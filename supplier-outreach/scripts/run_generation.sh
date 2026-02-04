@@ -13,15 +13,14 @@ if [ -z "$OPENROUTER_API_KEY" ]; then
   exit 1
 fi
 
+echo "✅ OpenRouter API key configured"
+
 if [ -z "$OPENAI_API_KEY" ]; then
-  echo "❌ OPENAI_API_KEY not set"
-  echo ""
-  echo "Please set it with:"
-  echo "export OPENAI_API_KEY='your_key_here'"
-  exit 1
+  echo "ℹ️  OpenAI API key not set (will use OpenRouter for validation)"
+else
+  echo "✅ OpenAI API key configured (will use for validation)"
 fi
 
-echo "✅ API keys configured"
 echo ""
 
 # Install required packages

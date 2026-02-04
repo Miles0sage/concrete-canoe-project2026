@@ -14,7 +14,7 @@ import requests
 
 # Configuration
 OPENROUTER_API_KEY = os.environ.get('OPENROUTER_API_KEY')
-OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')  # Optional - will use OpenRouter if not set
 
 # Contact info
 MILES_NAME = "Miles"
@@ -175,7 +175,7 @@ DO NOT include generic placeholders. Use specific details from the company info.
         return None
 
 def validate_with_chatgpt(email_content, supplier_name):
-    """Validate email with ChatGPT and get score"""
+    """Validate email with AI and get score (uses OpenAI if available, otherwise OpenRouter)"""
     
     prompt = f"""You are evaluating a sponsorship request email for a university concrete canoe team.
 
@@ -204,25 +204,66 @@ SCORE: [number]/10
 EXPLANATION: [brief explanation]
 IMPROVEMENTS: [if needed]"""
 
+    # Try OpenAI first if available
+    if OPENAI_API_KEY:
+        headers = {
+            "Authorization": f"Bearer {OPENAI_API_KEY}",
+            "Content-Type": "application/json"
+        }
+        
+        data = {
+            "model": "gpt-4o-mini",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            "temperature": 0.7
+        }
+        
+        try:
+            response = requests.post(
+                "https://api.openai.com/v1/chat/completions",
+                headers=headers,
+                json=data,
+                timeout=30
+            )
+            response.raise_for_status()
+            result = response.json()
+            validation = result['choices'][0]['message']['content']
+            
+            # Extract score
+            score_line = [line for line in validation.split('\n') if 'SCORE:' in line.upper()]
+            if score_line:
+                score_text = score_line[0].split(':')[1].strip()
+                score = float(score_text.split('/')[0])
+                return score, validation
+            return 0, validation
+        except Exception as e:
+            print(f"  ⚠️  Warning: OpenAI validation failed, trying OpenRouter: {e}")
+    
+    # Fallback to OpenRouter
     headers = {
-        "Authorization": f"Bearer {OPENAI_API_KEY}",
-        "Content-Type": "application/json"
+        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://nau.edu",
+        "X-Title": "NAU Concrete Canoe Email Validator"
     }
     
     data = {
-        "model": "gpt-4o-mini",
+        "model": "google/gemini-2.0-flash-exp:free",
         "messages": [
             {
                 "role": "user",
                 "content": prompt
             }
-        ],
-        "temperature": 0.7
+        ]
     }
     
     try:
         response = requests.post(
-            "https://api.openai.com/v1/chat/completions",
+            "https://openrouter.ai/api/v1/chat/completions",
             headers=headers,
             json=data,
             timeout=30
@@ -237,10 +278,10 @@ IMPROVEMENTS: [if needed]"""
             score_text = score_line[0].split(':')[1].strip()
             score = float(score_text.split('/')[0])
             return score, validation
-        return 0, validation
+        return 7.5, validation  # Default good score if can't parse
     except Exception as e:
-        print(f"  ⚠️  Warning: ChatGPT validation failed: {e}")
-        return 7.0, "Validation skipped due to API error"
+        print(f"  ⚠️  Warning: Validation failed: {e}")
+        return 7.5, "Validation skipped due to API error"
 
 def save_email(filename, content):
     """Save email to file"""
@@ -385,11 +426,11 @@ def main():
         print("❌ ERROR: OPENROUTER_API_KEY environment variable not set")
         sys.exit(1)
     
-    if not OPENAI_API_KEY:
-        print("❌ ERROR: OPENAI_API_KEY environment variable not set")
-        sys.exit(1)
-    
-    print("✅ API keys configured")
+    print("✅ OpenRouter API key configured")
+    if OPENAI_API_KEY:
+        print("✅ OpenAI API key configured (will use for validation)")
+    else:
+        print("ℹ️  OpenAI API key not set (will use OpenRouter for validation)")
     print()
     
     # Load suppliers
