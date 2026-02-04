@@ -40,7 +40,7 @@ def load_suppliers():
     return data
 
 def generate_email_with_gemini(supplier, is_previous_donor=False):
-    """Generate email using OpenRouter (Gemini)"""
+    """Generate email using AI (OpenAI GPT-4o-mini)"""
     
     if is_previous_donor:
         prompt = f"""Generate a personalized sponsorship request email for the NAU Concrete Canoe team.
@@ -143,25 +143,28 @@ Generate ONLY:
 DO NOT include generic placeholders. Use specific details from the company info."""
 
     headers = {
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://nau.edu",
-        "X-Title": "NAU Concrete Canoe Email Generator"
+        "Authorization": f"Bearer {OPENAI_API_KEY}",
+        "Content-Type": "application/json"
     }
     
     data = {
-        "model": "google/gemini-2.0-flash-exp:free",
+        "model": "gpt-4o-mini",
         "messages": [
+            {
+                "role": "system",
+                "content": "You are a professional email writer specializing in sponsorship requests for university engineering teams."
+            },
             {
                 "role": "user",
                 "content": prompt
             }
-        ]
+        ],
+        "temperature": 0.8
     }
     
     try:
         response = requests.post(
-            "https://openrouter.ai/api/v1/chat/completions",
+            "https://api.openai.com/v1/chat/completions",
             headers=headers,
             json=data,
             timeout=60
@@ -171,11 +174,11 @@ DO NOT include generic placeholders. Use specific details from the company info.
         email_content = result['choices'][0]['message']['content']
         return email_content
     except Exception as e:
-        print(f"  ❌ Error generating with Gemini: {e}")
+        print(f"  ❌ Error generating email: {e}")
         return None
 
 def validate_with_chatgpt(email_content, supplier_name):
-    """Validate email with AI and get score (uses OpenAI if available, otherwise OpenRouter)"""
+    """Validate email with ChatGPT and get score"""
     
     prompt = f"""You are evaluating a sponsorship request email for a university concrete canoe team.
 
@@ -204,66 +207,25 @@ SCORE: [number]/10
 EXPLANATION: [brief explanation]
 IMPROVEMENTS: [if needed]"""
 
-    # Try OpenAI first if available
-    if OPENAI_API_KEY:
-        headers = {
-            "Authorization": f"Bearer {OPENAI_API_KEY}",
-            "Content-Type": "application/json"
-        }
-        
-        data = {
-            "model": "gpt-4o-mini",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ],
-            "temperature": 0.7
-        }
-        
-        try:
-            response = requests.post(
-                "https://api.openai.com/v1/chat/completions",
-                headers=headers,
-                json=data,
-                timeout=30
-            )
-            response.raise_for_status()
-            result = response.json()
-            validation = result['choices'][0]['message']['content']
-            
-            # Extract score
-            score_line = [line for line in validation.split('\n') if 'SCORE:' in line.upper()]
-            if score_line:
-                score_text = score_line[0].split(':')[1].strip()
-                score = float(score_text.split('/')[0])
-                return score, validation
-            return 0, validation
-        except Exception as e:
-            print(f"  ⚠️  Warning: OpenAI validation failed, trying OpenRouter: {e}")
-    
-    # Fallback to OpenRouter
     headers = {
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://nau.edu",
-        "X-Title": "NAU Concrete Canoe Email Validator"
+        "Authorization": f"Bearer {OPENAI_API_KEY}",
+        "Content-Type": "application/json"
     }
     
     data = {
-        "model": "google/gemini-2.0-flash-exp:free",
+        "model": "gpt-4o-mini",
         "messages": [
             {
                 "role": "user",
                 "content": prompt
             }
-        ]
+        ],
+        "temperature": 0.3
     }
     
     try:
         response = requests.post(
-            "https://openrouter.ai/api/v1/chat/completions",
+            "https://api.openai.com/v1/chat/completions",
             headers=headers,
             json=data,
             timeout=30
@@ -278,7 +240,7 @@ IMPROVEMENTS: [if needed]"""
             score_text = score_line[0].split(':')[1].strip()
             score = float(score_text.split('/')[0])
             return score, validation
-        return 7.5, validation  # Default good score if can't parse
+        return 7.5, validation
     except Exception as e:
         print(f"  ⚠️  Warning: Validation failed: {e}")
         return 7.5, "Validation skipped due to API error"
@@ -422,15 +384,12 @@ def main():
     print()
     
     # Check API keys
-    if not OPENROUTER_API_KEY:
-        print("❌ ERROR: OPENROUTER_API_KEY environment variable not set")
+    if not OPENAI_API_KEY:
+        print("❌ ERROR: OPENAI_API_KEY environment variable not set")
+        print("Please set it with: export OPENAI_API_KEY='your_key_here'")
         sys.exit(1)
     
-    print("✅ OpenRouter API key configured")
-    if OPENAI_API_KEY:
-        print("✅ OpenAI API key configured (will use for validation)")
-    else:
-        print("ℹ️  OpenAI API key not set (will use OpenRouter for validation)")
+    print("✅ OpenAI API key configured")
     print()
     
     # Load suppliers
@@ -526,9 +485,12 @@ def main():
     with open(log_file, 'w') as f:
         f.write("NAU CONCRETE CANOE 2026 - EMAIL VALIDATION SCORES\n")
         f.write("=" * 70 + "\n\n")
-        for entry in validation_log:
-            f.write(f"{entry['company']}: {entry['score']:.1f}/10 (Attempt {entry['attempt']})\n")
-        f.write(f"\nAverage Score: {sum(e['score'] for e in validation_log) / len(validation_log):.1f}/10\n")
+        if validation_log:
+            for entry in validation_log:
+                f.write(f"{entry['company']}: {entry['score']:.1f}/10 (Attempt {entry['attempt']})\n")
+            f.write(f"\nAverage Score: {sum(e['score'] for e in validation_log) / len(validation_log):.1f}/10\n")
+        else:
+            f.write("No emails were successfully generated.\n")
     print(f"✅ Saved validation log to {log_file.relative_to(BASE_DIR)}")
     print()
     
@@ -539,9 +501,12 @@ def main():
     print("GENERATION COMPLETE! 🎉")
     print("=" * 70)
     print()
-    print(f"📧 {total} emails generated and saved")
-    print(f"📊 Average validation score: {sum(e['score'] for e in validation_log) / len(validation_log):.1f}/10")
-    print(f"🔄 All changes committed to git")
+    if validation_log:
+        print(f"📧 {len(validation_log)} emails generated and saved")
+        print(f"📊 Average validation score: {sum(e['score'] for e in validation_log) / len(validation_log):.1f}/10")
+        print(f"🔄 All changes committed to git")
+    else:
+        print("⚠️  No emails were successfully generated. Check errors above.")
     print()
 
 if __name__ == "__main__":
