@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Testing data (large files)
+*.csv
+*.xlsx
+testing-data/raw-data/
+
+# CAD files (too large for git)
+*.dwg
+*.dxf
+hull-design/autocad/
+
+# Credentials
+.env
+credentials.json
+api_keys.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Build artifacts
+*.log
+*.tmp
