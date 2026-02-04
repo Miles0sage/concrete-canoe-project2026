@@ -1,0 +1,159 @@
+{
+  "donors_2024": [
+    {
+      "contact": "Angel M Leon",
+      "company": "Simpson Strong-Tie",
+      "product": "Carbon fiber mesh",
+      "address": "12246 Holly St., Riverside, CA 92509",
+      "phone": "714-738-2179",
+      "email": "aleon@strongtie.com",
+      "website": "www.strongtie.com",
+      "status": "Previous donor",
+      "priority": "HIGH",
+      "notes": "Donated carbon fiber mesh last year - excellent relationship"
+    },
+    {
+      "contact": "Rashid Awik",
+      "company": "Western Technologies (RMA Company)",
+      "product": "Testing cylinders, sieve analysis",
+      "address": "2400 E Huntington Dr. Flagstaff, AZ 86004",
+      "phone": "928-856-0192",
+      "office_phone": "928-774-8700",
+      "email": "rawik@RMA-WESTERN.com",
+      "website": "RMA-WESTERN.COM",
+      "status": "Previous donor",
+      "priority": "CRITICAL",
+      "notes": "LOCAL Flagstaff - donated testing services last year"
+    },
+    {
+      "contact": "John Ratiu, Ph.D.",
+      "company": "Aero Aggregates of North America",
+      "product": "Aero aggregates (lightweight)",
+      "phone": "321-295-1445",
+      "email": "jratiu@aeroaggregates.com",
+      "status": "Previous donor (paid shipping)",
+      "priority": "HIGH",
+      "notes": "Lightweight aggregate alternative to Poraver - will need to pay shipping"
+    },
+    {
+      "contact": "Daryl Leazier",
+      "company": "National Waste & Recycling",
+      "product": "Carbon carbonite (PC4)",
+      "phone": "480-243-3082",
+      "address": "7776 S Pointe Pkwy W, Phoenix, AZ 85044",
+      "website": "www.nationalwasterecovery.com",
+      "status": "Previous donor",
+      "priority": "MEDIUM",
+      "notes": "Phoenix area - carbon carbonite material"
+    },
+    {
+      "contact": "General",
+      "company": "Flagstaff Landscape Products Inc",
+      "product": "Red sand",
+      "address": "6500 Historic Route 66 E, Flagstaff, AZ 86004",
+      "phone": "928-526-0801",
+      "website": "flagstafflandscapeproducts.com",
+      "status": "Previous donor",
+      "priority": "HIGH",
+      "notes": "LOCAL - donated red sand last year, easy pickup"
+    },
+    {
+      "contact": "Clinton Wilkins (Director AZ Sales), Brian Lugo (Facility Operator)",
+      "company": "Salt River Materials Group / Phoenix Cement Company",
+      "product": "Fly ash F, Portland cement Type I and II",
+      "address": "1802 W. Lower Buckeye Rd., Phoenix, AZ 85007",
+      "phone": "602-253-9149",
+      "email": "blugoolivas@srmaterials.com",
+      "website": "www.srmaterials.com",
+      "status": "Previous donor",
+      "priority": "CRITICAL",
+      "notes": "Donated cement and fly ash - MAJOR DONOR"
+    },
+    {
+      "contact": "Mike Loven (CEO), Jon Hansen (President), Daniel Van Gundy (Safety Manager)",
+      "company": "Loven Contracting",
+      "product": "Cash donation",
+      "address": "1100 S Pinnacle St, Flagstaff, AZ 86001",
+      "phone": "928-774-9040",
+      "email": "dvangundy@lovencontracting.com",
+      "status": "Previous donor",
+      "priority": "CRITICAL",
+      "notes": "LOCAL - Made cash donation last year, strong NAU connection"
+    },
+    {
+      "contact": "Alyson Ayres",
+      "company": "Unknown (Nevada supplier)",
+      "product": "Slag 120",
+      "phone": "928-254-9179",
+      "status": "Previous donor",
+      "priority": "MEDIUM",
+      "notes": "Provided Slag 120 from Nevada last year"
+    }
+  ],
+  "new_targets_2026": [
+    {
+      "company": "Poraver North America",
+      "product": "Expanded glass aggregate",
+      "contact": "Sales Team",
+      "email": "info@poraver.com",
+      "phone": "513-874-3555",
+      "website": "www.poraver.com",
+      "priority": "CRITICAL",
+      "notes": "Known to donate to concrete canoe teams nationwide - MUST CONTACT"
+    },
+    {
+      "company": "CalPortland",
+      "product": "Portland cement Type I/II",
+      "contact": "Community Relations",
+      "email": "community@calportland.com",
+      "phone": "602-252-7521",
+      "website": "www.calportland.com",
+      "priority": "HIGH",
+      "notes": "Regional supplier with AZ presence"
+    },
+    {
+      "company": "Sika Corporation",
+      "product": "Admixtures (air entraining, water reducers)",
+      "contact": "Education Department",
+      "email": "education@sika.com",
+      "website": "usa.sika.com",
+      "priority": "HIGH",
+      "notes": "Has student sample program"
+    },
+    {
+      "company": "CEMEX Arizona",
+      "product": "Portland cement",
+      "contact": "Community Relations",
+      "email": "community@cemex.com",
+      "website": "www.cemexusa.com",
+      "priority": "MEDIUM",
+      "notes": "Large company with university outreach"
+    },
+    {
+      "company": "Master Builders Solutions (BASF)",
+      "product": "Admixtures (superplasticizer)",
+      "contact": "Technical Support",
+      "email": "technical@master-builders-solutions.com",
+      "website": "www.master-builders-solutions.com",
+      "priority": "MEDIUM",
+      "notes": "Technical support team provides samples"
+    },
+    {
+      "company": "Quikrete",
+      "product": "Portland cement, concrete mix",
+      "contact": "Use website form",
+      "website": "www.quikrete.com",
+      "priority": "LOW",
+      "notes": "Available locally, backup option"
+    },
+    {
+      "company": "Home Depot Flagstaff",
+      "product": "Various materials or gift card",
+      "address": "1800 S Milton Rd, Flagstaff, AZ 86001",
+      "phone": "928-556-0800",
+      "contact": "Store Manager",
+      "priority": "MEDIUM",
+      "notes": "LOCAL - Ask for community grant program"
+    }
+  ]
+}
