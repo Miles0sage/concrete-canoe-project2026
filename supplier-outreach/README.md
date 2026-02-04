@@ -1,139 +1,280 @@
-# Concrete Canoe Supplier Outreach
+# NAU Concrete Canoe 2026 - Supplier Email Generator
 
-**Goal:** Secure $500+ in donated materials  
-**Status:** Research phase - STRATEGY UPDATED
-
-## IMPORTANT UPDATE - Feb 4, 2026
-
-**Poraver Response:** They don't do direct donations - advised to contact **local retailers**.
-
-## Updated Strategy
-
-### Priority 1: LOCAL FLAGSTAFF (Contact First!)
-
-**Why Local First:**
-- Can pickup (no shipping costs)
-- NAU community connection
-- Faster response time
-- Face-to-face relationship building
-
-**Targets:**
-
-1. **Flagstaff Ready Mix** - (928) 526-xxxx
-   - Products: Cement, sand, aggregate
-   - Approach: Call for manager, emphasize NAU students
-   - Ask about: Poraver availability, cement donation
-   - Value: $75-150
-
-2. **Home Depot Flagstaff** - 1800 S Milton Rd
-   - Community grant program
-   - Might stock Poraver or can order
-   - Value: $75
-
-3. **Local Masonry Supply**
-   - Research Flagstaff masonry/concrete suppliers
-   - Call to ask: "Do you carry Poraver expanded glass beads?"
-   - Emphasize: NAU engineering students, educational project
-
-### Priority 2: ADMIXTURE SAMPLE PROGRAMS
-
-These companies often have educational sample programs:
-
-1. **Sika Corporation** - education@sika.com
-   - Products: Air entraining agent, water reducer
-   - Mention: Student learning, will document in technical paper
-   - Value: $50-75
-
-2. **BASF Master Builders** - technical@master-builders-solutions.com
-   - Products: Superplasticizer
-   - Educational samples available
-   - Value: $40-60
-
-3. **GCP Applied Technologies** - samples@gcpat.com
-   - Product: DARAVAIR air entraining
-   - Sample program known to support students
-   - Value: $40
-
-### Priority 3: REGIONAL CEMENT
-
-1. **CalPortland** - community@calportland.com
-   - Arizona regional supplier
-   - University outreach program
-   - Value: $100
-
-2. **CEMEX Arizona** - community@cemex.com
-   - Large company with student programs
-   - Value: $75
-
-## Poraver Lightweight Aggregate - Action Plan
-
-Since Poraver said to go through retailers:
-
-**Step 1:** Call local Flagstaff suppliers
-- "Hi, I'm an NAU civil engineering student building a concrete canoe. Do you carry Poraver expanded glass beads?"
-- If YES → "We're seeking donations for our ASCE competition project"
-- If NO → "Can you order it? Or who in Flagstaff might stock it?"
-
-**Step 2:** If no local source found
-- Research online retailers shipping to AZ
-- Check specialized masonry supply in Phoenix (2hr drive)
-- Budget to purchase if donations fail (~$200)
-
-**Step 3:** Alternative lightweight aggregates
-- Perlite (SG ~0.5) - Less effective but cheaper
-- Vermiculite (SG ~0.6) - Available at Home Depot
-- Research performance tradeoffs
-
-## Email Template: Admixture Sample Programs
-
-```
-Subject: Educational Sample Request - NAU Concrete Canoe Competition
-
-Hello,
-
-I'm reaching out from Northern Arizona University's Civil Engineering program. Our team is competing in the ASCE Concrete Canoe Competition, where we design and build a concrete canoe that floats and races.
-
-This project requires specialized admixtures to achieve our target properties:
-- Density: 65 PCF (vs normal 150 PCF)
-- Strength: 1000+ PSI
-- Workability for thin-shell application
-
-We're specifically interested in [Product Name] for [specific purpose].
-
-We understand [Company] has an educational sample program. Would sample quantities be available for our student competition project?
-
-We will:
-- Document admixture performance in our technical paper
-- Provide recognition in our presentation
-- Share competition results
-
-This is an excellent hands-on learning opportunity for civil engineering students.
-
-Thank you for supporting engineering education!
-
-Miles  
-NAU Civil Engineering  
-miles27.85shah@nau.edu
-```
-
-## Action Items
-
-- [ ] Research: Find all Flagstaff masonry/concrete suppliers
-- [ ] Call: Flagstaff Ready Mix - ask for manager
-- [ ] Visit: Home Depot - speak with store manager about grants
-- [ ] Call: Local masonry suppliers - ask about Poraver
-- [ ] Email: Sika, BASF, GCP (admixture samples)
-- [ ] Email: CalPortland, CEMEX (cement)
-- [ ] Backup: Research Poraver online retailers if no local source
-
-## Timeline
-
-- **Wed Feb 5:** Local Flagstaff outreach (calls/visits)
-- **Thu Feb 6:** Send admixture sample request emails
-- **Fri Feb 7:** Send cement company emails
-- **Tue Feb 11:** DEADLINE - evaluate what we've secured
-- **Wed Feb 12:** Purchase any missing critical materials
+**Mission**: Generate 15 personalized sponsorship emails for material suppliers  
+**Deadline**: February 11, 2026 (Materials needed!)  
+**Contact**: Miles - miles27.85shah@nau.edu - (928) 254-9179
 
 ---
 
-**Key Lesson:** For specialty products like Poraver, manufacturers refer you to retailers. Always check local suppliers first!
+## 🎯 Overview
+
+This system automatically generates personalized sponsorship request emails for the NAU Concrete Canoe team using AI:
+
+- **Previous Donors (8)**: Thank-you + renewal request emails
+- **New Targets (7)**: Introduction + sponsorship request emails
+- **AI-Powered**: Uses OpenRouter (Gemini) for generation + ChatGPT for validation
+- **Quality Control**: Each email validated, minimum 7/10 score required
+- **Git Integration**: Auto-commits each email as it's generated
+
+---
+
+## 📁 Project Structure
+
+```
+supplier-outreach/
+├── data/
+│   └── previous_donors.json       # Supplier database (8 donors + 7 targets)
+├── scripts/
+│   ├── generate_emails.py         # Main email generator
+│   └── run_generation.sh          # Runner script
+├── emails/                         # Generated emails (created when run)
+│   ├── 01_simpson_strong_tie.txt
+│   ├── 02_western_technologies.txt
+│   └── ... (15 total)
+├── TRACKING.md                     # Outreach tracking sheet (created when run)
+└── validation_log.txt              # ChatGPT scores (created when run)
+```
+
+---
+
+## 🚀 Quick Start
+
+### 1. Set API Keys
+
+```bash
+export OPENROUTER_API_KEY='sk-or-v1-...'
+export OPENAI_API_KEY='sk-...'
+```
+
+**Get API Keys:**
+- OpenRouter: https://openrouter.ai/keys (Free tier available)
+- OpenAI: https://platform.openai.com/api-keys (Costs ~$0.15 total)
+
+### 2. Run Generator
+
+```bash
+cd /root/projects/concrete-canoe-2026/supplier-outreach/scripts
+./run_generation.sh
+```
+
+### 3. Review & Send
+
+```bash
+# View all emails
+ls -lh ../emails/
+
+# Read first email (Simpson Strong-Tie - Previous Donor)
+cat ../emails/01_simpson_strong_tie.txt
+
+# View tracking sheet
+cat ../TRACKING.md
+
+# Check validation scores
+cat ../validation_log.txt
+```
+
+---
+
+## 📧 Email Categories
+
+### Previous Donors (HIGH Priority!)
+These companies donated last year - highest success rate!
+
+1. **Simpson Strong-Tie** - Carbon fiber mesh
+2. **Western Technologies (RMA)** - Testing services (LOCAL)
+3. **Aero Aggregates** - Lightweight aggregate
+4. **National Waste & Recycling** - Carbon carbonite
+5. **Flagstaff Landscape Products** - Red sand (LOCAL)
+6. **Salt River Materials** - Cement & fly ash (MAJOR DONOR)
+7. **Loven Contracting** - Cash donation (LOCAL)
+8. **Unknown Nevada Supplier** - Slag 120
+
+### New Targets
+Fresh contacts with high potential:
+
+9. **Poraver North America** - Expanded glass aggregate (CRITICAL)
+10. **CalPortland** - Portland cement
+11. **Sika Corporation** - Admixtures
+12. **CEMEX Arizona** - Portland cement
+13. **Master Builders Solutions** - Superplasticizer
+14. **Quikrete** - Backup cement source
+15. **Home Depot Flagstaff** - Materials/gift card (LOCAL)
+
+---
+
+## 🎨 Email Structure
+
+Each generated email includes:
+
+1. **Personalized Subject Line**
+2. **Opening** - Warm greeting, personalized to company
+3. **Background**:
+   - Previous donors: Thank you for last year
+   - New targets: Introduction to NAU Concrete Canoe
+4. **The Ask** - Specific product request with amount
+5. **Sponsor Benefits**:
+   - Logo on canoe hull (visible at competition)
+   - Social media recognition
+   - Competition photos
+   - Recognition in technical paper
+   - Certificate from NAU
+6. **Logistics** - Easy pickup/shipping details
+7. **Call to Action** - Clear next steps
+8. **Signature** - Full contact info including phone
+
+**Length**: 200-300 words  
+**Tone**: Professional, enthusiastic, personalized  
+**Phone**: (928) 254-9179 in EVERY email
+
+---
+
+## 🤖 AI System
+
+### Generation (OpenRouter - Gemini 2.0 Flash)
+- Model: `google/gemini-2.0-flash-exp:free`
+- Cost: **$0** (free tier)
+- Creates personalized emails based on supplier data
+
+### Validation (OpenAI - ChatGPT)
+- Model: `gpt-4o-mini`
+- Cost: **~$0.01 per email** (~$0.15 total)
+- Scores each email 1-10
+- Minimum 7/10 to accept
+- Auto-regenerates if below threshold (max 3 attempts)
+
+---
+
+## 📊 Output Files
+
+### Generated Emails
+```
+emails/01_simpson_strong_tie.txt
+emails/02_western_technologies_rma_company.txt
+emails/03_aero_aggregates_of_north_america.txt
+... (15 total)
+```
+
+### Tracking Sheet
+`TRACKING.md` - Complete outreach tracking:
+- All suppliers organized by priority
+- Contact information
+- Checkboxes for tracking
+- Response tracking table
+- Materials status checklist
+
+### Validation Log
+`validation_log.txt` - ChatGPT scores for each email
+
+---
+
+## 📈 Success Metrics
+
+✅ **All 15 emails generated**  
+✅ **ChatGPT validation scores ≥ 7/10**  
+✅ **Phone number in every email**  
+✅ **Previous donors thanked personally**  
+✅ **Committed to git (16 commits)**  
+✅ **Ready to copy & send**
+
+---
+
+## 🎯 Sending Strategy
+
+### Priority Order:
+1. **🔴 Previous Donors First** (Day 1-2)
+   - They already know us
+   - Highest success rate
+   - Send ASAP!
+
+2. **🟡 Critical New Targets** (Day 2-3)
+   - Poraver (known concrete canoe supporter)
+   - Local Flagstaff suppliers
+
+3. **🟢 Other New Targets** (Day 3-5)
+   - Regional suppliers
+   - National companies
+
+### Tips:
+- **Use NAU email** (miles27.85shah@nau.edu) - more professional
+- **Personalize subject lines** if desired
+- **Follow up after 3-4 days** if no response
+- **Local suppliers**: Mention easy pickup
+- **Track responses** in TRACKING.md
+
+---
+
+## 🔧 Technical Details
+
+### Requirements
+- Python 3.6+
+- `requests` library (auto-installed)
+- Git
+- Internet connection
+- API keys (OpenRouter + OpenAI)
+
+### Environment Variables
+```bash
+OPENROUTER_API_KEY  # Required
+OPENAI_API_KEY      # Required
+```
+
+### Git Integration
+- Each email committed separately as generated
+- Commit format: `feat: Generate email for [Company Name]`
+- Final commit: `feat: Complete 15 supplier sponsorship emails`
+- Easy to track progress in git log
+
+---
+
+## 💰 Cost Estimate
+
+| Service | Model | Cost | Purpose |
+|---------|-------|------|---------|
+| OpenRouter | Gemini 2.0 Flash | $0 | Email generation |
+| OpenAI | GPT-4o-mini | ~$0.15 | Quality validation |
+| **TOTAL** | | **~$0.15** | Complete system |
+
+---
+
+## 🐛 Troubleshooting
+
+### "API key not set"
+```bash
+export OPENROUTER_API_KEY='your_key_here'
+export OPENAI_API_KEY='your_key_here'
+```
+
+### "Validation score too low"
+The system auto-regenerates (up to 3 attempts). If still failing, check:
+- Is supplier data complete?
+- Are there placeholder fields in JSON?
+
+### "Git commit failed"
+Ensure git is configured:
+```bash
+git config user.name "Miles"
+git config user.email "miles27.85shah@nau.edu"
+```
+
+---
+
+## 📞 Contact
+
+**Miles**  
+Civil Engineering '27  
+Northern Arizona University  
+miles27.85shah@nau.edu  
+(928) 254-9179
+
+---
+
+## 🏆 Competition Info
+
+**Event**: ASCE Pacific Southwest Conference 2026  
+**Project**: Concrete Canoe  
+**Challenge**: Build lightweight, strong concrete canoe  
+**Materials Deadline**: February 11, 2026 (7 DAYS!)
+
+---
+
+**Let's get those donations! 🚣**
