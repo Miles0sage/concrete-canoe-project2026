@@ -1,0 +1,4 @@
+name,length_in,beam_in,depth_in,weight_lbs,freeboard_in,gm_in,max_bm_lb_ft,safety_factor,pass
+Canoe 1,216,30,18,276,6.21,4.16,621.0,308.22,Pass
+Canoe 2,216,36,18,300,7.32,7.35,675.0,340.28,Pass
+Canoe 3,192,42,18,320,7.01,10.77,640.0,418.7,Pass

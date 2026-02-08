@@ -49,15 +49,35 @@ Repository for NAU engineering students building a concrete canoe. This project 
 ## 📂 Repository Structure
 
 ```
-concrete-canoe-project/
-├── material-sourcing/     # Supplier contacts, pricing, donation requests
-├── design/                # CAD files, calculations, hull design
-├── construction/          # Build process, techniques, photos
-├── testing/               # Load tests, water tests, performance data
-└── documentation/         # Reports, presentations, final documentation
+concrete-canoe-project2026/
+├── calculations/          # Python hull analysis (hydrostatics, stability)
+├── scripts/               # run_hull_analysis, asce_compliance_checker, batch_sheets
+├── data/
+│   ├── spreadsheets/      # Excel: mixture design, reinforcement POA
+│   ├── test_results/      # Hull comparison CSVs
+│   └── compliance/        # ASCE compliance JSON reports
+├── design/                # CAD, hull models, mold design
+├── documentation/         # Hull plan, usage guide, meeting notes
+├── material-sourcing/     # Supplier contacts, pricing
+├── construction/          # Build process, techniques
+├── testing/               # Load tests, performance data
+└── reports/               # Design report, batch sheets
 ```
 
 ## 🚀 Quick Start
+
+### Hull Analysis (Python)
+
+```bash
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+python3 calculations/concrete_canoe_calculator.py
+python3 scripts/run_hull_analysis.py
+```
+
+See [documentation/USAGE_GUIDE.md](documentation/USAGE_GUIDE.md) for details.
+
+### Material Sourcing
 
 1. **Review Material Sourcing Strategy**
    - See `material-sourcing/README.md` for phone scripts

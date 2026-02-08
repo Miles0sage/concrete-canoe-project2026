@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-02-08T12:53:54.683932",
+  "overall_pass": true,
+  "checks": [
+    {
+      "requirement": "Cement-to-cementitious ratio \u2264 0.40",
+      "actual": 0.35,
+      "limit": 0.4,
+      "unit": "ratio",
+      "pass": true,
+      "margin_pct": 12.5
+    },
+    {
+      "requirement": "Portland cement + lime \u2264 40% by weight",
+      "actual": 35.0,
+      "limit": 40.0,
+      "unit": "%",
+      "pass": true,
+      "margin_pct": 12.5
+    },
+    {
+      "requirement": "Lime content \u2264 5%",
+      "actual": 3.0,
+      "limit": 5.0,
+      "unit": "%",
+      "pass": true,
+      "margin_pct": 40.0
+    },
+    {
+      "requirement": "Reinforcement POA \u2265 40%",
+      "actual": 42.0,
+      "limit": 40.0,
+      "unit": "%",
+      "pass": true,
+      "margin_pct": 5.0
+    }
+  ],
+  "input": {
+    "cement_to_cementitious": 0.35,
+    "portland_plus_lime_pct": 35.0,
+    "lime_content_pct": 3.0,
+    "reinforcement_poa_pct": 42.0
+  }
+}

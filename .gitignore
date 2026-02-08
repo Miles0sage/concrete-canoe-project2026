@@ -22,10 +22,13 @@ build/
 Thumbs.db
 
 # Project specific
-*.pdf
-*.docx
 temp/
 scratch/
+
+# Allow project docs and data
+!documentation/*.docx
+!documentation/*.pdf
+!data/spreadsheets/*.xlsx
 
 # Secrets
 .env
