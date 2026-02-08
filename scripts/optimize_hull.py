@@ -127,7 +127,7 @@ def main() -> int:
     with open(out_path, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=[
             "length_in", "beam_in", "depth_in", "weight_lbs",
-            "freeboard_in", "gm_in", "safety_factor",
+            "freeboard_in", "gm_in", "safety_factor", "obj",
         ])
         w.writeheader()
         w.writerows(results)

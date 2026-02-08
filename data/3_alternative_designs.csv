@@ -1,0 +1,4 @@
+id,name,L,B,D,hull_wt,total_wt,draft_in,fb_in,GM_in,SF,hull_speed,fb_pass,gm_pass,sf_pass,all_pass
+A,Design A — Optimal (Lightest),192,32,17,224.8,924.8,5.79,11.21,7.06,22.51,5.36,True,True,True,True
+B,Design B — Conservative (Extra Margin),196,34,18,242.7,942.7,5.44,12.56,9.52,24.37,5.42,True,True,True,True
+C,Design C — Long & Stable (Speed),216,36,18,271.5,971.5,4.81,13.19,13.58,22.47,5.69,True,True,True,True
