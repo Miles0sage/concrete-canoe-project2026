@@ -20,6 +20,7 @@ from calculations.concrete_canoe_calculator import (
     metacentric_height_approx,
     bending_moment_uniform_load,
     section_modulus_rectangular,
+    section_modulus_thin_shell,
     bending_stress_psi,
     safety_factor as calc_safety_factor,
 )
@@ -91,8 +92,7 @@ def run_single(density, thickness, flexural, paddler_wt):
 
     w_per_ft = loaded / Lf
     M_max = w_per_ft * Lf**2 / 8
-    eff_d = D - thickness
-    S = B * eff_d**2 / 6
+    S = section_modulus_thin_shell(B, D, thickness)
     sigma = (M_max * 12) / S if S > 0 else 0
     sf = flexural / sigma if sigma > 0 else 0
 

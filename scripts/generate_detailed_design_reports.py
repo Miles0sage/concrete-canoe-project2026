@@ -28,6 +28,7 @@ from calculations.concrete_canoe_calculator import (
     metacentric_height_approx,
     bending_moment_uniform_load,
     section_modulus_rectangular,
+    section_modulus_thin_shell,
     bending_stress_psi,
     safety_factor as calc_safety_factor,
 )
@@ -137,8 +138,7 @@ def full_analysis(d: Design) -> Dict[str, Any]:
         SF_stations.append(V)
     M_max = max(BM_stations)
 
-    eff_depth = D - t
-    S_in3 = section_modulus_rectangular(B, eff_depth)
+    S_in3 = section_modulus_thin_shell(B, D, t)
     sigma = bending_stress_psi(M_max, S_in3)
     sf = calc_safety_factor(FLEXURAL_STRENGTH_PSI, sigma)
 

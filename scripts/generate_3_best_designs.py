@@ -158,16 +158,17 @@ def analyse_design(spec: DesignSpec) -> Dict[str, Any]:
     # Total loaded weight (canoe + crew)
     loaded_weight = total_canoe_wt + CREW_WEIGHT
 
-    # Run calculator with realistic waterplane coefficient (Cwp=0.65)
-    # for loaded-condition hydrostatics (freeboard, stability)
+    # Run calculator — pass canoe-only weight; calculator adds crew internally
     results = run_complete_analysis(
         hull_length_in=spec.length_in,
         hull_beam_in=spec.beam_in,
         hull_depth_in=spec.depth_in,
         hull_thickness_in=spec.thickness_in,
-        concrete_weight_lbs=loaded_weight,
+        concrete_weight_lbs=total_canoe_wt,
         flexural_strength_psi=FLEXURAL_STRENGTH_PSI,
         waterplane_form_factor=WATERPLANE_CWP,
+        concrete_density_pcf=CONCRETE_DENSITY_PCF,
+        crew_weight_lbs=CREW_WEIGHT,
     )
 
     fb_in = results["freeboard"]["freeboard_in"]

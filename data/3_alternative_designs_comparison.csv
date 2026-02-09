@@ -1,4 +1,4 @@
 design,length_in,beam_in,depth_in,thickness_in,shell_weight_lbs,total_weight_lbs,loaded_weight_lbs,freeboard_in,gm_in,safety_factor,draft_in,bending_stress_psi,fb_pass,gm_pass,sf_pass,all_pass
-Design A,192,32,17,0.5,163.11,171.26,871.26,10.96,9.5,104.1589,6.04,14.4,True,True,True,True
-Design B,196,34,18,0.5,176.62,185.45,885.45,12.34,11.75,119.9959,5.66,12.5,True,True,True,True
-Design C,216,36,18,0.5,200.53,210.56,910.56,13.01,16.04,112.1111,4.99,13.38,True,True,True,True
+Design A,192,32,17,0.5,163.11,171.26,871.26,10.96,9.5,5.5473,6.04,270.4,True,True,True,True
+Design B,196,34,18,0.5,176.62,185.45,885.45,12.34,11.75,6.0071,5.66,249.7,True,True,True,True
+Design C,216,36,18,0.5,200.53,210.56,910.56,13.01,16.04,5.3423,4.99,280.78,True,True,True,True

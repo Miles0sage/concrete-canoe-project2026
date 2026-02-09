@@ -2,12 +2,21 @@
 """
 NAU ASCE Concrete Canoe 2026 - Hull Hydrostatics, Stability & Structural Analysis
 VPS-compatible (no GUI dependencies). Runs headless for remote calculations.
+
+Engineering fixes (v2.0):
+  1. Waterplane coefficient default 0.10 → 0.70 (canoe hull Cwp)
+  2. Thin-shell U-section modulus replaces solid-rectangle formula
+  3. Hull weight estimation from geometry with verification
+  4. BM = Iwp / V using Cwp × L × B³/12 (not B²/12T rectangle)
+  5. ASCE 2026 thresholds: 6" freeboard, 6" GM, 2.0 SF
+  6. Crew loading: crew_weight_lbs=700 (4 paddlers × 175 lbs)
 """
 
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Any
 import math
+import warnings
 
 
 # Constants
@@ -42,12 +51,14 @@ class HullGeometry:
 
 
 def waterplane_approximation(
-    length_ft: float, beam_ft: float, form_factor: float = 0.10
+    length_ft: float, beam_ft: float, form_factor: float = 0.70
 ) -> float:
     """
-    Approximate waterplane area (ft²). Canoe hulls have tapered ends,
-    so effective area << length×beam. form_factor ~0.08-0.15 typical.
-    Calibrate against your Excel hydrostatics if needed.
+    Approximate waterplane area (ft²).
+    form_factor is the waterplane coefficient Cwp (ratio of waterplane area
+    to circumscribing rectangle). Canoe hulls: Cwp ≈ 0.65-0.75.
+    Previous default of 0.10 was incorrect — that is NOT a form factor,
+    it produced a waterplane area 7× too small.
     """
     return length_ft * beam_ft * form_factor
 
@@ -77,18 +88,79 @@ def metacentric_height_approx(
     draft_ft: float,
     depth_ft: float,
     cog_height_approx_ft: float,
+    length_ft: float = 0.0,
+    waterplane_coeff: float = 0.70,
 ) -> float:
     """
     Approximate metacentric height GM (ft).
     GM = KB + BM - KG
-    KB ≈ draft/2, BM ≈ beam²/(12*draft), KG from COG estimate.
+
+    KB ≈ draft/2 (centroid of submerged volume)
+    BM = I_wp / V_displaced
+       where I_wp = Cwp × L × B³ / 12  (second moment of waterplane area)
+       and   V    = Cwp × L × B × T     (displaced volume approximation)
+       so    BM   = B² / (12 × T)       when Cwp cancels
+
+    Note: For a canoe hull the Cwp terms cancel in BM = Iwp/V when both
+    use the same coefficient, giving BM = B²/(12×T). However, using the
+    full formula with length allows proper I_wp computation for other uses.
+
+    KG from COG estimate (typically 0.40-0.45 × depth for loaded canoe).
     """
     if draft_ft <= 0:
         return 0.0
-    kb = draft_ft / 2
-    bm = (beam_ft ** 2) / (12 * draft_ft)
+
+    kb = draft_ft / 2.0
+
+    if length_ft > 0:
+        # Full formula: BM = I_wp / V_displaced
+        i_wp = waterplane_coeff * length_ft * (beam_ft ** 3) / 12.0
+        v_disp = waterplane_coeff * length_ft * beam_ft * draft_ft
+        if v_disp <= 0:
+            return 0.0
+        bm = i_wp / v_disp
+    else:
+        # Simplified: BM = B² / (12 × T) — Cwp cancels
+        bm = (beam_ft ** 2) / (12.0 * draft_ft)
+
     kg = cog_height_approx_ft if cog_height_approx_ft > 0 else depth_ft * 0.4
     return kb + bm - kg
+
+
+def estimate_hull_weight(
+    length_in: float,
+    beam_in: float,
+    depth_in: float,
+    thickness_in: float,
+    density_pcf: float = 60.0,
+    prismatic_coeff: float = 0.55,
+    overhead_factor: float = 1.10,
+) -> float:
+    """
+    Estimate hull weight (lbs) from geometry.
+
+    Models the hull as a U-shaped shell (bottom plate + 2 side walls):
+      girth = beam + 2 × depth  (unfolded U perimeter)
+      shell_area = girth × length × Cp  (prismatic coeff for tapered ends)
+      shell_volume = shell_area × thickness
+      weight = volume × density × overhead  (gunwales, ribs, thickened keel)
+
+    Parameters:
+      prismatic_coeff: ~0.55 for canoe (tapered bow/stern)
+      overhead_factor: 1.10 (10% for reinforcements, gunwales)
+    """
+    # Convert to feet
+    l_ft = length_in / INCHES_PER_FOOT
+    b_ft = beam_in / INCHES_PER_FOOT
+    d_ft = depth_in / INCHES_PER_FOOT
+    t_ft = thickness_in / INCHES_PER_FOOT
+
+    girth_ft = b_ft + 2.0 * d_ft  # U-shape unfolded
+    shell_area_ft2 = girth_ft * l_ft * prismatic_coeff
+    shell_volume_ft3 = shell_area_ft2 * t_ft
+    weight_lbs = shell_volume_ft3 * density_pcf * overhead_factor
+
+    return weight_lbs
 
 
 def bending_moment_uniform_load(
@@ -99,13 +171,75 @@ def bending_moment_uniform_load(
     return w_lbs_per_ft * (length_ft ** 2) / 8
 
 
+def section_modulus_thin_shell(
+    beam_in: float, depth_in: float, thickness_in: float
+) -> float:
+    """
+    Section modulus (in³) for a thin-shell U-shaped cross-section.
+
+    Models the hull cross-section as:
+      - Bottom plate: beam × thickness
+      - Two side walls: thickness × (depth - thickness) each
+
+    Uses parallel axis theorem to compute I about the neutral axis,
+    then S = I / c_max.
+
+    For Canoe 1 (B=30, D=18, t=0.5): Sx ≈ 85 in³ (NOT 1,452 from solid rect).
+    """
+    b = beam_in
+    t = thickness_in
+    d = depth_in
+
+    # --- Component 1: Bottom plate (b × t) ---
+    a_bot = b * t
+    # Centroid of bottom plate is at y = t/2 from bottom
+    y_bot = t / 2.0
+    # I of bottom plate about its own centroid
+    i_bot_self = b * t**3 / 12.0
+
+    # --- Component 2: Two side walls, each t × (d - t) ---
+    h_wall = d - t  # wall height (from top of bottom plate to top of hull)
+    a_wall = t * h_wall  # area of one wall
+    # Centroid of each wall is at y = t + h_wall/2 from bottom
+    y_wall = t + h_wall / 2.0
+    # I of one wall about its own centroid
+    i_wall_self = t * h_wall**3 / 12.0
+
+    # --- Composite neutral axis ---
+    total_area = a_bot + 2.0 * a_wall
+    if total_area <= 0:
+        return 0.0
+    y_na = (a_bot * y_bot + 2.0 * a_wall * y_wall) / total_area
+
+    # --- Parallel axis theorem for total I about NA ---
+    i_total = (
+        i_bot_self + a_bot * (y_na - y_bot) ** 2
+        + 2.0 * (i_wall_self + a_wall * (y_wall - y_na) ** 2)
+    )
+
+    # --- Section modulus: S = I / c_max ---
+    c_top = d - y_na  # distance from NA to top fiber
+    c_bot = y_na       # distance from NA to bottom fiber
+    c_max = max(c_top, c_bot)
+
+    if c_max <= 0:
+        return 0.0
+
+    return i_total / c_max
+
+
+# Keep old function for backward compatibility but mark deprecated
 def section_modulus_rectangular(b_in: float, h_in: float) -> float:
-    """Section modulus (in³) for rectangular cross-section. S = b*h²/6"""
+    """
+    Section modulus (in³) for solid rectangular cross-section. S = b*h²/6.
+    DEPRECATED: Use section_modulus_thin_shell() for canoe hulls.
+    A canoe is a thin shell, not a solid block.
+    """
     return b_in * (h_in ** 2) / 6
 
 
 def bending_stress_psi(moment_lb_ft: float, section_modulus_in3: float) -> float:
-    """Bending stress (psi). sigma = M*c/I = M/S"""
+    """Bending stress (psi). sigma = M/S (moment converted to lb-in)."""
     if section_modulus_in3 <= 0:
         return 0.0
     moment_lb_in = moment_lb_ft * INCHES_PER_FOOT
@@ -126,12 +260,20 @@ def run_complete_analysis(
     hull_thickness_in: float,
     concrete_weight_lbs: float,
     flexural_strength_psi: float = 1500,
-    waterplane_form_factor: float = 0.10,
-    concrete_density_pcf: float = 60.0,  # Optional, for compatibility
+    waterplane_form_factor: float = 0.70,
+    concrete_density_pcf: float = 60.0,
+    crew_weight_lbs: float = 700.0,
 ) -> Dict[str, Any]:
     """
     Run full hull analysis. All dimensions in inches, weight in lbs.
     Returns dict with freeboard, stability, structural, and pass/fail.
+
+    Parameters:
+      concrete_weight_lbs: Self-weight of the concrete hull (lbs).
+      crew_weight_lbs: Total crew weight (lbs). Default 700 = 4 × 175.
+                       Set to 0 if concrete_weight_lbs already includes crew.
+      waterplane_form_factor: Cwp waterplane coefficient (default 0.70).
+      concrete_density_pcf: Concrete density (lb/ft³), used for weight check.
     """
     hull = HullGeometry(
         length_in=hull_length_in,
@@ -140,8 +282,25 @@ def run_complete_analysis(
         thickness_in=hull_thickness_in,
     )
 
-    # Hydrostatics
-    disp_ft3 = displacement_volume(concrete_weight_lbs)
+    # --- Fix 3: Weight verification ---
+    estimated_weight = estimate_hull_weight(
+        hull_length_in, hull_beam_in, hull_depth_in,
+        hull_thickness_in, concrete_density_pcf,
+    )
+    weight_diff_pct = abs(concrete_weight_lbs - estimated_weight) / estimated_weight * 100
+    if weight_diff_pct > 20:
+        warnings.warn(
+            f"Provided hull weight ({concrete_weight_lbs:.0f} lbs) differs from "
+            f"estimated ({estimated_weight:.0f} lbs) by {weight_diff_pct:.0f}%. "
+            f"Check your weight input.",
+            stacklevel=2,
+        )
+
+    # --- Fix 6: Total displacement includes crew ---
+    total_weight_lbs = concrete_weight_lbs + crew_weight_lbs
+
+    # Hydrostatics (using total loaded weight for displacement)
+    disp_ft3 = displacement_volume(total_weight_lbs)
     wp_ft2 = waterplane_approximation(
         hull.length_ft, hull.beam_ft, waterplane_form_factor
     )
@@ -150,26 +309,26 @@ def run_complete_analysis(
     fb_ft = freeboard(hull.depth_ft, draft_ft)
     fb_in = fb_ft * INCHES_PER_FOOT
 
-    # Stability
+    # Stability (Fix 4: use corrected BM with length)
     cog_approx_ft = hull.depth_ft * 0.45
     gm_ft = metacentric_height_approx(
-        hull.beam_ft, draft_ft, hull.depth_ft, cog_approx_ft
+        hull.beam_ft, draft_ft, hull.depth_ft, cog_approx_ft,
+        length_ft=hull.length_ft,
+        waterplane_coeff=waterplane_form_factor,
     )
     gm_in = gm_ft * INCHES_PER_FOOT
 
-    # Structural
-    w_per_ft = concrete_weight_lbs / hull.length_ft
+    # Structural (Fix 2: thin-shell section modulus)
+    w_per_ft = total_weight_lbs / hull.length_ft
     m_max_lb_ft = bending_moment_uniform_load(w_per_ft, hull.length_ft)
-    # Hull cross-section: beam × (depth as effective)
-    effective_depth = hull.depth_in - hull.thickness_in
-    s_in3 = section_modulus_rectangular(hull.beam_in, effective_depth)
+    s_in3 = section_modulus_thin_shell(hull.beam_in, hull.depth_in, hull.thickness_in)
     sigma_psi = bending_stress_psi(m_max_lb_ft, s_in3)
     sf = safety_factor(flexural_strength_psi, sigma_psi)
 
-    # Pass/Fail (ASCE 2026: min freeboard ~4–6", GM > 0 for stability)
-    min_freeboard_in = 4.0
-    min_gm_in = 0.5
-    min_sf = 1.5
+    # Pass/Fail — Fix 5: corrected ASCE 2026 thresholds
+    min_freeboard_in = 6.0
+    min_gm_in = 6.0
+    min_sf = 2.0
 
     pass_freeboard = fb_in >= min_freeboard_in
     pass_stability = gm_in >= min_gm_in
@@ -213,10 +372,10 @@ def run_complete_analysis(
 def main() -> None:
     """CLI entry - run analysis for default Canoe 1."""
     print("=" * 60)
-    print("NAU Concrete Canoe 2026 - Hull Analysis")
+    print("NAU Concrete Canoe 2026 - Hull Analysis (v2.0 - Fixed)")
     print("=" * 60)
 
-    # Canoe 1: 18' × 30" × 18", 276 lbs
+    # Canoe 1: 18' × 30" × 18", 276 lbs, density 70 pcf
     results = run_complete_analysis(
         hull_length_in=18 * 12,
         hull_beam_in=30,
@@ -224,16 +383,29 @@ def main() -> None:
         hull_thickness_in=0.5,
         concrete_weight_lbs=276,
         flexural_strength_psi=1500,
+        concrete_density_pcf=70.0,
     )
 
-    print("\n--- Canoe 1: 18' × 30\" × 18\", 276 lbs ---")
-    print(f"Freeboard:      {results['freeboard']['freeboard_in']:.2f} in (min {results['freeboard']['min_required_in']} in) {'✓' if results['freeboard']['pass'] else '✗'}")
+    print("\n--- Canoe 1: 18' × 30\" × 18\", 276 lbs (+ 700 crew) ---")
+    print(f"Freeboard:      {results['freeboard']['freeboard_in']:.2f} in"
+          f"  (min {results['freeboard']['min_required_in']:.0f} in)"
+          f"  {'PASS' if results['freeboard']['pass'] else 'FAIL'}")
     print(f"Draft:          {results['freeboard']['draft_in']:.2f} in")
-    print(f"Metacentric GM: {results['stability']['gm_in']:.2f} in (min {results['stability']['min_required_in']} in) {'✓' if results['stability']['pass'] else '✗'}")
+    print(f"Displacement:   {results['freeboard']['displacement_ft3']:.2f} ft³")
+    print(f"Metacentric GM: {results['stability']['gm_in']:.2f} in"
+          f"  (min {results['stability']['min_required_in']:.0f} in)"
+          f"  {'PASS' if results['stability']['pass'] else 'FAIL'}")
+    print(f"Section Mod Sx: {results['structural']['section_modulus_in3']:.1f} in³")
     print(f"Max BM:         {results['structural']['max_bending_moment_lb_ft']:.1f} lb-ft")
-    print(f"Bending stress: {results['structural']['bending_stress_psi']:.0f} psi")
-    print(f"Safety factor:  {results['structural']['safety_factor']:.2f} (min {results['structural']['min_sf']}) {'✓' if results['structural']['pass'] else '✗'}")
+    print(f"Bending stress: {results['structural']['bending_stress_psi']:.1f} psi")
+    print(f"Safety factor:  {results['structural']['safety_factor']:.2f}"
+          f"  (min {results['structural']['min_sf']:.1f})"
+          f"  {'PASS' if results['structural']['pass'] else 'FAIL'}")
     print(f"\nOverall: {'PASS' if results['overall_pass'] else 'FAIL'}")
+
+    # Weight verification
+    est_w = estimate_hull_weight(216, 30, 18, 0.5, 70.0)
+    print(f"\nWeight check: provided=276 lbs, estimated={est_w:.0f} lbs")
     print("=" * 60)
 
 

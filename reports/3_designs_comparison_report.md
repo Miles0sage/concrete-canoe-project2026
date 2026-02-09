@@ -32,8 +32,8 @@ Loading condition: canoe shell + 4 paddlers @ 175 lbs each (700 lbs total crew).
 | Draft (in) | 6.0 | 5.7 | 5.0 |
 | Freeboard (in) | 11.0 PASS | 12.3 PASS | 13.0 PASS |
 | GM (in) | 9.5 PASS | 11.7 PASS | 16.0 PASS |
-| Safety Factor | 104.16 PASS | 120.00 PASS | 112.11 PASS |
-| Bending Stress (psi) | 14 | 13 | 13 |
+| Safety Factor | 5.55 PASS | 6.01 PASS | 5.34 PASS |
+| Bending Stress (psi) | 270 | 250 | 281 |
 | **OVERALL** | **PASS** | **PASS** | **PASS** |
 
 ## Design Analysis
@@ -86,7 +86,7 @@ Loading condition: canoe shell + 4 paddlers @ 175 lbs each (700 lbs total crew).
 - Weight: **171.3 lbs** (target: 237.0 lbs)
 - Freeboard: **11.0"** (requirement: >= 6.0")
 - GM: **9.5"** (requirement: >= 6.0")
-- Safety Factor: **104.16** (requirement: >= 2.0)
+- Safety Factor: **5.55** (requirement: >= 2.0)
 
 ## Figures
 

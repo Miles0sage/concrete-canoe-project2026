@@ -19,10 +19,13 @@ class TestDesignA:
 
     @pytest.fixture
     def results(self):
+        # 871 lbs = old loaded weight (canoe+crew); pass crew_weight_lbs=0
+        # to avoid double-counting since calculator now adds crew internally
         return run_complete_analysis(
             hull_length_in=192, hull_beam_in=32, hull_depth_in=17,
             hull_thickness_in=0.5, concrete_weight_lbs=871,
             flexural_strength_psi=1500, waterplane_form_factor=CWP,
+            crew_weight_lbs=0,
         )
 
     def test_returns_dict(self, results):
@@ -56,6 +59,7 @@ class TestDesignB:
             hull_length_in=196, hull_beam_in=34, hull_depth_in=18,
             hull_thickness_in=0.5, concrete_weight_lbs=885,
             flexural_strength_psi=1500, waterplane_form_factor=CWP,
+            crew_weight_lbs=0,
         )
 
     def test_freeboard_passes(self, results):
@@ -77,6 +81,7 @@ class TestDesignC:
             hull_length_in=216, hull_beam_in=36, hull_depth_in=18,
             hull_thickness_in=0.5, concrete_weight_lbs=911,
             flexural_strength_psi=1500, waterplane_form_factor=CWP,
+            crew_weight_lbs=0,
         )
 
     def test_freeboard_passes(self, results):
@@ -97,6 +102,7 @@ class TestPipelineConsistency:
             hull_length_in=L, hull_beam_in=B, hull_depth_in=D,
             hull_thickness_in=0.5, concrete_weight_lbs=wt,
             flexural_strength_psi=1500, waterplane_form_factor=CWP,
+            crew_weight_lbs=0,
         )
 
     def test_heavier_means_less_freeboard(self):
