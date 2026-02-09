@@ -59,6 +59,8 @@
             <a href="#partStressTest" class="nav-link px-2 py-1 rounded bg-red-800">AI vs Code</a>
             <a href="#partCost" class="nav-link px-2 py-1 rounded bg-emerald-800">Cost &amp; Credit</a>
             <a href="#partVideo" class="nav-link px-2 py-1 rounded bg-rose-800">Video</a>
+            <a href="#partMixDesign" class="nav-link px-2 py-1 rounded bg-teal-800">Mix Design</a>
+            <a href="#partPresTools" class="nav-link px-2 py-1 rounded bg-violet-800">Pres Tools</a>
             <a href="hand-calcs.html" class="nav-link px-2 py-1 rounded bg-amber-700 font-bold">Hand Calcs &rarr;</a>
             <a href="construction.html" class="nav-link px-2 py-1 rounded bg-orange-700 font-bold">Build Guide &rarr;</a>
         </div>
@@ -1435,12 +1437,366 @@ streamlit run app.py</div>
     </div>
 </div>
 
+<div id="partMixDesign" class="section-anchor border-t-4 border-teal-500 p-10 md:p-16">
+    <h2 class="text-3xl font-bold text-teal-800 sans mb-2">Mix Design Analysis</h2>
+    <p class="text-gray-500 sans mb-6">Mix 3 (Optimized) &mdash; 47.2% Slag, 58.6 PCF, 1,774 psi Predicted</p>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white rounded-xl shadow p-4">
+            <h3 class="text-lg font-bold text-teal-700 sans mb-3">Decision Matrix</h3>
+            <img src="mix_decision_matrix.png" alt="Decision Matrix" class="w-full rounded" loading="lazy">
+            <p class="text-xs text-gray-500 mt-2">Weighted scoring: Strength 40% | Durability 30% | Cost 20% | Workability 10%</p>
+        </div>
+        <div class="bg-white rounded-xl shadow p-4">
+            <h3 class="text-lg font-bold text-teal-700 sans mb-3">28-Day Strength Prediction</h3>
+            <img src="mix_strength_prediction.png" alt="Strength Prediction" class="w-full rounded" loading="lazy">
+            <p class="text-xs text-gray-500 mt-2">From 7-day wet test (273 psi) &rarr; 1,774 psi predicted @ 28 days</p>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow p-4 mb-8">
+        <h3 class="text-lg font-bold text-teal-700 sans mb-3">Mix 3 Showcase &mdash; Recommended for Hull Fabrication</h3>
+        <img src="mix3_showcase.png" alt="Mix 3 Showcase" class="w-full rounded" loading="lazy">
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white rounded-xl shadow p-4">
+            <h3 class="text-lg font-bold text-teal-700 sans mb-3">ASCE Compliance</h3>
+            <img src="mix_asce_compliance.png" alt="ASCE Compliance" class="w-full rounded" loading="lazy">
+        </div>
+        <div class="bg-white rounded-xl shadow p-4">
+            <h3 class="text-lg font-bold text-teal-700 sans mb-3">Cementitious Composition</h3>
+            <img src="mix_composition_comparison.png" alt="Composition" class="w-full rounded" loading="lazy">
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white rounded-xl shadow p-4">
+            <h3 class="text-lg font-bold text-teal-700 sans mb-3">CO2 Curing Benefit</h3>
+            <img src="mix_co2_curing_benefit.png" alt="CO2 Curing" class="w-full rounded" loading="lazy">
+            <p class="text-xs text-gray-500 mt-2">Standard curing vs CO2 accelerated &mdash; ready March 7 vs April 7</p>
+        </div>
+        <div class="bg-white rounded-xl shadow p-4">
+            <h3 class="text-lg font-bold text-teal-700 sans mb-3">Full Comparison Table</h3>
+            <img src="mix_comparison_table.png" alt="Comparison Table" class="w-full rounded" loading="lazy">
+        </div>
+    </div>
+
+    <div class="bg-teal-50 border-2 border-teal-300 rounded-lg p-6">
+        <h4 class="font-bold text-teal-900 sans text-lg mb-2">Mix 3 Key Numbers</h4>
+        <div class="grid md:grid-cols-4 gap-4 text-center">
+            <div class="bg-white rounded-lg p-4 shadow-sm">
+                <p class="text-3xl font-bold text-teal-700 sans">58.6</p>
+                <p class="text-sm text-teal-600">PCF Density</p>
+                <p class="text-xs text-gray-400">Target: 55-65</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 shadow-sm">
+                <p class="text-3xl font-bold text-teal-700 sans">1,774</p>
+                <p class="text-sm text-teal-600">PSI @ 28 Days</p>
+                <p class="text-xs text-gray-400">Target: &ge;1,500</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 shadow-sm">
+                <p class="text-3xl font-bold text-teal-700 sans">8.7/10</p>
+                <p class="text-sm text-teal-600">Decision Score</p>
+                <p class="text-xs text-gray-400">Weighted Matrix</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 shadow-sm">
+                <p class="text-3xl font-bold text-teal-700 sans">$265</p>
+                <p class="text-sm text-teal-600">Per Cubic Yard</p>
+                <p class="text-xs text-gray-400">Within Budget</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="partPresTools" class="section-anchor border-t-4 border-violet-500 p-10 md:p-16">
+    <h2 class="text-3xl font-bold text-violet-800 sans mb-2">Presentation Tools</h2>
+    <p class="text-gray-500 sans mb-6">Timer, Script Runner, and Local AI Assistant &mdash; Powered by Ollama + RTX 5070 Ti</p>
+
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <!-- Timer -->
+        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+            <h3 class="text-lg font-bold text-violet-700 sans mb-4">Presentation Timer</h3>
+            <div id="timer-display" class="text-6xl font-mono font-bold text-violet-900 mb-4">05:00</div>
+            <div class="flex gap-2 justify-center mb-3">
+                <button onclick="startTimer()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-bold transition">Start</button>
+                <button onclick="pauseTimer()" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg font-bold transition">Pause</button>
+                <button onclick="resetTimer()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-bold transition">Reset</button>
+            </div>
+            <div class="flex gap-2 justify-center">
+                <button onclick="setTimer(300)" class="bg-violet-100 hover:bg-violet-200 text-violet-800 px-3 py-1 rounded text-sm font-bold transition">5 min</button>
+                <button onclick="setTimer(600)" class="bg-violet-100 hover:bg-violet-200 text-violet-800 px-3 py-1 rounded text-sm font-bold transition">10 min</button>
+                <button onclick="setTimer(900)" class="bg-violet-100 hover:bg-violet-200 text-violet-800 px-3 py-1 rounded text-sm font-bold transition">15 min</button>
+                <button onclick="setTimer(1200)" class="bg-violet-100 hover:bg-violet-200 text-violet-800 px-3 py-1 rounded text-sm font-bold transition">20 min</button>
+            </div>
+            <p class="text-xs text-gray-400 mt-3">Keyboard: Space=Start/Pause, R=Reset</p>
+        </div>
+
+        <!-- Script Runner -->
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-lg font-bold text-violet-700 sans mb-4">Script Runner</h3>
+            <p class="text-sm text-gray-500 mb-3">Run analysis scripts from the browser (requires local server)</p>
+            <div class="space-y-2">
+                <button onclick="runScript('mix_analysis')" class="w-full bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition text-left">
+                    <span class="block">Run Mix Analysis</span>
+                    <span class="text-teal-200 text-xs">mix_analysis_system.py</span>
+                </button>
+                <button onclick="runScript('shop_drawings')" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition text-left">
+                    <span class="block">Generate Shop Drawings</span>
+                    <span class="text-blue-200 text-xs">generate_shop_drawings.py</span>
+                </button>
+                <button onclick="runScript('mix_visuals')" class="w-full bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition text-left">
+                    <span class="block">Generate Mix Visuals</span>
+                    <span class="text-orange-200 text-xs">generate_mix_design_visuals.py</span>
+                </button>
+                <button onclick="runScript('calculator')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition text-left">
+                    <span class="block">Run Hull Calculator</span>
+                    <span class="text-emerald-200 text-xs">concrete_canoe_calculator.py</span>
+                </button>
+            </div>
+            <div id="script-output" class="mt-3 bg-gray-900 text-green-400 text-xs font-mono p-3 rounded-lg max-h-40 overflow-y-auto hidden"></div>
+        </div>
+
+        <!-- GPU Status -->
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-lg font-bold text-violet-700 sans mb-4">System Status</h3>
+            <div class="space-y-3">
+                <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                    <p class="text-xs text-green-600 font-bold uppercase">GPU</p>
+                    <p class="text-sm font-bold text-green-800">2x RTX 5070 Ti (32 GB)</p>
+                    <p class="text-xs text-green-600">CUDA 13.1 | 0% utilization</p>
+                </div>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                    <p class="text-xs text-blue-600 font-bold uppercase">CPU</p>
+                    <p class="text-sm font-bold text-blue-800">AMD EPYC 7352 48-Core</p>
+                    <p class="text-xs text-blue-600">2.3 GHz | 125 GB RAM</p>
+                </div>
+                <div class="bg-violet-50 border border-violet-200 rounded-lg p-3">
+                    <p class="text-xs text-violet-600 font-bold uppercase">Local AI (Ollama)</p>
+                    <p class="text-sm font-bold text-violet-800">5 Models Loaded</p>
+                    <p class="text-xs text-violet-600">qwen3:14b | qwen2.5:32b | gemma2:9b | qwen2.5-coder:7b/32b</p>
+                </div>
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                    <p class="text-xs text-amber-600 font-bold uppercase">Inference Speed</p>
+                    <p class="text-sm font-bold text-amber-800">~77 tok/s (qwen3:14b)</p>
+                    <p class="text-xs text-amber-600">No API needed &mdash; runs on local GPU</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Local AI Chat -->
+    <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+        <h3 class="text-lg font-bold text-violet-700 sans mb-2">Local AI Assistant</h3>
+        <p class="text-sm text-gray-500 mb-4">Ask questions about the concrete canoe project. Runs locally on RTX 5070 Ti via Ollama &mdash; no API keys, no cloud, no cost.</p>
+
+        <div class="flex gap-2 mb-3">
+            <select id="ai-model" class="border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                <option value="qwen3:14b">qwen3:14b (Fast, 77 tok/s)</option>
+                <option value="qwen2.5:32b">qwen2.5:32b (Smartest, 32B)</option>
+                <option value="gemma2:9b">gemma2:9b (Quick, 9B)</option>
+                <option value="qwen2.5-coder:32b">qwen2.5-coder:32b (Code Expert)</option>
+            </select>
+            <span id="ai-status" class="text-xs text-green-600 font-bold self-center">Ready</span>
+        </div>
+
+        <div id="ai-chat-history" class="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-3 max-h-96 overflow-y-auto space-y-3" style="min-height:120px;">
+            <div class="text-sm text-gray-400 italic">Ask anything about Mix 3, hull design, ASCE requirements, CO2 curing...</div>
+        </div>
+
+        <div class="flex gap-2">
+            <input type="text" id="ai-input" placeholder="Ask about Mix 3, hull design, ASCE requirements..."
+                   class="flex-1 border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                   onkeydown="if(event.key==='Enter')sendAIMessage()">
+            <button onclick="sendAIMessage()" class="bg-violet-600 hover:bg-violet-700 text-white px-6 py-2 rounded-lg font-bold transition">Send</button>
+        </div>
+
+        <div class="flex gap-2 mt-2 flex-wrap">
+            <button onclick="quickAsk('What is the predicted 28-day strength for Mix 3?')" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-xs transition">28-day strength?</button>
+            <button onclick="quickAsk('Why did we choose 47.2% slag cement?')" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-xs transition">Why so much slag?</button>
+            <button onclick="quickAsk('Does Mix 3 pass all ASCE 2026 requirements?')" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-xs transition">ASCE compliance?</button>
+            <button onclick="quickAsk('What are the benefits of CO2 curing for our canoe?')" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-xs transition">CO2 curing benefits?</button>
+            <button onclick="quickAsk('Explain the hull stability calculation')" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-xs transition">Hull stability?</button>
+        </div>
+    </div>
+</div>
+
 </div><!-- end white container -->
 </div><!-- end max-w -->
 
 <footer class="no-print text-center text-gray-400 text-xs py-6">
     NAU ASCE Concrete Canoe 2026 &mdash; Teaching Edition &mdash; Generated from concrete_canoe_calculator.py v2.1
 </footer>
+
+<script>
+// ============================================
+// PRESENTATION TIMER
+// ============================================
+let timerInterval = null;
+let timerSeconds = 300;
+let timerRunning = false;
+
+function updateTimerDisplay() {
+    const m = Math.floor(timerSeconds / 60);
+    const s = timerSeconds % 60;
+    const display = document.getElementById('timer-display');
+    display.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    if (timerSeconds <= 60) display.classList.add('text-red-600');
+    else if (timerSeconds <= 120) display.classList.add('text-yellow-600');
+    else { display.classList.remove('text-red-600','text-yellow-600'); }
+}
+
+function startTimer() {
+    if (timerRunning) return;
+    timerRunning = true;
+    timerInterval = setInterval(() => {
+        if (timerSeconds > 0) { timerSeconds--; updateTimerDisplay(); }
+        else { pauseTimer(); document.getElementById('timer-display').textContent = "TIME!"; }
+    }, 1000);
+}
+
+function pauseTimer() { clearInterval(timerInterval); timerRunning = false; }
+
+function resetTimer() { pauseTimer(); timerSeconds = 300; updateTimerDisplay(); }
+
+function setTimer(secs) { pauseTimer(); timerSeconds = secs; updateTimerDisplay(); }
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.code === 'Space') { e.preventDefault(); timerRunning ? pauseTimer() : startTimer(); }
+    if (e.code === 'KeyR' && !e.ctrlKey) { e.preventDefault(); resetTimer(); }
+});
+
+// ============================================
+// SCRIPT RUNNER (calls local API if available)
+// ============================================
+const SCRIPTS = {
+    'mix_analysis': 'mix_design/mix_analysis_system.py',
+    'shop_drawings': 'scripts/generate_shop_drawings.py',
+    'mix_visuals': 'scripts/generate_mix_design_visuals.py',
+    'calculator': 'calculations/concrete_canoe_calculator.py'
+};
+
+function runScript(key) {
+    const output = document.getElementById('script-output');
+    output.classList.remove('hidden');
+    output.textContent = 'Running ' + SCRIPTS[key] + '...\n(Requires local server on port 8080)';
+
+    fetch('http://localhost:8080/run', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({script: SCRIPTS[key]})
+    }).then(r => r.json()).then(d => {
+        output.textContent = d.output || d.error || 'Done';
+    }).catch(() => {
+        output.textContent += '\n\nNote: Script runner requires the local API server.\nRun: python3 scripts/web_api_server.py\nOr run scripts directly in terminal.';
+    });
+}
+
+// ============================================
+// LOCAL AI CHAT (Ollama)
+// ============================================
+const SYSTEM_PROMPT = `You are a helpful assistant for the NAU Concrete Canoe 2026 project. Key facts:
+- Mix 3 (OPTIMIZED): 30.8% Portland, 47.2% Slag, 18.9% Fly Ash, 3.1% Lime
+- Density: 58.6 pcf, w/cm: 0.36, 7-day: 273 psi (wet), 28-day predicted: 1,774 psi
+- Design A hull: 192"x32"x17"x0.5" wall, V-bottom 15deg deadrise
+- Lightweight aggregates: Poraver (131 lbs), Perlite (88 lbs), K1 Glass Bubbles (39 lbs)
+- ASCE requirements: density 48-65 pcf, strength >=1500 psi, Portland <=40%
+- CO2 curing available (professor's system, free), can boost to ~1,900-2,000 psi
+- Decision matrix score: Mix 3 = 8.7/10 (strength 40%, durability 30%, cost 20%, workability 10%)
+Answer concisely and technically. You are running locally on 2x RTX 5070 Ti via Ollama.`;
+
+let chatHistory = [];
+
+function addChatMessage(role, text) {
+    const history = document.getElementById('ai-chat-history');
+    // Remove placeholder
+    const placeholder = history.querySelector('.italic');
+    if (placeholder) placeholder.remove();
+
+    const div = document.createElement('div');
+    div.className = role === 'user'
+        ? 'bg-violet-100 rounded-lg p-3 ml-12'
+        : 'bg-gray-100 rounded-lg p-3 mr-12';
+
+    const label = document.createElement('p');
+    label.className = 'text-xs font-bold mb-1 ' + (role === 'user' ? 'text-violet-600' : 'text-gray-600');
+    label.textContent = role === 'user' ? 'You' : 'AI (Local)';
+
+    const content = document.createElement('p');
+    content.className = 'text-sm text-gray-800 whitespace-pre-wrap';
+    content.textContent = text;
+
+    div.appendChild(label);
+    div.appendChild(content);
+    history.appendChild(div);
+    history.scrollTop = history.scrollHeight;
+    return content;
+}
+
+async function sendAIMessage() {
+    const input = document.getElementById('ai-input');
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = '';
+
+    addChatMessage('user', msg);
+    chatHistory.push({role: 'user', content: msg});
+
+    const status = document.getElementById('ai-status');
+    status.textContent = 'Thinking...';
+    status.className = 'text-xs text-yellow-600 font-bold self-center animate-pulse';
+
+    const responseEl = addChatMessage('assistant', '');
+    const model = document.getElementById('ai-model').value;
+
+    try {
+        const messages = [{role: 'system', content: SYSTEM_PROMPT}, ...chatHistory];
+
+        const response = await fetch('http://localhost:11434/api/chat', {
+            method: 'POST',
+            body: JSON.stringify({ model: model, messages: messages, stream: true })
+        });
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let fullResponse = '';
+
+        while (true) {
+            const {done, value} = await reader.read();
+            if (done) break;
+            const chunk = decoder.decode(value);
+            const lines = chunk.split('\n').filter(l => l.trim());
+            for (const line of lines) {
+                try {
+                    const data = JSON.parse(line);
+                    if (data.message && data.message.content) {
+                        fullResponse += data.message.content;
+                        responseEl.textContent = fullResponse;
+                        document.getElementById('ai-chat-history').scrollTop =
+                            document.getElementById('ai-chat-history').scrollHeight;
+                    }
+                } catch(e) {}
+            }
+        }
+
+        chatHistory.push({role: 'assistant', content: fullResponse});
+        status.textContent = 'Ready';
+        status.className = 'text-xs text-green-600 font-bold self-center';
+
+    } catch(err) {
+        responseEl.textContent = 'Error connecting to Ollama. Make sure it is running on localhost:11434.\n\nStart with: ollama serve';
+        status.textContent = 'Offline';
+        status.className = 'text-xs text-red-600 font-bold self-center';
+    }
+}
+
+function quickAsk(question) {
+    document.getElementById('ai-input').value = question;
+    sendAIMessage();
+}
+</script>
 
 </body>
 </html>
