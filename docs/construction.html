@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAU Concrete Canoe 2026 — Construction Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Times New Roman', Times, serif; scroll-behavior: smooth; }
+        h1,h2,h3,h4,.sans { font-family: 'Helvetica','Arial',sans-serif; }
+        .academic-p { text-align:justify; margin-bottom:1.5rem; line-height:1.8; font-size:1.05rem; }
+        .step-box { background:#fffbeb; border-left:4px solid #d97706; padding:1.25rem 1.5rem; margin:1rem 0; border-radius:0 0.5rem 0.5rem 0; }
+        .danger-box { background:#fef2f2; border-left:4px solid #dc2626; padding:1rem 1.25rem; margin:1rem 0; border-radius:0 0.5rem 0.5rem 0; }
+        .tip-box { background:#f0fdf4; border-left:4px solid #16a34a; padding:1rem 1.25rem; margin:1rem 0; border-radius:0 0.5rem 0.5rem 0; }
+        .info-box { background:#eff6ff; border-left:4px solid #2563eb; padding:1rem 1.25rem; margin:1rem 0; border-radius:0 0.5rem 0.5rem 0; }
+        .nav-link { transition:all 0.2s; }
+        .nav-link:hover { background-color:#1e40af; color:white; }
+        .section-anchor { scroll-margin-top:80px; }
+        .check-item { cursor:pointer; user-select:none; }
+        .check-item.done { text-decoration:line-through; color:#9ca3af; }
+        .grade-bar { height:24px; border-radius:4px; transition:width 0.5s; }
+        table.data-table { width:100%; border-collapse:collapse; font-size:0.9rem; }
+        table.data-table th { background:#1e3a8a; color:white; padding:0.5rem 0.75rem; text-align:left; font-family:'Helvetica',sans-serif; font-size:0.8rem; text-transform:uppercase; }
+        table.data-table td { padding:0.5rem 0.75rem; border-bottom:1px solid #e5e7eb; }
+        table.data-table tr:nth-child(even) { background:#f9fafb; }
+        @media print { .no-print{display:none;} .step-box,.danger-box,.tip-box,.info-box{break-inside:avoid;} }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+<!-- NAV -->
+<nav class="no-print sticky top-0 z-50 bg-blue-900 text-white shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+    <span class="font-bold text-lg sans">NAU Canoe 2026</span>
+    <div class="flex gap-1 text-xs flex-wrap">
+      <a href="index.html" class="nav-link px-2 py-1 rounded">Main Report</a>
+      <a href="hand-calcs.html" class="nav-link px-2 py-1 rounded">Hand Calcs</a>
+      <a href="#phase1" class="nav-link px-2 py-1 rounded bg-amber-700">1: Mold</a>
+      <a href="#phase2" class="nav-link px-2 py-1 rounded bg-amber-700">2: Mix</a>
+      <a href="#phase3" class="nav-link px-2 py-1 rounded bg-amber-700">3: Layup</a>
+      <a href="#phase4" class="nav-link px-2 py-1 rounded bg-amber-700">4: Cure</a>
+      <a href="#phase5" class="nav-link px-2 py-1 rounded bg-amber-700">5: Demold</a>
+      <a href="#phase6" class="nav-link px-2 py-1 rounded bg-amber-700">6: Finish</a>
+      <a href="#safety" class="nav-link px-2 py-1 rounded bg-red-800">Safety</a>
+      <a href="#grading" class="nav-link px-2 py-1 rounded bg-emerald-800">Grading</a>
+      <a href="#calculator" class="nav-link px-2 py-1 rounded bg-indigo-800">Mix Calc</a>
+    </div>
+  </div>
+</nav>
+
+<div class="max-w-5xl mx-auto my-8">
+<div class="bg-white shadow-2xl border border-gray-300">
+
+<!-- COVER -->
+<div class="p-10 md:p-16">
+  <div class="border-b-4 border-amber-600 pb-8 mb-8">
+    <p class="text-sm text-amber-700 font-bold sans tracking-widest mb-2">NORTHERN ARIZONA UNIVERSITY &mdash; ASCE 2026</p>
+    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-3 sans">Construction Guide</h1>
+    <h2 class="text-xl text-gray-500 sans">Complete Step-by-Step Build Manual &mdash; From Foam to Float</h2>
+    <p class="text-gray-400 mt-4 font-mono text-sm">Design C: 216" &times; 36" &times; 18" &times; 0.75" | 60 PCF lightweight concrete | 2-layer basalt mesh</p>
+  </div>
+
+  <div class="bg-amber-50 border border-amber-200 rounded-lg p-6 mb-8">
+    <h3 class="font-bold text-amber-900 sans text-lg mb-3">What This Guide Covers</h3>
+    <div class="grid md:grid-cols-3 gap-4 text-sm">
+      <div><strong class="text-amber-800">Phase 1:</strong> EPS foam mold construction &mdash; CNC hot-wire and manual methods, station templates, fairing</div>
+      <div><strong class="text-amber-800">Phase 2:</strong> Concrete mix design &mdash; 60 PCF lightweight with Poraver, PVA fibers, batch planning</div>
+      <div><strong class="text-amber-800">Phase 3:</strong> Three-layer layup &mdash; mesh placement, consolidation, thickness control</div>
+      <div><strong class="text-amber-800">Phase 4:</strong> 28-day wet cure protocol &mdash; temperature, moisture, testing schedule</div>
+      <div><strong class="text-amber-800">Phase 5:</strong> Mechanical demolding &mdash; wedge technique, damage prevention, inspection</div>
+      <div><strong class="text-amber-800">Phase 6:</strong> Finishing &mdash; patching, sanding 80&rarr;400 grit, sealing, painting, hardware</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS TRACKER -->
+  <div class="bg-gray-50 border rounded-lg p-6 mb-8" id="progress-section">
+    <h3 class="font-bold text-gray-800 sans text-lg mb-2">Your Build Progress</h3>
+    <p class="text-sm text-gray-500 mb-4">Check off steps as you complete them. Progress is saved in your browser.</p>
+    <div class="w-full bg-gray-200 rounded-full h-6 mb-3">
+      <div id="progress-bar" class="grade-bar bg-gradient-to-r from-amber-500 to-green-500" style="width:0%">
+        <span id="progress-text" class="text-xs font-bold text-white pl-2 leading-6"></span>
+      </div>
+    </div>
+    <p class="text-xs text-gray-400" id="progress-detail">0 of 42 steps completed</p>
+  </div>
+
+  <!-- PROJECT OVERVIEW -->
+  <h3 class="text-2xl font-bold text-gray-800 sans mb-4">Project Overview &amp; Timeline</h3>
+
+  <table class="data-table mb-8">
+    <thead><tr><th>Phase</th><th>Duration</th><th>Team Size</th><th>Key Deliverable</th></tr></thead>
+    <tbody>
+      <tr><td>1. Mold Construction</td><td>2&ndash;3 weeks</td><td>4&ndash;6</td><td>Faired female mold, release-coated</td></tr>
+      <tr><td>2. Mix Design &amp; Testing</td><td>1&ndash;2 weeks</td><td>2&ndash;3</td><td>Verified 60 PCF mix, test cylinders</td></tr>
+      <tr><td>3. Concrete Layup</td><td>1&ndash;2 days</td><td>6&ndash;10</td><td>Complete shell, 0.75" uniform thickness</td></tr>
+      <tr><td>4. Curing</td><td>28 days</td><td>1&ndash;2 (monitoring)</td><td>Fully hydrated shell, 2000 psi f'c</td></tr>
+      <tr><td>5. Demolding</td><td>1&ndash;2 days</td><td>6&ndash;8</td><td>Free-standing hull, no cracks</td></tr>
+      <tr><td>6. Finishing</td><td>3&ndash;6 weeks</td><td>3&ndash;5</td><td>Race-ready canoe, painted &amp; sealed</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <strong>Total estimated build time:</strong> 300&ndash;500 person-hours over 10&ndash;14 weeks. Finishing alone is typically 100&ndash;300 hours. Start early.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PHASE 1: MOLD CONSTRUCTION                                    -->
+<!-- ============================================================ -->
+<div id="phase1" class="section-anchor border-t-4 border-amber-500 p-10 md:p-16">
+  <h2 class="text-3xl font-bold text-amber-800 sans mb-2">Phase 1: Mold Construction</h2>
+  <p class="text-gray-500 sans mb-8">EPS Foam Female Mold &mdash; The Foundation of Your Hull</p>
+
+  <p class="academic-p">The mold defines the hull shape. Every imperfection in the mold transfers directly to the concrete shell. A well-built mold with smooth, fair curves is the single most important factor in producing a competitive canoe. The female mold approach (concave, laying concrete inside) is standard for ASCE competition canoes because it produces a smoother exterior surface.</p>
+
+  <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">1.1 Materials &amp; Tools Required</h3>
+
+  <table class="data-table mb-6">
+    <thead><tr><th>Item</th><th>Specification</th><th>Qty</th><th>Est. Cost</th></tr></thead>
+    <tbody>
+      <tr><td>EPS foam blocks</td><td>2 lb/ft&sup3; density, 24"&times;48"&times;12" sheets</td><td>8 sheets</td><td>$360</td></tr>
+      <tr><td>MDF strongback</td><td>3/4" &times; 36" &times; 16 ft</td><td>1 sheet</td><td>$80</td></tr>
+      <tr><td>Polyurethane adhesive</td><td>Gorilla Glue or equiv.</td><td>2 bottles</td><td>$25</td></tr>
+      <tr><td>Drywall screws</td><td>#8 &times; 2.5"</td><td>1 box (100)</td><td>$12</td></tr>
+      <tr><td>Wood dowels</td><td>3/8" &times; 36" alignment pins</td><td>8 dowels</td><td>$13</td></tr>
+      <tr><td>PVA mold release</td><td>Partall or TR Industries</td><td>1 quart</td><td>$25</td></tr>
+      <tr><td>Sandpaper</td><td>80, 120, 220, 400 grit</td><td>Assorted</td><td>$40</td></tr>
+      <tr><td>Surform rasp</td><td>Stanley Surform plane</td><td>1</td><td>$15</td></tr>
+      <tr><td>Hot-wire cutter (optional)</td><td>NiChrome wire, 12V supply</td><td>1 setup</td><td>$30</td></tr>
+    </tbody>
+  </table>
+  <p class="text-sm text-gray-500 mb-8"><strong>Total mold cost estimate: ~$600&ndash;$850</strong> depending on foam sourcing and whether CNC cutting is available.</p>
+
+  <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">1.2 Station Templates</h3>
+
+  <p class="academic-p">The hull shape is defined by cross-section templates ("stations") cut at regular intervals along the length. Our Design C uses 32 stations at 6-inch spacing across the 192-inch hull length. Each station defines the beam (width) at that position, following a quartic taper function from the calculator.</p>
+
+  <!-- STATION SCHEDULE TABLE -->
+  <div class="overflow-x-auto mb-6">
+    <table class="data-table text-xs">
+      <thead><tr><th>Stn</th><th>Position</th><th>Beam (in)</th><th>Stn</th><th>Position</th><th>Beam (in)</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>0"</td><td>0.0</td><td>17</td><td>102"</td><td>31.8</td></tr>
+        <tr><td>1</td><td>6"</td><td>3.1</td><td>18</td><td>108"</td><td>31.4</td></tr>
+        <tr><td>2</td><td>12"</td><td>6.2</td><td>19</td><td>114"</td><td>30.6</td></tr>
+        <tr><td>3</td><td>18"</td><td>9.3</td><td>20</td><td>120"</td><td>29.6</td></tr>
+        <tr><td>4</td><td>24"</td><td>12.2</td><td>21</td><td>126"</td><td>28.2</td></tr>
+        <tr><td>5</td><td>30"</td><td>15.1</td><td>22</td><td>132"</td><td>26.6</td></tr>
+        <tr><td>6</td><td>36"</td><td>17.8</td><td>23</td><td>138"</td><td>24.7</td></tr>
+        <tr><td>7</td><td>42"</td><td>20.3</td><td>24</td><td>144"</td><td>22.6</td></tr>
+        <tr><td>8</td><td>48"</td><td>22.6</td><td>25</td><td>150"</td><td>20.3</td></tr>
+        <tr><td>9</td><td>54"</td><td>24.7</td><td>26</td><td>156"</td><td>17.8</td></tr>
+        <tr><td>10</td><td>60"</td><td>26.6</td><td>27</td><td>162"</td><td>15.1</td></tr>
+        <tr><td>11</td><td>66"</td><td>28.2</td><td>28</td><td>168"</td><td>12.2</td></tr>
+        <tr><td>12</td><td>72"</td><td>29.6</td><td>29</td><td>174"</td><td>9.3</td></tr>
+        <tr><td>13</td><td>78"</td><td>30.6</td><td>30</td><td>180"</td><td>6.2</td></tr>
+        <tr><td>14</td><td>84"</td><td>31.4</td><td>31</td><td>186"</td><td>3.1</td></tr>
+        <tr><td>15</td><td>90"</td><td>31.8</td><td>32</td><td>192"</td><td>0.0</td></tr>
+        <tr><td>16</td><td>96"</td><td>32.0 (max)</td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip-box">
+    <strong>Pro Tip:</strong> Print the station schedule and tape it to the strongback for quick reference during assembly. Mark each station position with a Sharpie line across the MDF.
+  </div>
+
+  <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">1.3 Cutting Foam Templates &mdash; Manual Method</h3>
+  <p class="academic-p">If CNC hot-wire cutting is not available, templates can be cut manually with excellent results. This is the method most student teams actually use. It takes longer but requires no specialized equipment.</p>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 1.3.1: Create Cardboard Master Templates <span class="check-item text-xs" data-step="1">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Print the cross-section profile for each unique station at 1:1 scale (use a large-format printer or tile across multiple sheets)</li>
+      <li>For each station: draw a horizontal line = Beam width, centered. Draw vertical lines at each end = Depth (17" for inner hull, accounting for shell thickness). Connect the bottom with the U-profile (flat bottom + 90&deg; walls for our design)</li>
+      <li>Transfer the profile onto heavy cardboard or 1/4" MDF using carbon paper or spray adhesive</li>
+      <li>Cut with a jigsaw or utility knife. Label each template with its station number</li>
+      <li>Sand edges smooth &mdash; these are your cutting guides</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 1.3.2: Transfer Profiles to Foam <span class="check-item text-xs" data-step="2">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Lay a foam block flat on a clean work surface</li>
+      <li>Place the cardboard template on top, aligning the centerline</li>
+      <li>Trace around the template with a fine-tip Sharpie</li>
+      <li>Flip the template and trace the mirror side (if asymmetric station)</li>
+      <li>Mark the station number and orientation arrow on the foam</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 1.3.3: Cut Foam Profiles <span class="check-item text-xs" data-step="3">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li><strong>Hot-wire method (preferred):</strong> Stretch NiChrome wire between a wooden bow frame. Connect to a 12V variable power supply. Adjust current until wire glows barely orange (~400&deg;F). Guide the wire along the traced line at a steady 1&ndash;2 inches per second. The wire melts through EPS cleanly with minimal dust.</li>
+      <li><strong>Hand-saw method:</strong> Use a long serrated bread knife or a drywall saw. Cut along the outside of the Sharpie line (leave material to sand). Use long, smooth strokes &mdash; short choppy cuts leave ridges.</li>
+      <li><strong>Band-saw method:</strong> If available, a band saw with a fine-tooth blade cuts EPS quickly. Feed slowly to prevent melting and re-welding.</li>
+      <li>Cut 1/8" outside the line in all cases &mdash; you will sand to final profile</li>
+    </ol>
+  </div>
+
+  <div class="danger-box">
+    <strong>SAFETY:</strong> Hot-wire cutting produces styrene fumes. Always work outdoors or with strong ventilation. Wear a respirator with organic vapor cartridges. Never use an open flame to cut EPS &mdash; it is flammable.
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 1.3.4: Sand to Final Profile <span class="check-item text-xs" data-step="4">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Use a Surform rasp for initial shaping &mdash; removes material quickly without tearing</li>
+      <li>Switch to 80-grit sandpaper on a flat sanding block for fairness</li>
+      <li>Check against the cardboard template frequently &mdash; light behind the template shows gaps</li>
+      <li>Final pass with 120-grit for smoothness</li>
+      <li>Tolerance: &plusmn;1/16" from the template profile</li>
+    </ol>
+  </div>
+
+  <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">1.4 CNC Hot-Wire Method (If Available)</h3>
+  <p class="academic-p">If your school has access to a CNC hot-wire cutter (common in architecture and aerospace departments), the process is dramatically faster and more precise. The CNC controller reads G-code generated from the hull coordinates and drives the wire through the foam automatically.</p>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 1.4.1: Generate G-Code from Calculator <span class="check-item text-xs" data-step="5">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Export station coordinates from <code>concrete_canoe_calculator.py</code> (the station schedule above)</li>
+      <li>Convert each cross-section profile to a 2D DXF or G-code path</li>
+      <li>Each station is one cut: the wire traces the U-profile from one side of the foam block to the other</li>
+      <li>Set wire speed to 1.5"/sec for 2 lb/ft&sup3; EPS, wire temp ~400&deg;F</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 1.4.2: CNC Cutting Process <span class="check-item text-xs" data-step="6">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Secure the foam block to the CNC bed with pins or double-sided tape</li>
+      <li>Run a dry pass (wire off) to verify the path clears the foam and bed</li>
+      <li>Power on the wire, run the cut. One station takes ~30 seconds</li>
+      <li>Remove the cut piece, label it, stack for assembly</li>
+      <li>CNC tolerance: &plusmn;1/32" &mdash; far better than manual cutting</li>
+    </ol>
+  </div>
+
+  <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">1.5 Strongback Assembly</h3>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 1.5.1: Build the Strongback <span class="check-item text-xs" data-step="7">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>The strongback is a flat, rigid base that holds all station templates in alignment. Use 3/4" MDF or plywood, 36" wide &times; 196" long (hull + 2" margin each end)</li>
+      <li>If a single 16-ft sheet isn't available, join two sheets with a butt joint reinforced by a 12" splice plate screwed to the underside</li>
+      <li>Snap a centerline down the full length with a chalk line</li>
+      <li>Mark station positions every 6" starting from one end (32 marks total)</li>
+      <li>At each station mark, drill 3/8" holes for alignment dowels</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 1.5.2: Mount Station Templates <span class="check-item text-xs" data-step="8">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Drill matching 3/8" holes in the bottom of each foam station template (2 holes, symmetric about centerline)</li>
+      <li>Apply polyurethane adhesive to the bottom face of each template</li>
+      <li>Press each template onto the strongback at its marked position, pushing dowels through both holes</li>
+      <li>Secure with 2.5" drywall screws from below (pre-drill through MDF)</li>
+      <li>Check vertical alignment with a level &mdash; templates must be plumb</li>
+      <li>Check fore-aft alignment by sighting along the sheer line (top edge) &mdash; should be a smooth curve with no bumps</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 1.5.3: Fill Between Stations <span class="check-item text-xs" data-step="9">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Cut filler blocks from scrap EPS to fit roughly between each pair of adjacent stations</li>
+      <li>Glue filler blocks in place with polyurethane adhesive. Clamp or weight until cured (2&ndash;4 hrs)</li>
+      <li>The filler doesn't need to be precise &mdash; you'll shape it in the fairing step</li>
+      <li>Leave 1/4" proud (above the template surface) to ensure full coverage for sanding</li>
+    </ol>
+  </div>
+
+  <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">1.6 Fairing the Mold</h3>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 1.6.1: Rough Fairing <span class="check-item text-xs" data-step="10">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Use a Surform rasp to knock down high spots between stations. Work longitudinally (along the hull length), not across it</li>
+      <li>Use a long flexible batten (thin wood strip or aluminum bar, 36&ndash;48" long) to check fairness: hold the batten against the mold surface along the length. It should make contact along its full length with no gaps &gt; 1/16"</li>
+      <li>Mark high spots with a Sharpie, sand them down, re-check with the batten</li>
+      <li>Work from the center of the hull outward toward bow and stern</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 1.6.2: Fine Fairing &amp; Surface Prep <span class="check-item text-xs" data-step="11">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Switch to 80-grit on a large sanding board (12" or longer). Sand the entire surface, blending station-to-station transitions</li>
+      <li>Progress through 120 and 220 grit for the final surface. The mold surface should feel smooth and continuous</li>
+      <li>Fill any remaining low spots with lightweight spackle or Bondo, then sand flush</li>
+      <li>Vacuum all dust thoroughly &mdash; any dust under the release agent will transfer to the hull</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 1.6.3: Apply Mold Release Agent <span class="check-item text-xs" data-step="12">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Apply 2 coats of PVA mold release (Partall Film #10 or equivalent) with a foam brush</li>
+      <li>First coat: thin, even, let dry 30 minutes until clear and tacky</li>
+      <li>Second coat: perpendicular to first coat direction, let dry 1 hour</li>
+      <li>Do NOT touch the mold surface after release is applied &mdash; fingerprints break the release film</li>
+      <li>Optional: apply paste wax before PVA for extra insurance on porous foam</li>
+    </ol>
+  </div>
+
+  <div class="tip-box">
+    <strong>Pro Tip:</strong> Some teams seal the EPS foam with a coat of water-based polyurethane before applying PVA release. This prevents the foam from absorbing the release agent and gives a glassier mold surface.
+  </div>
+
+  <!-- SVG: MOLD CROSS-SECTION DIAGRAM -->
+  <div class="my-8">
+    <h4 class="text-lg font-bold text-gray-700 sans mb-3">Mold Cross-Section (Station 16, Maximum Beam)</h4>
+    <svg viewBox="0 0 500 280" class="w-full max-w-lg mx-auto" xmlns="http://www.w3.org/2000/svg">
+      <!-- Strongback -->
+      <rect x="50" y="230" width="400" height="20" fill="#c4a882" stroke="#8b6914" stroke-width="1.5"/>
+      <text x="250" y="245" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#5c3d00">MDF Strongback (3/4")</text>
+      <!-- Foam mold outline -->
+      <path d="M100,230 L100,60 L400,60 L400,230" fill="#fff9c4" stroke="#f59e0b" stroke-width="2"/>
+      <!-- Mold cavity (U-shape) -->
+      <path d="M130,230 L130,80 L370,80 L370,230" fill="#fff" stroke="#d97706" stroke-width="2" stroke-dasharray="6,3"/>
+      <!-- Labels -->
+      <text x="250" y="50" text-anchor="middle" font-size="11" font-weight="bold" font-family="sans-serif" fill="#92400e">32.0" beam (foam edge)</text>
+      <line x1="100" y1="55" x2="400" y2="55" stroke="#92400e" stroke-width="1" marker-start="url(#arrowL)" marker-end="url(#arrowR)"/>
+      <!-- Depth label -->
+      <text x="80" y="150" text-anchor="end" font-size="10" font-family="sans-serif" fill="#92400e" transform="rotate(-90,80,150)">17" depth</text>
+      <line x1="90" y1="60" x2="90" y2="230" stroke="#92400e" stroke-width="1"/>
+      <!-- Cavity label -->
+      <text x="250" y="160" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#d97706">Mold Cavity</text>
+      <text x="250" y="175" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#92400e">(concrete goes here)</text>
+      <!-- Foam fill -->
+      <text x="115" y="170" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#b45309" transform="rotate(-90,115,170)">EPS foam</text>
+      <text x="385" y="170" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#b45309" transform="rotate(90,385,170)">EPS foam</text>
+      <!-- Dowels -->
+      <circle cx="160" cy="235" r="4" fill="#8b6914" stroke="#5c3d00"/>
+      <circle cx="340" cy="235" r="4" fill="#8b6914" stroke="#5c3d00"/>
+      <text x="160" y="265" text-anchor="middle" font-size="8" font-family="sans-serif" fill="#5c3d00">dowel</text>
+      <text x="340" y="265" text-anchor="middle" font-size="8" font-family="sans-serif" fill="#5c3d00">dowel</text>
+    </svg>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PHASE 2: MIX DESIGN                                           -->
+<!-- ============================================================ -->
+<div id="phase2" class="section-anchor border-t-4 border-blue-500 p-10 md:p-16">
+  <h2 class="text-3xl font-bold text-blue-800 sans mb-2">Phase 2: Concrete Mix Design</h2>
+  <p class="text-gray-500 sans mb-8">60 PCF Lightweight Concrete &mdash; Batch Planning &amp; Testing</p>
+
+  <p class="academic-p">The concrete mix must achieve a unit weight of 60 lb/ft&sup3; (960 kg/m&sup3;) while maintaining a compressive strength of at least f'c = 2000 psi and a modulus of rupture f_r = 1500 psi. This is accomplished using lightweight aggregates (Poraver expanded glass or K1 cenospheres) to replace normal-weight sand and gravel, combined with PVA fiber reinforcement and a carefully controlled water-to-cite ratio.</p>
+
+  <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">2.1 Mix Design (Per 5-Gallon Bucket Batch)</h3>
+
+  <table class="data-table mb-6">
+    <thead><tr><th>Ingredient</th><th>Weight (lbs)</th><th>Volume (gal)</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Portland Cement (Type I/II)</td><td>18.0</td><td>~0.7</td><td>ASTM C150</td></tr>
+      <tr><td>Poraver 1&ndash;2mm</td><td>4.5</td><td>~1.2</td><td>Lightweight agg, ASTM C330</td></tr>
+      <tr><td>Poraver 0.5&ndash;1mm</td><td>3.0</td><td>~0.8</td><td>Fine lightweight agg</td></tr>
+      <tr><td>K1 Cenospheres (optional)</td><td>2.0</td><td>~0.6</td><td>Ultra-light filler, 6&ndash;8 PCF</td></tr>
+      <tr><td>PVA Fibers (3/4")</td><td>0.3</td><td>&mdash;</td><td>0.5% by vol, crack control</td></tr>
+      <tr><td>Water</td><td>7.2</td><td>~0.86</td><td>w/c = 0.40</td></tr>
+      <tr><td>HRWR (superplasticizer)</td><td>0.09</td><td>&mdash;</td><td>Sika ViscoCrete, 0.5% by cement wt</td></tr>
+      <tr><td><strong>Batch Total</strong></td><td><strong>~35.1</strong></td><td><strong>~5.0</strong></td><td><strong>Target: 52&ndash;62 PCF wet</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <strong>From our calculator:</strong> Net shell volume = 3.464 ft&sup3; (25.9 gal). With 40% waste factor = 4.849 ft&sup3; (36.3 gal). That's <strong>8 batches</strong> at 5 gal each.
+  </div>
+
+  <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">2.2 Mixing Procedure</h3>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 2.2.1: Pre-Wet Aggregates <span class="check-item text-xs" data-step="13">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Poraver beads are highly absorptive. Pre-soak in water for 24 hours, then drain for 30 minutes</li>
+      <li>This prevents the aggregates from stealing water from the cement paste during hydration</li>
+      <li>Weigh aggregates after soaking &mdash; adjust mix water to compensate for absorbed water</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 2.2.2: Dry Mix <span class="check-item text-xs" data-step="14">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>In a clean 5-gallon bucket, combine cement, pre-wetted Poraver (both sizes), and K1 cenospheres</li>
+      <li>Mix dry ingredients for 2 minutes with a drill-mounted paddle mixer at low speed</li>
+      <li>Add PVA fibers gradually while mixing to prevent clumping</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 2.2.3: Add Water &amp; Admixtures <span class="check-item text-xs" data-step="15">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Add 80% of the mix water. Mix for 2 minutes at medium speed</li>
+      <li>Add superplasticizer (HRWR) to the remaining 20% water, stir to dissolve</li>
+      <li>Add the HRWR-water mixture. Mix for 3 more minutes</li>
+      <li>Target consistency: thick pancake batter &mdash; should hold shape when scooped but flow when vibrated</li>
+      <li>If too stiff, add water in 1-oz increments. If too wet, add a pinch of cement. Record adjustments!</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 2.2.4: Test &amp; Document <span class="check-item text-xs" data-step="16">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Measure unit weight: fill a known-volume container (e.g., 1-quart deli container), weigh, calculate PCF. Target: 52&ndash;62 PCF</li>
+      <li>Cast 3 test cylinders (2"&times;4" or 3"&times;6") for 7-day and 28-day compression tests</li>
+      <li>Record: date, batch number, all ingredient weights, water added, slump/flow, unit weight, ambient temperature</li>
+      <li>Photo the consistency and test cylinders for documentation</li>
+    </ol>
+  </div>
+
+  <div class="danger-box">
+    <strong>SAFETY:</strong> Portland cement is highly alkalite (pH 12&ndash;13). Always wear nitrile gloves and safety glasses when mixing. Wash skin contact immediately. Wear an N95 mask when handling dry cement &mdash; silica dust causes silicosis.
+  </div>
+
+  <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">2.3 Common Mix Problems &amp; Solutions</h3>
+
+  <table class="data-table mb-6">
+    <thead><tr><th>Problem</th><th>Cause</th><th>Solution</th></tr></thead>
+    <tbody>
+      <tr><td>Mix too heavy (&gt;65 PCF)</td><td>Too much cement or too little Poraver</td><td>Increase Poraver ratio, add K1 cenospheres</td></tr>
+      <tr><td>Mix too light (&lt;50 PCF)</td><td>Excessive air or too much Poraver</td><td>Reduce Poraver, increase cement slightly</td></tr>
+      <tr><td>Mix won't flow</td><td>Low w/c or no superplasticizer</td><td>Add HRWR in 0.1% increments, NOT more water</td></tr>
+      <tr><td>Segregation (beads float)</td><td>Over-vibration or too wet</td><td>Reduce water, shorten vibration time</td></tr>
+      <tr><td>PVA fibers clumping</td><td>Added too fast</td><td>Add fibers slowly while mixer runs, break clumps by hand</td></tr>
+      <tr><td>Flash set (&lt;30 min workability)</td><td>Hot weather or old cement</td><td>Use cold water, shade the bucket, add retarder</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<!-- PHASE 3: CONCRETE LAYUP                                       -->
+<!-- ============================================================ -->
+<div id="phase3" class="section-anchor border-t-4 border-green-500 p-10 md:p-16">
+  <h2 class="text-3xl font-bold text-green-800 sans mb-2">Phase 3: Concrete Layup</h2>
+  <p class="text-gray-500 sans mb-8">Three-Layer Application with Basalt Mesh Reinforcement</p>
+
+  <p class="academic-p">The layup is the most critical construction day. The entire shell must be placed in a single continuous session (6&ndash;10 hours) to ensure monolithic bonding between layers. Plan for at least 8 people: 2 mixing, 4 applying, 1 checking thickness, 1 managing tools and materials. Run through the plan as a team the day before.</p>
+
+  <div class="info-box">
+    <strong>Target shell thickness:</strong> 0.75" (19mm) total, applied in three layers:<br>
+    &bull; Layer 1: ~0.25" (scratch coat + first mesh) <br>
+    &bull; Layer 2: ~0.25" (fill coat + second mesh) <br>
+    &bull; Layer 3: ~0.25" (finish coat, trowel smooth)
+  </div>
+
+  <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">3.1 Reinforcement Preparation</h3>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 3.1.1: Cut Basalt Mesh <span class="check-item text-xs" data-step="17">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Total mesh needed: 55.5 ft&sup2; (2 layers &times; 27.7 ft&sup2; each)</li>
+      <li>Cut mesh into manageable panels: bottom panel (full length &times; beam width) and side panels (full length &times; wall height)</li>
+      <li>Pre-cut dart relief cuts at the bow and stern where the mesh must conform to compound curves</li>
+      <li>Label each panel (L1-Bottom, L1-Left, L1-Right, L2-Bottom, L2-Left, L2-Right)</li>
+      <li>Verify mesh POA (percent open area) &ge; 40% per ASCE rules</li>
+      <li>Wear gloves &mdash; basalt fiber ends are sharp</li>
+    </ol>
+  </div>
+
+  <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">3.2 Layer 1 &mdash; Scratch Coat</h3>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 3.2.1: Apply Scratch Coat <span class="check-item text-xs" data-step="18">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Verify mold release is intact (no fingerprints, scratches, or dust)</li>
+      <li>Mix Batch 1. Begin at the bottom center of the mold</li>
+      <li>Apply concrete with a small flexible trowel or gloved hands. Press firmly into the mold surface</li>
+      <li>Work outward from center, up the sides. Target thickness: 1/8" to 3/16"</li>
+      <li>The scratch coat must be continuous &mdash; no dry spots or gaps</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 3.2.2: Place First Mesh Layer <span class="check-item text-xs" data-step="19">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>While the scratch coat is still wet, lay the bottom mesh panel into the mold</li>
+      <li>Press the mesh gently into the wet concrete with a roller or flat trowel</li>
+      <li>Place side panels, overlapping bottom panel by at least 2"</li>
+      <li>Ensure mesh is fully embedded &mdash; no mesh should be visible on the mold-side surface</li>
+      <li>At bow and stern, overlap dart cuts by 1" minimum</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 3.2.3: Consolidate Layer 1 <span class="check-item text-xs" data-step="20">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Apply another 1/8" of concrete over the mesh, pressing through the openings</li>
+      <li>Use a small vibrating tool (palm sander without sandpaper, or a vibrating phone taped to a trowel) to consolidate &mdash; 5&ndash;10 seconds per area</li>
+      <li>Total Layer 1 thickness: ~0.25" with mesh embedded in the middle</li>
+      <li>Let Layer 1 set for 30&ndash;45 minutes until it can support light finger pressure without deforming</li>
+    </ol>
+  </div>
+
+  <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">3.3 Layer 2 &mdash; Fill Coat</h3>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 3.3.1: Apply Fill Coat &amp; Second Mesh <span class="check-item text-xs" data-step="21">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Mist Layer 1 surface lightly with water (spray bottle) to improve bonding</li>
+      <li>Mix Batches 3&ndash;5. Apply concrete ~1/8" thick over the entire Layer 1 surface</li>
+      <li>Place second mesh layer (same procedure as Layer 1)</li>
+      <li>Apply another ~1/8" of concrete over the second mesh</li>
+      <li>Consolidate with vibration. Total cumulative thickness: ~0.50"</li>
+    </ol>
+  </div>
+
+  <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">3.4 Layer 3 &mdash; Finish Coat</h3>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 3.4.1: Apply Finish Coat <span class="check-item text-xs" data-step="22">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Mist Layer 2 surface lightly</li>
+      <li>Mix Batches 6&ndash;8. Apply the final ~0.25" layer</li>
+      <li>This is the interior surface of the canoe &mdash; trowel it as smooth as possible</li>
+      <li>Use a steel finishing trowel for the final passes. Wet the trowel to prevent dragging</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 3.4.2: Thickness Verification <span class="check-item text-xs" data-step="23">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Before the concrete sets, check thickness at 20+ points using a depth gauge (thin wire with a stop)</li>
+      <li>Push the wire through to the mold surface, read the depth</li>
+      <li>Target: 0.75" &plusmn; 0.0625" (3/4" &plusmn; 1/16")</li>
+      <li>Add material where thin, remove where thick. Document measurements on a hull map</li>
+      <li>Pay special attention to the chines (bottom-to-side corners) and gunwale areas &mdash; these tend to be thin</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 3.4.3: Gunwale Formation <span class="check-item text-xs" data-step="24">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Build up the gunwale (top edge) to 1.0&ndash;1.25" thickness for structural reinforcement</li>
+      <li>Form a smooth, rounded profile on the top edge &mdash; sharp edges crack</li>
+      <li>The gunwale takes the most handling abuse; it needs to be the strongest part</li>
+    </ol>
+  </div>
+
+  <div class="danger-box">
+    <strong>CRITICAL TIMING:</strong> All 3 layers must be placed within 4&ndash;6 hours. If Layer 1 fully sets before Layer 2 is placed, you get a cold joint &mdash; a weak plane that can delaminate under load. Keep the previous layer damp if there's a delay.
+  </div>
+
+  <!-- SVG: LAYUP CROSS-SECTION -->
+  <div class="my-8">
+    <h4 class="text-lg font-bold text-gray-700 sans mb-3">Shell Cross-Section (3-Layer Layup)</h4>
+    <svg viewBox="0 0 500 200" class="w-full max-w-md mx-auto" xmlns="http://www.w3.org/2000/svg">
+      <!-- Mold surface -->
+      <rect x="50" y="160" width="400" height="20" fill="#fff9c4" stroke="#f59e0b" stroke-width="1.5"/>
+      <text x="250" y="175" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#92400e">EPS Foam Mold</text>
+      <!-- Layer 1 -->
+      <rect x="50" y="130" width="400" height="30" fill="#d1d5db" stroke="#6b7280" stroke-width="1"/>
+      <text x="250" y="150" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#374151">Layer 1: Scratch Coat (0.25")</text>
+      <!-- Mesh 1 -->
+      <line x1="50" y1="133" x2="450" y2="133" stroke="#dc2626" stroke-width="2" stroke-dasharray="8,4"/>
+      <text x="470" y="137" font-size="8" font-family="sans-serif" fill="#dc2626">Mesh 1</text>
+      <!-- Layer 2 -->
+      <rect x="50" y="100" width="400" height="30" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1"/>
+      <text x="250" y="120" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#1e40af">Layer 2: Fill Coat (0.25")</text>
+      <!-- Mesh 2 -->
+      <line x1="50" y1="103" x2="450" y2="103" stroke="#dc2626" stroke-width="2" stroke-dasharray="8,4"/>
+      <text x="470" y="107" font-size="8" font-family="sans-serif" fill="#dc2626">Mesh 2</text>
+      <!-- Layer 3 -->
+      <rect x="50" y="70" width="400" height="30" fill="#d1fae5" stroke="#059669" stroke-width="1"/>
+      <text x="250" y="90" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#065f46">Layer 3: Finish Coat (0.25")</text>
+      <!-- Dimension -->
+      <line x1="30" y1="70" x2="30" y2="160" stroke="#1f2937" stroke-width="1"/>
+      <line x1="25" y1="70" x2="35" y2="70" stroke="#1f2937" stroke-width="1"/>
+      <line x1="25" y1="160" x2="35" y2="160" stroke="#1f2937" stroke-width="1"/>
+      <text x="20" y="120" text-anchor="middle" font-size="11" font-weight="bold" font-family="sans-serif" fill="#1f2937" transform="rotate(-90,20,120)">0.75" total</text>
+      <!-- Labels -->
+      <text x="250" y="55" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#065f46">Interior Surface (troweled smooth)</text>
+      <text x="250" y="195" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#92400e">Exterior Surface (mold finish)</text>
+    </svg>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PHASE 4: CURING                                               -->
+<!-- ============================================================ -->
+<div id="phase4" class="section-anchor border-t-4 border-purple-500 p-10 md:p-16">
+  <h2 class="text-3xl font-bold text-purple-800 sans mb-2">Phase 4: Curing</h2>
+  <p class="text-gray-500 sans mb-8">28-Day Wet Cure Protocol &mdash; ACI 308R Compliant</p>
+
+  <p class="academic-p">Curing is the chemical hydration process where cement reacts with water to form calcium silicate hydrate (C-S-H) gel &mdash; the "glue" that gives concrete its strength. If the concrete dries out prematurely, hydration stops and you get a weak, crumbly shell. Proper curing is non-negotiable. Per ACI 308R, moist curing must continue for a minimum of 7 days, but 28 days is standard for competition canoes to achieve full design strength.</p>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 4.1: Initial Set (0&ndash;24 hours) <span class="check-item text-xs" data-step="25">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Immediately after finishing the layup, cover the entire mold with damp burlap or cotton towels</li>
+      <li>Wrap the entire mold in 6-mil polyethylene sheeting (painter's plastic), sealing edges with tape</li>
+      <li>The goal is to create a humid chamber &mdash; no moisture should escape</li>
+      <li>Do NOT move, bump, or vibrate the mold for at least 12 hours</li>
+      <li>Temperature should be 60&ndash;80&deg;F. If curing outdoors in winter, use insulation blankets or a heated enclosure</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 4.2: Daily Maintenance (Days 1&ndash;28) <span class="check-item text-xs" data-step="26">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Check the plastic wrap daily. Look for condensation on the inside &mdash; this means moisture is present (good)</li>
+      <li>If the burlap feels dry, re-wet it with a spray bottle. The concrete surface should never appear dry</li>
+      <li>Re-seal any plastic that has come loose</li>
+      <li>Log the date, temperature, and moisture condition in a curing log</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 4.3: Strength Testing Schedule <span class="check-item text-xs" data-step="27">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li><strong>Day 7:</strong> Break 1 test cylinder (compression test per ASTM C39). Should reach ~70% of 28-day strength (&ge;1400 psi)</li>
+      <li><strong>Day 14:</strong> Break 1 test cylinder. Should reach ~85% (&ge;1700 psi)</li>
+      <li><strong>Day 28:</strong> Break final cylinder. Must reach f'c = 2000 psi</li>
+      <li>If 7-day strength is below 1200 psi, investigate: was the mix correct? Is the cure environment wet enough?</li>
+    </ol>
+  </div>
+
+  <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">Strength Development Curve</h3>
+  <div class="bg-gray-50 border rounded-lg p-4 mb-6">
+    <div class="font-mono text-xs text-gray-600 leading-relaxed">
+      <pre>
+  f'c (psi)
+  2200 |                                          ___________
+  2000 |                              ___________/  target
+  1800 |                      _______/
+  1600 |                _____/
+  1400 |           ____/     &lt;-- 70% at 7 days
+  1200 |        __/
+  1000 |      _/
+   800 |    _/
+   600 |  _/
+   400 | /
+   200 |/
+     0 +------+------+------+------+------+------+
+       0      7      14     21     28     35   days
+      </pre>
+    </div>
+  </div>
+
+  <div class="danger-box">
+    <strong>DO NOT demold early.</strong> If you demold before 14 days, the shell may not have enough strength to support its own weight without cracking. 28 days is the standard. If you must demold early (schedule constraints), wait at least 14 days and handle with extreme care.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PHASE 5: DEMOLDING                                            -->
+<!-- ============================================================ -->
+<div id="phase5" class="section-anchor border-t-4 border-orange-500 p-10 md:p-16">
+  <h2 class="text-3xl font-bold text-orange-800 sans mb-2">Phase 5: Demolding</h2>
+  <p class="text-gray-500 sans mb-8">Mechanical Separation &mdash; The Most Nerve-Wracking Day</p>
+
+  <p class="academic-p">Demolding is the process of separating the cured concrete shell from the foam mold. This is the highest-risk step in the entire build: one wrong move can crack or break the hull. The PVA release agent creates a boundary layer between foam and concrete, but mechanical force is still needed to overcome suction and adhesion. Plan this carefully and rehearse with the whole team.</p>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 5.1: Prepare for Demolding <span class="check-item text-xs" data-step="28">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Assemble the full team (minimum 6 people for lifting)</li>
+      <li>Clear and pad the receiving area &mdash; lay foam mats, blankets, or cardboard where the hull will rest</li>
+      <li>Build or acquire two padded sawhorses or cradles to support the hull upright</li>
+      <li>Have repair materials ready: rapid-set cement, epoxy, mesh patches</li>
+      <li>Remove all plastic sheeting and burlap from the mold</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 5.2: Break the Bond <span class="check-item text-xs" data-step="29">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Start at the gunwales. Insert thin plastic wedges (cut from old credit cards or plastic shims) between the concrete and foam at the top edge</li>
+      <li>Work wedges along the entire gunwale perimeter, gently tapping with a rubber mallet</li>
+      <li>Listen for a "cracking" sound &mdash; this is the PVA release breaking, NOT the concrete (usually). A dull thud means the concrete is still bonded; a sharp pop means release</li>
+      <li>Once the gunwale is released on both sides, work wedges down the sides</li>
+      <li>For the bottom, compressed air can help: insert an air nozzle at the gunwale gap and apply low-pressure (10&ndash;15 psi) air to break suction</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 5.3: Lift and Separate <span class="check-item text-xs" data-step="30">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>With the bond broken, position 3 people on each side of the mold, hands under the gunwale lip</li>
+      <li>On a count of three, lift the hull straight up, keeping it level. Do NOT tilt or flex</li>
+      <li>Lift at least 6" above the mold, then walk it to the padded receiving area</li>
+      <li>Set down gently onto the cradles, exterior (smooth mold-side) facing down</li>
+      <li>If any foam remains bonded to the hull exterior, do NOT pry it &mdash; dissolve with acetone or sand it off gently</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 5.4: Post-Demold Inspection <span class="check-item text-xs" data-step="31">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Visually inspect the entire hull for cracks, voids, delamination, or thin spots</li>
+      <li>Tap the surface with a coin &mdash; a clear ring means solid concrete; a dull thud means a void or delamination</li>
+      <li>Measure wall thickness at 20+ points with calipers or an ultrasonic thickness gauge</li>
+      <li>Photograph all defects with a ruler for scale. Map their locations on a hull diagram</li>
+      <li>Small cracks (&lt; 1/16" wide) and voids (&lt; 1" dia) can be repaired. Structural cracks or delamination over large areas may require a rebuild</li>
+    </ol>
+  </div>
+
+  <div class="tip-box">
+    <strong>Pro Tip:</strong> Some teams sacrifice the foam mold by dissolving it with acetone or gasoline after demolding (EPS dissolves in organic solvents). This works but destroys the mold. If you might need to re-cast, preserve the mold by using the mechanical method.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PHASE 6: FINISHING                                            -->
+<!-- ============================================================ -->
+<div id="phase6" class="section-anchor border-t-4 border-pink-500 p-10 md:p-16">
+  <h2 class="text-3xl font-bold text-pink-800 sans mb-2">Phase 6: Finishing</h2>
+  <p class="text-gray-500 sans mb-8">Patching, Sanding, Sealing, Painting &amp; Hardware</p>
+
+  <p class="academic-p">Finishing transforms a rough concrete shell into a race-ready canoe. This is the most labor-intensive phase, typically consuming 100&ndash;300 person-hours of sanding alone. The quality of the finish directly affects both aesthetics (judging points) and hydrodynamic performance (surface drag). Start early and be patient.</p>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 6.1: Patch Defects <span class="check-item text-xs" data-step="32">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Mix a small batch of patching compound: Portland cement + fine sand (1:1) + acrylic bonding agent + water to a stiff paste</li>
+      <li>Wet the repair area. Pack patching compound into voids and over cracks. Trowel flush with the surrounding surface</li>
+      <li>For larger repairs: cut a mesh patch 2" larger than the defect, embed in the patching compound</li>
+      <li>Moist-cure patches for 3&ndash;7 days under damp rags</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 6.2: Sanding Schedule <span class="check-item text-xs" data-step="33">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li><strong>80-grit:</strong> Remove major high spots, shape the gunwale profile, blend patches. Use an orbital sander or sanding block. This is the roughest and most aggressive step</li>
+      <li><strong>120-grit:</strong> Smooth the 80-grit scratches. The hull should feel uniformly textured, no bumps or ridges</li>
+      <li><strong>220-grit:</strong> Refine the surface. At this point, run your hand over the hull &mdash; it should feel like smooth stone</li>
+      <li><strong>400-grit (wet):</strong> Wet-sand the exterior for a near-glass finish. This step is critical for hydrodynamics</li>
+      <li>Between each grit: wipe down with a damp cloth to remove all dust</li>
+      <li>Wear an N95 respirator for ALL sanding &mdash; concrete dust contains crystalline silica</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 6.3: Sealing <span class="check-item text-xs" data-step="34">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Apply a penetrating concrete sealer (silane/siloxane-based, e.g., Chemique H&amp;C or SikaGuard) to reduce water absorption</li>
+      <li>Apply 2 coats by brush or roller, 4 hours apart. The sealer soaks into the concrete pores</li>
+      <li>Alternative: marine-grade epoxy coat (West System 105/205) for a completely waterproof barrier. Apply 2&ndash;3 thin coats, sanding between with 220-grit</li>
+      <li>Let cure 24&ndash;48 hours before painting</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 6.4: Painting &amp; Graphics <span class="check-item text-xs" data-step="35">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Apply 1 coat of primer (concrete/masonry primer) and let dry</li>
+      <li>Apply 2&ndash;3 coats of exterior latex or marine paint in team colors. Light colors recommended for visibility on water</li>
+      <li>For graphics/logos: use vinyl stencils or vinyl decals. Some teams use automotive clear-coat for a glossy finish</li>
+      <li>Reminder: ASCE rules require the canoe name, university name, and competition year to be visible on the hull</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 6.5: Hardware Installation <span class="check-item text-xs" data-step="36">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li><strong>Seats:</strong> Install 2 seats at positions per ASCE Sec 6.2 spacing requirements. Attach with marine adhesive (3M 5200) and stainless steel bolts through pre-drilled holes with rubber washers</li>
+      <li><strong>Carrying handles:</strong> Nylon rope through drilled holes at bow and stern, reinforced with epoxy-filled backing plates</li>
+      <li><strong>Keel strip (optional):</strong> Apply a thin bead of marine epoxy along the bottom centerline for abrasion protection</li>
+      <li><strong>Flotation:</strong> ASCE requires positive flotation. Secure closed-cell foam blocks under each seat</li>
+    </ol>
+  </div>
+
+  <div class="step-box">
+    <p class="font-bold text-amber-800 sans mb-1">Step 6.6: Final Weigh-In &amp; Float Test <span class="check-item text-xs" data-step="37">[click to check]</span></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-2 text-sm">
+      <li>Weigh the completed hull on a calibrated scale. Record: bare hull weight, weight with hardware</li>
+      <li>Compare to calculated weight (245 lbs target). Tolerance: &plusmn;15%</li>
+      <li>Float test: place the canoe in water (pool or calm lake). Check for leaks, measure actual draft and freeboard</li>
+      <li>Load test: add crew weight (sandbags) per each load case (2-person men, 4-person coed, etc.). Measure draft and freeboard under load. Verify freeboard &ge; 6" per ASCE rules</li>
+      <li>Document everything with photos and measurements for the design report</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SAFETY SECTION                                                -->
+<!-- ============================================================ -->
+<div id="safety" class="section-anchor border-t-4 border-red-500 p-10 md:p-16">
+  <h2 class="text-3xl font-bold text-red-800 sans mb-2">Safety Requirements</h2>
+  <p class="text-gray-500 sans mb-8">PPE, Chemical Hazards &amp; Workshop Protocols</p>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="danger-box">
+      <h4 class="font-bold text-red-800 sans mb-2">Chemical Hazards</h4>
+      <ul class="list-disc ml-5 text-sm space-y-1">
+        <li><strong>Portland cement:</strong> pH 12&ndash;13, causes chemical burns. Wear nitrile gloves, wash immediately on skin contact</li>
+        <li><strong>Concrete dust:</strong> Contains crystalline silica (OSHA PEL 50 &mu;g/m&sup3;). N95 minimum; P100 half-face for extended sanding</li>
+        <li><strong>Styrene fumes:</strong> From hot-wire cutting EPS. Organic vapor cartridge respirator required</li>
+        <li><strong>Epoxy resins:</strong> Skin sensitizer. Nitrile gloves + long sleeves. Once sensitized, reaction is permanent</li>
+        <li><strong>Superplasticizer:</strong> Mild irritant. Gloves when handling concentrate</li>
+      </ul>
+    </div>
+
+    <div class="danger-box">
+      <h4 class="font-bold text-red-800 sans mb-2">Physical Hazards</h4>
+      <ul class="list-disc ml-5 text-sm space-y-1">
+        <li><strong>Lifting:</strong> The hull weighs ~245 lbs. Minimum 6 people for any lift. Bend at the knees, not the waist</li>
+        <li><strong>Power tools:</strong> Eye protection (ANSI Z87.1 safety glasses) mandatory. Hearing protection for extended sanding</li>
+        <li><strong>Hot wire:</strong> Burns at 400&deg;F. Keep clear of skin, hair, and clothing. Unplug when not cutting</li>
+        <li><strong>Tripping:</strong> Keep work area clean. Coil extension cords. Store tools when not in use</li>
+        <li><strong>EPS ignition:</strong> EPS is flammable (melts at 464&deg;F, ignites at 680&deg;F). No open flames in the work area</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">Required PPE by Phase</h3>
+  <table class="data-table mb-6">
+    <thead><tr><th>Phase</th><th>Eyes</th><th>Hands</th><th>Respiratory</th><th>Other</th></tr></thead>
+    <tbody>
+      <tr><td>Foam cutting (manual)</td><td>Safety glasses</td><td>Work gloves</td><td>&mdash;</td><td>Closed-toe shoes</td></tr>
+      <tr><td>Foam cutting (hot wire)</td><td>Safety glasses</td><td>Heat-resistant</td><td>OV respirator</td><td>Ventilation required</td></tr>
+      <tr><td>Mixing concrete</td><td>Safety glasses</td><td>Nitrile gloves</td><td>N95 mask</td><td>Long sleeves</td></tr>
+      <tr><td>Layup</td><td>Safety glasses</td><td>Nitrile gloves</td><td>N95 mask</td><td>Knee pads</td></tr>
+      <tr><td>Sanding</td><td>Safety glasses</td><td>Work gloves</td><td>P100 half-face</td><td>Hearing protection</td></tr>
+      <tr><td>Epoxy/sealer</td><td>Safety glasses</td><td>Nitrile gloves</td><td>OV respirator</td><td>Long sleeves, ventilation</td></tr>
+      <tr><td>Demolding/lifting</td><td>Safety glasses</td><td>Work gloves</td><td>&mdash;</td><td>Steel-toe boots, back support</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <strong>Emergency contacts:</strong> Post the following at the worksite: Campus police, nearest hospital ER, team advisor phone number, Poison Control (1-800-222-1222). Keep a first aid kit and eyewash station within 25 feet of the work area.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- GRADING RUBRIC                                                -->
+<!-- ============================================================ -->
+<div id="grading" class="section-anchor border-t-4 border-emerald-500 p-10 md:p-16">
+  <h2 class="text-3xl font-bold text-emerald-800 sans mb-2">ASCE Competition Grading Rubric</h2>
+  <p class="text-gray-500 sans mb-8">How Judges Score Your Canoe &mdash; Self-Assessment Tool</p>
+
+  <p class="academic-p">The ASCE National Concrete Canoe Competition scores teams across five major categories. Use this interactive rubric to self-assess your progress and identify areas for improvement before the competition.</p>
+
+  <div class="space-y-6 mb-8" id="rubric-section">
+    <!-- Design Paper -->
+    <div class="border rounded-lg p-5 bg-white">
+      <div class="flex justify-between items-center mb-2">
+        <h4 class="font-bold text-gray-800 sans">Design Paper (25%)</h4>
+        <div class="flex gap-1">
+          <button onclick="setGrade('dp',1)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="dp" data-val="1">Poor</button>
+          <button onclick="setGrade('dp',2)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="dp" data-val="2">Fair</button>
+          <button onclick="setGrade('dp',3)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="dp" data-val="3">Good</button>
+          <button onclick="setGrade('dp',4)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="dp" data-val="4">Excellent</button>
+        </div>
+      </div>
+      <div class="w-full bg-gray-200 rounded h-4"><div id="bar-dp" class="grade-bar bg-emerald-500 h-4" style="width:0%"></div></div>
+      <p class="text-xs text-gray-500 mt-2">Structural analysis, mix design justification, hull form optimization, ACI code compliance, Appendix C accuracy</p>
+    </div>
+
+    <!-- Oral Presentation -->
+    <div class="border rounded-lg p-5 bg-white">
+      <div class="flex justify-between items-center mb-2">
+        <h4 class="font-bold text-gray-800 sans">Oral Presentation (15%)</h4>
+        <div class="flex gap-1">
+          <button onclick="setGrade('op',1)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="op" data-val="1">Poor</button>
+          <button onclick="setGrade('op',2)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="op" data-val="2">Fair</button>
+          <button onclick="setGrade('op',3)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="op" data-val="3">Good</button>
+          <button onclick="setGrade('op',4)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="op" data-val="4">Excellent</button>
+        </div>
+      </div>
+      <div class="w-full bg-gray-200 rounded h-4"><div id="bar-op" class="grade-bar bg-blue-500 h-4" style="width:0%"></div></div>
+      <p class="text-xs text-gray-500 mt-2">Technical depth, team participation, visual aids, Q&A responses, time management</p>
+    </div>
+
+    <!-- Product -->
+    <div class="border rounded-lg p-5 bg-white">
+      <div class="flex justify-between items-center mb-2">
+        <h4 class="font-bold text-gray-800 sans">Final Product (20%)</h4>
+        <div class="flex gap-1">
+          <button onclick="setGrade('fp',1)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="fp" data-val="1">Poor</button>
+          <button onclick="setGrade('fp',2)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="fp" data-val="2">Fair</button>
+          <button onclick="setGrade('fp',3)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="fp" data-val="3">Good</button>
+          <button onclick="setGrade('fp',4)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="fp" data-val="4">Excellent</button>
+        </div>
+      </div>
+      <div class="w-full bg-gray-200 rounded h-4"><div id="bar-fp" class="grade-bar bg-purple-500 h-4" style="width:0%"></div></div>
+      <p class="text-xs text-gray-500 mt-2">Surface finish quality, uniform thickness, weight, aesthetics, craftsmanship, compliance with all rules</p>
+    </div>
+
+    <!-- Races -->
+    <div class="border rounded-lg p-5 bg-white">
+      <div class="flex justify-between items-center mb-2">
+        <h4 class="font-bold text-gray-800 sans">Races (25%)</h4>
+        <div class="flex gap-1">
+          <button onclick="setGrade('ra',1)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="ra" data-val="1">Poor</button>
+          <button onclick="setGrade('ra',2)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="ra" data-val="2">Fair</button>
+          <button onclick="setGrade('ra',3)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="ra" data-val="3">Good</button>
+          <button onclick="setGrade('ra',4)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="ra" data-val="4">Excellent</button>
+        </div>
+      </div>
+      <div class="w-full bg-gray-200 rounded h-4"><div id="bar-ra" class="grade-bar bg-amber-500 h-4" style="width:0%"></div></div>
+      <p class="text-xs text-gray-500 mt-2">Sprint times, distance race performance, endurance race, swamp test completion</p>
+    </div>
+
+    <!-- Swamp Test -->
+    <div class="border rounded-lg p-5 bg-white">
+      <div class="flex justify-between items-center mb-2">
+        <h4 class="font-bold text-gray-800 sans">Swamp Test &amp; Spirit (15%)</h4>
+        <div class="flex gap-1">
+          <button onclick="setGrade('st',1)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="st" data-val="1">Poor</button>
+          <button onclick="setGrade('st',2)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="st" data-val="2">Fair</button>
+          <button onclick="setGrade('st',3)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="st" data-val="3">Good</button>
+          <button onclick="setGrade('st',4)" class="grade-btn px-2 py-1 text-xs rounded border" data-cat="st" data-val="4">Excellent</button>
+        </div>
+      </div>
+      <div class="w-full bg-gray-200 rounded h-4"><div id="bar-st" class="grade-bar bg-red-500 h-4" style="width:0%"></div></div>
+      <p class="text-xs text-gray-500 mt-2">Canoe survives swamping and bailing, team spirit award, sportsmanship, team uniforms</p>
+    </div>
+  </div>
+
+  <!-- Overall Score -->
+  <div class="bg-gray-50 border-2 border-emerald-400 rounded-lg p-6 text-center">
+    <h3 class="text-2xl font-bold text-emerald-900 sans mb-2">Overall Projected Score</h3>
+    <div class="text-5xl font-bold text-emerald-700 mb-2" id="total-score">0%</div>
+    <div class="w-full bg-gray-200 rounded-full h-6 max-w-md mx-auto">
+      <div id="bar-total" class="grade-bar bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 h-6" style="width:0%"></div>
+    </div>
+    <p class="text-sm text-gray-500 mt-3" id="grade-label">Rate each category above to see your projected score</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- LIVE MIX CALCULATOR                                           -->
+<!-- ============================================================ -->
+<div id="calculator" class="section-anchor border-t-4 border-indigo-500 p-10 md:p-16">
+  <h2 class="text-3xl font-bold text-indigo-800 sans mb-2">Live Mix Calculator</h2>
+  <p class="text-gray-500 sans mb-8">Adjust your mix and see batch quantities in real time</p>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div>
+      <h4 class="font-bold text-gray-700 sans mb-4">Input Parameters</h4>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold text-gray-600 mb-1">Shell Volume (ft&sup3;): <span id="vol-val" class="text-indigo-700">3.464</span></label>
+          <input type="range" id="shell-vol" min="2.0" max="6.0" step="0.1" value="3.464" class="w-full" oninput="calcMix()">
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-gray-600 mb-1">Waste Factor: <span id="waste-val" class="text-indigo-700">1.40</span>x</label>
+          <input type="range" id="waste-factor" min="1.1" max="1.8" step="0.05" value="1.40" class="w-full" oninput="calcMix()">
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-gray-600 mb-1">Target Density (PCF): <span id="dens-val" class="text-indigo-700">60</span></label>
+          <input type="range" id="target-density" min="45" max="80" step="1" value="60" class="w-full" oninput="calcMix()">
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-gray-600 mb-1">Water/Cement Ratio: <span id="wc-val" class="text-indigo-700">0.40</span></label>
+          <input type="range" id="wc-ratio" min="0.30" max="0.55" step="0.01" value="0.40" class="w-full" oninput="calcMix()">
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-gray-600 mb-1">Batch Size (gal): <span id="batch-val" class="text-indigo-700">5.0</span></label>
+          <input type="range" id="batch-size" min="2.0" max="10.0" step="0.5" value="5.0" class="w-full" oninput="calcMix()">
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="font-bold text-gray-700 sans mb-4">Calculated Results</h4>
+      <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 font-mono text-sm space-y-2" id="mix-results">
+        <!-- Filled by JS -->
+      </div>
+
+      <h4 class="font-bold text-gray-700 sans mt-6 mb-4">Per-Batch Recipe</h4>
+      <div class="bg-gray-50 border rounded-lg p-4 font-mono text-sm space-y-1" id="batch-recipe">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- COMMON MISTAKES                                               -->
+<!-- ============================================================ -->
+<div class="border-t-4 border-gray-300 p-10 md:p-16">
+  <h2 class="text-3xl font-bold text-gray-800 sans mb-6">Common Mistakes &amp; How to Avoid Them</h2>
+
+  <div class="grid md:grid-cols-2 gap-4">
+    <div class="border rounded-lg p-4 bg-red-50">
+      <h4 class="font-bold text-red-800 sans text-sm mb-2">Mold Mistakes</h4>
+      <ul class="text-xs space-y-1">
+        <li><strong>Unfair surface:</strong> Causes bumps in the hull. Solution: use a long batten to check fairness constantly</li>
+        <li><strong>Skipping mold release:</strong> Hull bonds permanently to foam. Apply 2 coats PVA, no exceptions</li>
+        <li><strong>Misaligned stations:</strong> Creates a crooked hull. Use alignment dowels and check with string line</li>
+      </ul>
+    </div>
+    <div class="border rounded-lg p-4 bg-red-50">
+      <h4 class="font-bold text-red-800 sans text-sm mb-2">Mix Mistakes</h4>
+      <ul class="text-xs space-y-1">
+        <li><strong>Too much water:</strong> Reduces strength by 50%+ per Abrams' law. Use superplasticizer for workability, NOT water</li>
+        <li><strong>Not pre-soaking Poraver:</strong> Aggregate steals mix water, causes dry crumbly concrete</li>
+        <li><strong>Inconsistent batches:</strong> Weigh every ingredient on a scale. Never estimate</li>
+      </ul>
+    </div>
+    <div class="border rounded-lg p-4 bg-red-50">
+      <h4 class="font-bold text-red-800 sans text-sm mb-2">Layup Mistakes</h4>
+      <ul class="text-xs space-y-1">
+        <li><strong>Cold joints:</strong> Waiting too long between layers. Keep within 4&ndash;6 hours, mist interface</li>
+        <li><strong>Uneven thickness:</strong> Check with depth gauge at 20+ points during layup</li>
+        <li><strong>Mesh not embedded:</strong> Exposed mesh = corrosion path. Press mesh fully into wet concrete</li>
+      </ul>
+    </div>
+    <div class="border rounded-lg p-4 bg-red-50">
+      <h4 class="font-bold text-red-800 sans text-sm mb-2">Curing Mistakes</h4>
+      <ul class="text-xs space-y-1">
+        <li><strong>Letting it dry out:</strong> Even one day of dry curing can reduce strength by 30%. Keep it wrapped and wet</li>
+        <li><strong>Demolding too early:</strong> Wait minimum 14 days, ideally 28. Early demold = cracking under self-weight</li>
+        <li><strong>Temperature extremes:</strong> Below 50&deg;F, hydration nearly stops. Use insulation in cold weather</li>
+      </ul>
+    </div>
+    <div class="border rounded-lg p-4 bg-red-50">
+      <h4 class="font-bold text-red-800 sans text-sm mb-2">Demolding Mistakes</h4>
+      <ul class="text-xs space-y-1">
+        <li><strong>Prying with metal tools:</strong> Gouges and cracks the shell. Use plastic wedges only</li>
+        <li><strong>Tilting during lift:</strong> Creates bending stress that cracks the hull. Lift straight up, keep level</li>
+        <li><strong>Dropping:</strong> Even a 2" drop can crack a concrete canoe. Pad everything, move slowly</li>
+      </ul>
+    </div>
+    <div class="border rounded-lg p-4 bg-red-50">
+      <h4 class="font-bold text-red-800 sans text-sm mb-2">Finishing Mistakes</h4>
+      <ul class="text-xs space-y-1">
+        <li><strong>Sanding too aggressively:</strong> Exposes mesh or thins the shell. Use light pressure, let the paper do the work</li>
+        <li><strong>Skipping grits:</strong> Going from 80 straight to 400 takes forever. Follow the sequence: 80&rarr;120&rarr;220&rarr;400</li>
+        <li><strong>Painting over dust:</strong> Paint peels. Wipe with damp cloth and let dry before each paint coat</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- MATERIALS CHECKLIST                                            -->
+<!-- ============================================================ -->
+<div class="border-t-4 border-gray-300 p-10 md:p-16">
+  <h2 class="text-3xl font-bold text-gray-800 sans mb-6">Complete Materials Shopping List</h2>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <div>
+      <h4 class="font-bold text-gray-700 sans mb-3">Mold Construction</h4>
+      <div class="space-y-1 text-sm" id="checklist-mold">
+        <div class="check-item flex gap-2 items-center" data-step="38"><input type="checkbox" class="build-check"> EPS foam 2 lb/ft&sup3; (8 sheets, 24"&times;48"&times;12")</div>
+        <div class="check-item flex gap-2 items-center" data-step="38"><input type="checkbox" class="build-check"> MDF strongback 3/4" &times; 36" &times; 16'</div>
+        <div class="check-item flex gap-2 items-center" data-step="38"><input type="checkbox" class="build-check"> Polyurethane adhesive (2 bottles)</div>
+        <div class="check-item flex gap-2 items-center" data-step="38"><input type="checkbox" class="build-check"> Drywall screws #8 &times; 2.5" (100 ct)</div>
+        <div class="check-item flex gap-2 items-center" data-step="38"><input type="checkbox" class="build-check"> Wood dowels 3/8" &times; 36" (8 pcs)</div>
+        <div class="check-item flex gap-2 items-center" data-step="38"><input type="checkbox" class="build-check"> PVA mold release (1 quart)</div>
+        <div class="check-item flex gap-2 items-center" data-step="38"><input type="checkbox" class="build-check"> Sandpaper 80/120/220/400 grit assortment</div>
+        <div class="check-item flex gap-2 items-center" data-step="38"><input type="checkbox" class="build-check"> Surform rasp</div>
+      </div>
+
+      <h4 class="font-bold text-gray-700 sans mt-6 mb-3">Concrete Mix</h4>
+      <div class="space-y-1 text-sm">
+        <div class="check-item flex gap-2 items-center" data-step="39"><input type="checkbox" class="build-check"> Portland Cement Type I/II (2 bags, 94 lb ea)</div>
+        <div class="check-item flex gap-2 items-center" data-step="39"><input type="checkbox" class="build-check"> Poraver 1&ndash;2mm (25 lb bag)</div>
+        <div class="check-item flex gap-2 items-center" data-step="39"><input type="checkbox" class="build-check"> Poraver 0.5&ndash;1mm (25 lb bag)</div>
+        <div class="check-item flex gap-2 items-center" data-step="39"><input type="checkbox" class="build-check"> K1 Cenospheres (10 lb bag)</div>
+        <div class="check-item flex gap-2 items-center" data-step="39"><input type="checkbox" class="build-check"> PVA Fibers 3/4" (1 lb bag)</div>
+        <div class="check-item flex gap-2 items-center" data-step="39"><input type="checkbox" class="build-check"> Superplasticizer (Sika ViscoCrete, 1 qt)</div>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="font-bold text-gray-700 sans mb-3">Reinforcement &amp; Layup</h4>
+      <div class="space-y-1 text-sm">
+        <div class="check-item flex gap-2 items-center" data-step="40"><input type="checkbox" class="build-check"> Basalt fiber mesh (7 yd&sup2;, POA &ge;40%)</div>
+        <div class="check-item flex gap-2 items-center" data-step="40"><input type="checkbox" class="build-check"> 5-gallon mixing buckets (4 pcs)</div>
+        <div class="check-item flex gap-2 items-center" data-step="40"><input type="checkbox" class="build-check"> Drill-mounted paddle mixer</div>
+        <div class="check-item flex gap-2 items-center" data-step="40"><input type="checkbox" class="build-check"> Flexible trowels (4 pcs, various sizes)</div>
+        <div class="check-item flex gap-2 items-center" data-step="40"><input type="checkbox" class="build-check"> Steel finishing trowel (1 pc)</div>
+        <div class="check-item flex gap-2 items-center" data-step="40"><input type="checkbox" class="build-check"> Spray bottles (3 pcs)</div>
+        <div class="check-item flex gap-2 items-center" data-step="40"><input type="checkbox" class="build-check"> Digital kitchen scale (0.1 oz accuracy)</div>
+        <div class="check-item flex gap-2 items-center" data-step="40"><input type="checkbox" class="build-check"> Depth gauge wire with stop</div>
+      </div>
+
+      <h4 class="font-bold text-gray-700 sans mt-6 mb-3">Curing &amp; Finishing</h4>
+      <div class="space-y-1 text-sm">
+        <div class="check-item flex gap-2 items-center" data-step="41"><input type="checkbox" class="build-check"> Burlap sheets (2 large)</div>
+        <div class="check-item flex gap-2 items-center" data-step="41"><input type="checkbox" class="build-check"> 6-mil poly sheeting (20' roll)</div>
+        <div class="check-item flex gap-2 items-center" data-step="41"><input type="checkbox" class="build-check"> Duct tape (2 rolls)</div>
+        <div class="check-item flex gap-2 items-center" data-step="41"><input type="checkbox" class="build-check"> Concrete sealer (1 gallon)</div>
+        <div class="check-item flex gap-2 items-center" data-step="41"><input type="checkbox" class="build-check"> Primer + paint (team colors)</div>
+        <div class="check-item flex gap-2 items-center" data-step="41"><input type="checkbox" class="build-check"> Marine adhesive (3M 5200)</div>
+        <div class="check-item flex gap-2 items-center" data-step="41"><input type="checkbox" class="build-check"> Seat hardware (SS bolts, washers)</div>
+      </div>
+
+      <h4 class="font-bold text-gray-700 sans mt-6 mb-3">Safety Equipment</h4>
+      <div class="space-y-1 text-sm">
+        <div class="check-item flex gap-2 items-center" data-step="42"><input type="checkbox" class="build-check"> Nitrile gloves (box of 100)</div>
+        <div class="check-item flex gap-2 items-center" data-step="42"><input type="checkbox" class="build-check"> N95 respirators (10-pack)</div>
+        <div class="check-item flex gap-2 items-center" data-step="42"><input type="checkbox" class="build-check"> P100 half-face respirator (1 pc)</div>
+        <div class="check-item flex gap-2 items-center" data-step="42"><input type="checkbox" class="build-check"> Safety glasses ANSI Z87.1 (6 pcs)</div>
+        <div class="check-item flex gap-2 items-center" data-step="42"><input type="checkbox" class="build-check"> First aid kit</div>
+        <div class="check-item flex gap-2 items-center" data-step="42"><input type="checkbox" class="build-check"> Eyewash station</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end white container -->
+</div><!-- end max-w -->
+
+<footer class="no-print text-center text-gray-400 text-xs py-6">
+  NAU ASCE Concrete Canoe 2026 &mdash; Construction Guide &mdash; Generated from project data &amp; engineering research
+</footer>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT: Progress Tracker, Grading Rubric, Mix Calculator  -->
+<!-- ============================================================ -->
+<script>
+// ---- PROGRESS TRACKER ----
+const TOTAL_STEPS = 42;
+function loadProgress() {
+  try { return JSON.parse(localStorage.getItem('canoe-build-progress') || '{}'); } catch(e) { return {}; }
+}
+function saveProgress(p) { localStorage.setItem('canoe-build-progress', JSON.stringify(p)); }
+function updateProgressBar() {
+  const p = loadProgress();
+  const done = Object.keys(p).filter(k => p[k]).length;
+  const pct = Math.round(done / TOTAL_STEPS * 100);
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = pct + '%';
+  document.getElementById('progress-detail').textContent = done + ' of ' + TOTAL_STEPS + ' steps completed';
+}
+
+// Wire up step checkboxes
+document.querySelectorAll('.check-item[data-step]').forEach(el => {
+  const step = el.dataset.step;
+  const p = loadProgress();
+  if (p[step]) el.classList.add('done');
+  el.addEventListener('click', function(e) {
+    if (e.target.tagName === 'INPUT') return; // let native checkbox handle
+    const prog = loadProgress();
+    prog[step] = !prog[step];
+    saveProgress(prog);
+    el.classList.toggle('done', prog[step]);
+    updateProgressBar();
+  });
+});
+
+// Wire up native checkboxes in the materials list
+document.querySelectorAll('.build-check').forEach(cb => {
+  const parent = cb.closest('.check-item');
+  if (!parent) return;
+  const step = parent.dataset.step;
+  const p = loadProgress();
+  cb.checked = !!p[step];
+  cb.addEventListener('change', function() {
+    const prog = loadProgress();
+    prog[step] = cb.checked;
+    saveProgress(prog);
+    updateProgressBar();
+  });
+});
+
+updateProgressBar();
+
+// ---- GRADING RUBRIC ----
+const weights = { dp: 25, op: 15, fp: 20, ra: 25, st: 15 };
+const grades = { dp: 0, op: 0, fp: 0, ra: 0, st: 0 };
+const gradeLabels = {0:'Not rated',1:'Needs Work (25%)',2:'Fair (50%)',3:'Good (75%)',4:'Excellent (100%)'};
+
+function loadGrades() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('canoe-grades') || '{}');
+    Object.assign(grades, saved);
+  } catch(e) {}
+}
+function saveGrades() { localStorage.setItem('canoe-grades', JSON.stringify(grades)); }
+
+function setGrade(cat, val) {
+  grades[cat] = val;
+  saveGrades();
+  updateGrades();
+}
+
+function updateGrades() {
+  let totalWeighted = 0, totalWeight = 0;
+  for (const cat in weights) {
+    const pct = grades[cat] / 4 * 100;
+    document.getElementById('bar-' + cat).style.width = pct + '%';
+    // Highlight active button
+    document.querySelectorAll('.grade-btn[data-cat="' + cat + '"]').forEach(btn => {
+      btn.classList.toggle('bg-blue-600', parseInt(btn.dataset.val) === grades[cat]);
+      btn.classList.toggle('text-white', parseInt(btn.dataset.val) === grades[cat]);
+    });
+    if (grades[cat] > 0) {
+      totalWeighted += (grades[cat] / 4) * weights[cat];
+      totalWeight += weights[cat];
+    }
+  }
+  const overall = totalWeight > 0 ? Math.round(totalWeighted / totalWeight * 100) : 0;
+  document.getElementById('total-score').textContent = overall + '%';
+  document.getElementById('bar-total').style.width = overall + '%';
+
+  let label = 'Rate each category above';
+  if (overall >= 90) label = 'Excellent — Strong contender for nationals!';
+  else if (overall >= 75) label = 'Good — Competitive, focus on weak areas';
+  else if (overall >= 50) label = 'Fair — Significant improvement needed';
+  else if (overall > 0) label = 'Needs Work — Address fundamentals first';
+  document.getElementById('grade-label').textContent = label;
+}
+
+loadGrades();
+updateGrades();
+
+// ---- LIVE MIX CALCULATOR ----
+function calcMix() {
+  const vol = parseFloat(document.getElementById('shell-vol').value);
+  const waste = parseFloat(document.getElementById('waste-factor').value);
+  const density = parseFloat(document.getElementById('target-density').value);
+  const wc = parseFloat(document.getElementById('wc-ratio').value);
+  const batchGal = parseFloat(document.getElementById('batch-size').value);
+
+  document.getElementById('vol-val').textContent = vol.toFixed(3);
+  document.getElementById('waste-val').textContent = waste.toFixed(2);
+  document.getElementById('dens-val').textContent = density;
+  document.getElementById('wc-val').textContent = wc.toFixed(2);
+  document.getElementById('batch-val').textContent = batchGal.toFixed(1);
+
+  const totalVol = vol * waste;
+  const totalGal = totalVol * 7.481;
+  const numBatches = Math.ceil(totalGal / batchGal);
+  const totalWeight = totalVol * density;
+
+  // Simplified mix proportions (cement ~51%, agg ~21%, water ~20%, air ~8%)
+  const cementFrac = 0.51;
+  const aggFrac = 0.215;
+  const waterFrac = cementFrac * wc;
+  const batchVol = batchGal / 7.481; // ft3
+  const batchWeight = batchVol * density;
+  const cementPerBatch = batchWeight * cementFrac;
+  const aggPerBatch = batchWeight * aggFrac;
+  const waterPerBatch = cementPerBatch * wc;
+  const fiberPerBatch = batchWeight * 0.008;
+  const hrwrPerBatch = cementPerBatch * 0.005;
+
+  document.getElementById('mix-results').innerHTML =
+    '<div><strong>Total concrete needed:</strong> ' + totalVol.toFixed(2) + ' ft&sup3; (' + totalGal.toFixed(1) + ' gal)</div>' +
+    '<div><strong>Total weight:</strong> ' + totalWeight.toFixed(0) + ' lbs</div>' +
+    '<div><strong>Number of batches:</strong> ' + numBatches + ' @ ' + batchGal.toFixed(1) + ' gal each</div>' +
+    '<div><strong>Waste allowance:</strong> ' + ((waste - 1) * 100).toFixed(0) + '% (' + (totalVol - vol).toFixed(2) + ' ft&sup3; extra)</div>' +
+    '<div class="mt-2 text-xs text-gray-500">Net shell: ' + vol.toFixed(3) + ' ft&sup3; | Density: ' + density + ' PCF | w/c: ' + wc.toFixed(2) + '</div>';
+
+  document.getElementById('batch-recipe').innerHTML =
+    '<div class="font-bold text-indigo-800 mb-1">Per ' + batchGal.toFixed(1) + '-gallon batch:</div>' +
+    '<div>Cement (Type I/II): <strong>' + cementPerBatch.toFixed(1) + ' lbs</strong></div>' +
+    '<div>Poraver aggregate: <strong>' + aggPerBatch.toFixed(1) + ' lbs</strong></div>' +
+    '<div>Water: <strong>' + waterPerBatch.toFixed(1) + ' lbs</strong> (' + (waterPerBatch / 8.34).toFixed(2) + ' gal)</div>' +
+    '<div>PVA Fibers: <strong>' + (fiberPerBatch * 16).toFixed(1) + ' oz</strong></div>' +
+    '<div>HRWR: <strong>' + (hrwrPerBatch * 16).toFixed(1) + ' oz</strong></div>' +
+    '<div class="mt-2 font-bold">Batch weight: ~' + batchWeight.toFixed(1) + ' lbs</div>';
+}
+calcMix();
+</script>
+
+</body>
+</html>
