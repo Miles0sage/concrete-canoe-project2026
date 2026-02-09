@@ -44,6 +44,7 @@
         <span class="font-bold text-lg sans">NAU Canoe 2026</span>
         <div class="flex gap-1 text-xs flex-wrap">
             <a href="#part0" class="nav-link px-2 py-1 rounded">Home</a>
+            <a href="#flowchart" class="nav-link px-2 py-1 rounded bg-blue-800">Flowchart</a>
             <a href="#part1" class="nav-link px-2 py-1 rounded">1: Why Python</a>
             <a href="#part2" class="nav-link px-2 py-1 rounded">2: Hull Weight</a>
             <a href="#part3" class="nav-link px-2 py-1 rounded">3: Hydrostatics</a>
@@ -53,6 +54,8 @@
             <a href="#part7" class="nav-link px-2 py-1 rounded">7: Stability</a>
             <a href="#part8" class="nav-link px-2 py-1 rounded">8: Punching</a>
             <a href="#part9" class="nav-link px-2 py-1 rounded">9: Verdict</a>
+            <a href="#part3d" class="nav-link px-2 py-1 rounded bg-indigo-800">3D Viz</a>
+            <a href="#partHowBuilt" class="nav-link px-2 py-1 rounded bg-purple-800">How We Built</a>
         </div>
     </div>
 </nav>
@@ -76,6 +79,22 @@
         <p class="academic-p mb-2">Traditional engineering: an engineer spends <strong>40+ hours</strong> doing hand calculations, catches an error on page 12, restarts.</p>
         <p class="academic-p mb-2">Our approach: encode the physics into Python once, let the computer run <strong>10,000 design iterations in 5 seconds</strong>. Every formula is validated by unit tests. Every number traces to a published reference. The engineer's time is spent <em>thinking</em>, not computing.</p>
         <p class="academic-p mb-0"><strong>This document teaches both the engineering AND the code.</strong> If you are a non-coder, the code blocks have line-by-line explanations. If you are a judge, every formula cites ACI 318-25, SNAME, or ASTM standards. If you are a future NAU team, you can rebuild the entire system from this report.</p>
+    </div>
+
+    <div class="bg-purple-50 border border-purple-200 rounded-lg p-6 mb-8">
+        <h3 class="font-bold text-purple-900 sans text-lg mb-3">Why This Approach?</h3>
+        <p class="academic-p mb-2"><strong>Problem:</strong> Concrete canoe teams historically hand-calculate everything on paper. One wrong unit conversion cascades through 20 pages. Different team members get different answers. There's no way to verify the work except redoing it.</p>
+        <p class="academic-p mb-2"><strong>Solution:</strong> We built a <em>single-source-of-truth</em> calculator (<code>concrete_canoe_calculator.py v2.1</code>) that encodes every formula once with published references. Then we used AI (Claude + Gemini) to generate documentation, 3D visualizations, teaching materials, and this interactive website &mdash; all pulling numbers from that one validated engine.</p>
+        <p class="academic-p mb-2"><strong>The result:</strong></p>
+        <ul class="list-disc pl-6 space-y-1 text-sm mb-4">
+            <li><strong>Zero transcription errors</strong> &mdash; every number comes from code, not retyping</li>
+            <li><strong>Instant design changes</strong> &mdash; change one parameter, everything recalculates</li>
+            <li><strong>5 test modules</strong> verify the physics before any report is generated</li>
+            <li><strong>3D parametric hull</strong> &mdash; geometry is mathematically defined, not hand-drawn</li>
+            <li><strong>Interactive dashboard</strong> &mdash; real-time Plotly/Streamlit app with live 3D preview</li>
+            <li><strong>Full traceability</strong> &mdash; Git tracks every change, every commit, every decision</li>
+        </ul>
+        <p class="academic-p mb-0 text-sm text-purple-800"><strong>Bottom line:</strong> Hours of coding and debugging became <em>products</em>. This website, the Appendix C PDF, the 3D renderings, the dashboard &mdash; all generated from the same 662-line calculator. That's the paradigm shift.</p>
     </div>
 
     <h3 class="font-bold text-gray-800 sans text-lg mb-3">Document Map</h3>
@@ -103,6 +122,151 @@
         <p><strong>[5]</strong> Beer, Johnston, DeWolf, <em>Mechanics of Materials</em>, 8th Ed., McGraw-Hill.</p>
         <p><strong>[6]</strong> ASTM C78/C78M-22, <em>Standard Test Method for Flexural Strength of Concrete</em>.</p>
         <p><strong>[7]</strong> Tupper, E.C., <em>Introduction to Naval Architecture</em>, 5th Ed.</p>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- DEVELOPMENT FLOWCHART                                         -->
+<!-- ============================================================ -->
+<div id="flowchart" class="section-anchor p-10 md:p-20 border-t-4 border-purple-600">
+    <h2 class="text-3xl font-bold text-gray-900 mb-6 border-l-8 border-purple-600 pl-4 sans">Development Flowchart &mdash; What We Created &amp; How</h2>
+
+    <p class="academic-p">This flowchart shows every artifact we built, the tools used, and how they connect. Share this with your team to understand the full system at a glance.</p>
+
+    <!-- SVG FLOWCHART -->
+    <div class="flex justify-center my-8 overflow-x-auto">
+        <svg viewBox="0 0 900 720" width="100%" class="border rounded-lg bg-white shadow-inner" style="max-width:900px;">
+            <!-- Title -->
+            <text x="450" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e3a8a" font-family="Helvetica,Arial,sans-serif">NAU Concrete Canoe 2026 &mdash; Development Pipeline</text>
+
+            <!-- Row 1: Design Parameters -->
+            <rect x="310" y="50" width="280" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+            <text x="450" y="72" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af" font-family="Helvetica">DESIGN PARAMETERS</text>
+            <text x="450" y="88" text-anchor="middle" font-size="10" fill="#3b82f6" font-family="monospace">216" x 36" x 18" x 0.75" | 60 PCF</text>
+
+            <!-- Arrow down -->
+            <line x1="450" y1="100" x2="450" y2="130" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
+            <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/></marker></defs>
+
+            <!-- Row 2: Calculator (center) -->
+            <rect x="280" y="130" width="340" height="65" rx="10" fill="#1e3a8a" stroke="#1e3a8a" stroke-width="2"/>
+            <text x="450" y="152" text-anchor="middle" font-size="13" font-weight="bold" fill="white" font-family="Helvetica">concrete_canoe_calculator.py v2.1</text>
+            <text x="450" y="168" text-anchor="middle" font-size="10" fill="#93c5fd" font-family="monospace">662 lines | 10 functions | SINGLE SOURCE OF TRUTH</text>
+            <text x="450" y="183" text-anchor="middle" font-size="9" fill="#bfdbfe" font-family="Helvetica">6 engineering fixes | Validated by 5 test modules</text>
+
+            <!-- Arrow down to 5 outputs -->
+            <line x1="450" y1="195" x2="450" y2="225" stroke="#6b7280" stroke-width="2"/>
+            <line x1="450" y1="225" x2="90" y2="225" stroke="#6b7280" stroke-width="1.5"/>
+            <line x1="450" y1="225" x2="810" y2="225" stroke="#6b7280" stroke-width="1.5"/>
+            <!-- 5 vertical drops -->
+            <line x1="90" y1="225" x2="90" y2="255" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <line x1="270" y1="225" x2="270" y2="255" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <line x1="450" y1="225" x2="450" y2="255" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <line x1="630" y1="225" x2="630" y2="255" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <line x1="810" y1="225" x2="810" y2="255" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+            <!-- Row 3: 5 Output Boxes -->
+            <!-- Box 1: Tests -->
+            <rect x="20" y="255" width="140" height="70" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="90" y="275" text-anchor="middle" font-size="10" font-weight="bold" fill="#15803d" font-family="Helvetica">pytest Suite</text>
+            <text x="90" y="290" text-anchor="middle" font-size="8" fill="#166534" font-family="monospace">5 test modules</text>
+            <text x="90" y="302" text-anchor="middle" font-size="8" fill="#166534" font-family="monospace">ALL PASS</text>
+            <text x="90" y="316" text-anchor="middle" font-size="8" fill="#6b7280" font-family="Helvetica">tests/</text>
+
+            <!-- Box 2: Appendix C -->
+            <rect x="195" y="255" width="150" height="70" rx="6" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"/>
+            <text x="270" y="275" text-anchor="middle" font-size="10" font-weight="bold" fill="#a16207" font-family="Helvetica">Appendix C PDF</text>
+            <text x="270" y="290" text-anchor="middle" font-size="8" fill="#854d0e" font-family="monospace">4 pages, [1]-[8] refs</text>
+            <text x="270" y="302" text-anchor="middle" font-size="8" fill="#854d0e" font-family="monospace">ASCE 5.5.16 format</text>
+            <text x="270" y="316" text-anchor="middle" font-size="8" fill="#6b7280" font-family="Helvetica">generate_appendix_c_integrated.py</text>
+
+            <!-- Box 3: Teaching Report -->
+            <rect x="375" y="255" width="150" height="70" rx="6" fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.5"/>
+            <text x="450" y="275" text-anchor="middle" font-size="10" font-weight="bold" fill="#4338ca" font-family="Helvetica">Teaching Report</text>
+            <text x="450" y="290" text-anchor="middle" font-size="8" fill="#4338ca" font-family="monospace">Markdown + 3 figures</text>
+            <text x="450" y="302" text-anchor="middle" font-size="8" fill="#4338ca" font-family="monospace">Step-by-step walkthrough</text>
+            <text x="450" y="316" text-anchor="middle" font-size="8" fill="#6b7280" font-family="Helvetica">generate_teaching_appendix_c.py</text>
+
+            <!-- Box 4: 3D Viz -->
+            <rect x="555" y="255" width="150" height="70" rx="6" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+            <text x="630" y="275" text-anchor="middle" font-size="10" font-weight="bold" fill="#be185d" font-family="Helvetica">3D Visualizations</text>
+            <text x="630" y="290" text-anchor="middle" font-size="8" fill="#9d174d" font-family="monospace">4 PNG renders (300 DPI)</text>
+            <text x="630" y="302" text-anchor="middle" font-size="8" fill="#9d174d" font-family="monospace">Parametric hull geometry</text>
+            <text x="630" y="316" text-anchor="middle" font-size="8" fill="#6b7280" font-family="Helvetica">generate_3d_visualizations.py</text>
+
+            <!-- Box 5: Dashboard -->
+            <rect x="735" y="255" width="145" height="70" rx="6" fill="#f3e8ff" stroke="#9333ea" stroke-width="1.5"/>
+            <text x="808" y="275" text-anchor="middle" font-size="10" font-weight="bold" fill="#7e22ce" font-family="Helvetica">Live Dashboard</text>
+            <text x="808" y="290" text-anchor="middle" font-size="8" fill="#7e22ce" font-family="monospace">Streamlit + Plotly</text>
+            <text x="808" y="302" text-anchor="middle" font-size="8" fill="#7e22ce" font-family="monospace">Interactive 3D + sliders</text>
+            <text x="808" y="316" text-anchor="middle" font-size="8" fill="#6b7280" font-family="Helvetica">dashboard/app.py</text>
+
+            <!-- Row 4: All feed into this website -->
+            <line x1="90" y1="325" x2="90" y2="370" stroke="#6b7280" stroke-width="1.5"/>
+            <line x1="270" y1="325" x2="270" y2="370" stroke="#6b7280" stroke-width="1.5"/>
+            <line x1="450" y1="325" x2="450" y2="370" stroke="#6b7280" stroke-width="1.5"/>
+            <line x1="630" y1="325" x2="630" y2="370" stroke="#6b7280" stroke-width="1.5"/>
+            <line x1="810" y1="325" x2="810" y2="370" stroke="#6b7280" stroke-width="1.5"/>
+            <line x1="90" y1="370" x2="810" y2="370" stroke="#6b7280" stroke-width="1.5"/>
+            <line x1="450" y1="370" x2="450" y2="395" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
+
+            <rect x="250" y="395" width="400" height="55" rx="10" fill="#059669" stroke="#059669" stroke-width="2"/>
+            <text x="450" y="418" text-anchor="middle" font-size="14" font-weight="bold" fill="white" font-family="Helvetica">THIS INTERACTIVE WEBSITE</text>
+            <text x="450" y="436" text-anchor="middle" font-size="10" fill="#d1fae5" font-family="monospace">docs/index.html | GitHub Pages | All 9 parts + 3D</text>
+
+            <!-- Row 5: AI Tools Used -->
+            <line x1="450" y1="450" x2="450" y2="480" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+            <text x="450" y="500" text-anchor="middle" font-size="11" font-weight="bold" fill="#6b7280" font-family="Helvetica">AI TOOLS USED IN DEVELOPMENT</text>
+
+            <!-- Claude box -->
+            <rect x="100" y="515" width="300" height="90" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+            <text x="250" y="535" text-anchor="middle" font-size="11" font-weight="bold" fill="#c2410c" font-family="Helvetica">Claude (Anthropic)</text>
+            <text x="250" y="552" text-anchor="middle" font-size="9" fill="#9a3412" font-family="Helvetica">Built the calculator (v2.0 &rarr; v2.1)</text>
+            <text x="250" y="566" text-anchor="middle" font-size="9" fill="#9a3412" font-family="Helvetica">Created Appendix C generator scripts</text>
+            <text x="250" y="580" text-anchor="middle" font-size="9" fill="#9a3412" font-family="Helvetica">Generated 3D visualizations &amp; dashboard</text>
+            <text x="250" y="594" text-anchor="middle" font-size="9" fill="#9a3412" font-family="Helvetica">Built this website with all 9+ parts</text>
+
+            <!-- Gemini box -->
+            <rect x="500" y="515" width="300" height="90" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="650" y="535" text-anchor="middle" font-size="11" font-weight="bold" fill="#15803d" font-family="Helvetica">Gemini (Google)</text>
+            <text x="650" y="552" text-anchor="middle" font-size="9" fill="#166534" font-family="Helvetica">Generated HTML teaching content (Parts 1-6)</text>
+            <text x="650" y="566" text-anchor="middle" font-size="9" fill="#166534" font-family="Helvetica">MathJax equation formatting</text>
+            <text x="650" y="580" text-anchor="middle" font-size="9" fill="#166534" font-family="Helvetica">Visual styling with Tailwind CSS</text>
+            <text x="650" y="594" text-anchor="middle" font-size="9" fill="#166534" font-family="Helvetica">Initial draft reviewed &amp; enhanced by Claude</text>
+
+            <!-- GitHub box at bottom -->
+            <rect x="250" y="630" width="400" height="50" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+            <text x="450" y="652" text-anchor="middle" font-size="11" font-weight="bold" fill="#334155" font-family="Helvetica">GitHub Repository (Version Controlled)</text>
+            <text x="450" y="668" text-anchor="middle" font-size="9" fill="#64748b" font-family="monospace">github.com/Miles0sage/concrete-canoe-project2026</text>
+            <line x1="250" y1="615" x2="350" y2="630" stroke="#6b7280" stroke-width="1" stroke-dasharray="4,3"/>
+            <line x1="650" y1="615" x2="550" y2="630" stroke="#6b7280" stroke-width="1" stroke-dasharray="4,3"/>
+            <line x1="450" y1="450" x2="450" y2="455" stroke="none"/>
+
+            <!-- Legend -->
+            <text x="30" y="700" font-size="9" fill="#9ca3af" font-family="Helvetica">Legend: Dark blue = core engine | Green = testing | Yellow = competition deliverable | Pink = visualization | Purple = interactive | Orange/Green = AI tools</text>
+        </svg>
+    </div>
+
+    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4 sans">File-by-File Breakdown</h3>
+    <table class="w-full text-sm border border-gray-300 mb-6">
+        <thead><tr class="bg-purple-900 text-white"><th class="p-2 text-left">File</th><th class="p-2 text-left">Lines</th><th class="p-2 text-left">Purpose</th><th class="p-2 text-left">Built With</th></tr></thead>
+        <tbody>
+            <tr class="calc-row"><td class="font-mono text-xs">calculations/concrete_canoe_calculator.py</td><td>662</td><td>ALL physics &mdash; single source of truth (v2.1)</td><td>Claude</td></tr>
+            <tr class="calc-row"><td class="font-mono text-xs">scripts/generate_appendix_c_integrated.py</td><td>~500</td><td>Competition Appendix C PDF (imports from calculator)</td><td>Claude</td></tr>
+            <tr class="calc-row"><td class="font-mono text-xs">scripts/generate_teaching_appendix_c.py</td><td>~400</td><td>Teaching markdown with step-by-step explanations</td><td>Claude</td></tr>
+            <tr class="calc-row"><td class="font-mono text-xs">scripts/generate_3d_visualizations.py</td><td>241</td><td>Parametric 3D hull renderings (matplotlib)</td><td>Claude</td></tr>
+            <tr class="calc-row"><td class="font-mono text-xs">dashboard/app.py</td><td>275</td><td>Interactive Streamlit dashboard with Plotly 3D</td><td>Claude</td></tr>
+            <tr class="calc-row"><td class="font-mono text-xs">scripts/create_visual_calculator.py</td><td>~350</td><td>12-panel engineering dashboard (static PNG/PDF)</td><td>Claude</td></tr>
+            <tr class="calc-row"><td class="font-mono text-xs">docs/index.html</td><td>800+</td><td>This interactive teaching website</td><td>Claude + Gemini</td></tr>
+            <tr class="calc-row"><td class="font-mono text-xs">tests/ (5 modules)</td><td>~500</td><td>Geometry, hydrostatics, stability, structural, integration</td><td>Claude</td></tr>
+        </tbody>
+    </table>
+
+    <div class="bg-gray-50 border rounded-lg p-6">
+        <h4 class="font-bold sans mb-3">Key Architecture Decision: Why One Calculator File?</h4>
+        <p class="academic-p text-sm mb-2">Before v2.0, each script contained its own copy of the physics formulas. The problem: one script calculated hull weight as 318 lbs (Ramanujan method), another as 245 lbs (U-shell method), and a third hardcoded 276 lbs. <strong>Three different answers for the same canoe.</strong></p>
+        <p class="academic-p text-sm mb-0">The fix was radical simplicity: one file (<code>concrete_canoe_calculator.py</code>), one set of formulas, one answer. Every other script imports from it. The 10 key functions are: <code>estimate_hull_weight()</code>, <code>section_modulus_thin_shell()</code>, <code>run_complete_analysis()</code>, <code>metacentric_height_approx()</code>, <code>bending_moment_distributed_crew()</code>, <code>displacement_volume()</code>, <code>waterplane_approximation()</code>, <code>draft_from_displacement()</code>, <code>freeboard()</code>, and <code>calculate_cog_height()</code>.</p>
     </div>
 </div>
 
@@ -541,10 +705,294 @@ concrete-canoe-project2026/
     <div class="bg-blue-50 border border-blue-200 rounded p-4 text-sm font-mono mb-6">
         Design Parameters &rarr; concrete_canoe_calculator.py v2.1 &rarr; 5 pytest modules (PASS) &rarr; Hand calculations (verified) &rarr; This Report
     </div>
+    <p class="academic-p text-sm">See <a href="#partHowBuilt" class="text-blue-600 underline">How We Built This</a> for a complete 13-value verification table confirming every number matches the calculator output.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- PART 10: 3D HULL VISUALIZATION                                -->
+<!-- ============================================================ -->
+<div id="part3d" class="section-anchor p-10 md:p-20 border-t-4 border-pink-600">
+    <h2 class="text-3xl font-bold text-gray-900 mb-6 border-l-8 border-pink-600 pl-4 sans">3D Hull Visualization &mdash; Parametric Geometry</h2>
+
+    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4 sans">10.1 Why 3D Matters</h3>
+    <p class="academic-p">A 2D drawing shows one view. A 3D parametric model shows the <strong>complete hull shape</strong> from any angle &mdash; isometric, bow, port, and plan views. Judges can verify our geometry is buildable. The team can see how design changes affect the actual shape. And the math behind the geometry proves we understand the naval architecture, not just the numbers.</p>
+
+    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4 sans">10.2 Parametric Hull Generation</h3>
+    <p class="academic-p">The hull is NOT hand-drawn. It is <strong>mathematically generated</strong> from our design parameters using a parametric surface model. The same dimensions (216" &times; 36" &times; 18") that feed the calculator also define the 3D shape.</p>
+
+    <div class="border border-gray-800 rounded-lg overflow-hidden my-6">
+        <div class="bg-gray-800 text-white px-4 py-2 text-sm font-bold sans flex justify-between">
+            <span>CODE LABORATORY: Parametric Hull Surface</span>
+            <span class="text-gray-400 font-mono">generate_3d_visualizations.py:36-82</span>
+        </div>
+        <div class="code-block"><span class="keyword">def</span> <span class="function">generate_hull_surface</span>(L, B, D, n_long=<span class="number">80</span>, n_circ=<span class="number">40</span>):
+    <span class="comment"># u = longitudinal parameter (0=bow, 1=stern)</span>
+    <span class="comment"># v = circumferential parameter (0=keel, 1=gunwale)</span>
+    u = np.linspace(<span class="number">0</span>, <span class="number">1</span>, n_long)
+    v = np.linspace(<span class="number">0</span>, <span class="number">1</span>, n_circ)
+
+    <span class="keyword">for</span> i, ui <span class="keyword">in</span> enumerate(u):
+        <span class="comment"># TAPER: smooth bell curve narrowing at bow &amp; stern</span>
+        taper = <span class="number">1.0</span> - (<span class="number">2</span>*ui - <span class="number">1</span>)**<span class="number">4</span>  <span class="comment"># ← quartic taper function</span>
+        taper = max(taper, <span class="number">0.02</span>)       <span class="comment"># never fully zero</span>
+        half_b = (B / <span class="number">2</span>) * taper       <span class="comment"># half-beam at station</span>
+
+        <span class="comment"># ROCKER: slight depth variation along length</span>
+        rocker = D * <span class="number">0.06</span> * (<span class="number">2</span>*ui - <span class="number">1</span>)**<span class="number">2</span>
+        local_D = D - rocker
+
+        <span class="comment"># V-BOTTOM (deadrise): 20% of depth for keel V-shape</span>
+        deadrise_depth = local_D * <span class="number">0.20</span>
+
+        <span class="keyword">for</span> j, vj <span class="keyword">in</span> enumerate(v):
+            <span class="keyword">if</span> vj &lt;= <span class="number">0.3</span>:
+                <span class="comment"># Keel to chine (V-bottom region)</span>
+                frac = vj / <span class="number">0.3</span>
+                Y[i,j] = half_b * <span class="number">0.8</span> * frac
+                Z[i,j] = -deadrise_depth * (<span class="number">1</span> - frac)
+            <span class="keyword">else</span>:
+                <span class="comment"># Chine to gunwale (flared sides)</span>
+                frac = (vj - <span class="number">0.3</span>) / <span class="number">0.7</span>
+                Y[i,j] = half_b * (<span class="number">0.8</span> + <span class="number">0.2</span> * frac)
+                Z[i,j] = local_D * frac</div>
+    </div>
+
+    <div class="bg-pink-50 border border-pink-200 rounded-lg p-6 my-6">
+        <h4 class="font-bold text-pink-900 sans mb-3">Understanding the Parametric Model</h4>
+        <table class="w-full text-sm">
+            <thead><tr class="bg-pink-100"><th class="p-2 text-left">Feature</th><th class="p-2 text-left">Math</th><th class="p-2 text-left">What It Does</th></tr></thead>
+            <tbody>
+                <tr class="calc-row"><td class="font-bold">Quartic Taper</td><td class="font-mono text-xs">1 - (2u-1)&sup4;</td><td>Bow and stern narrow smoothly to near-zero beam. Maximum width at midship (u=0.5).</td></tr>
+                <tr class="calc-row"><td class="font-bold">V-Bottom Deadrise</td><td class="font-mono text-xs">0.20 &times; D</td><td>20% of depth forms a V-shaped keel for directional stability. Like a sailboat's fin.</td></tr>
+                <tr class="calc-row"><td class="font-bold">Chine-Flare Transition</td><td class="font-mono text-xs">v=0.3 boundary</td><td>Below 30%: V-bottom. Above 30%: flared sides. Creates a natural bilge radius.</td></tr>
+                <tr class="calc-row"><td class="font-bold">Rocker</td><td class="font-mono text-xs">0.06D &times; (2u-1)&sup2;</td><td>Slight upward curve at bow/stern (6% of depth). Helps the canoe track straight.</td></tr>
+                <tr class="calc-row"><td class="font-bold">Mirror Symmetry</td><td class="font-mono text-xs">Y &rarr; -Y</td><td>Only half the hull is computed; the other half is mirrored for perfect symmetry.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4 sans">10.3 3D Renderings (Design C: 216" &times; 36" &times; 18")</h3>
+    <p class="academic-p text-sm mb-4">Generated by <code>generate_3d_visualizations.py</code> using matplotlib 3D projection at 300 DPI. Four views: isometric, bow, port, plan.</p>
+    <div class="border rounded-lg overflow-hidden mb-6">
+        <img src="3d_hull_design_C.png" alt="Design C 3D Hull Rendering — 4 views" class="w-full" loading="lazy"/>
+        <p class="text-xs text-gray-500 p-2 bg-gray-50">Figure: Design C (216" &times; 36" &times; 18") — Isometric, Front (Bow), Side (Port), and Top (Plan) views. Surface colored by depth. Cyan line = waterline. Red dashed = keel line.</p>
+    </div>
+
+    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4 sans">10.4 Design Comparison Overlay</h3>
+    <p class="academic-p text-sm mb-4">All three designs overlaid at 25% opacity to compare hull volumes. Design A (blue, 192") is the smallest. Design C (orange, 216") is the largest.</p>
+    <div class="border rounded-lg overflow-hidden mb-6">
+        <img src="3d_comparison_all_designs.png" alt="3D Comparison of all 3 designs" class="w-full" loading="lazy"/>
+        <p class="text-xs text-gray-500 p-2 bg-gray-50">Figure: All 3 designs overlaid — Design A (blue), Design B (green), Design C (orange). Two views: isometric and top-down plan.</p>
+    </div>
+
+    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4 sans">10.5 Interactive Dashboard (Streamlit + Plotly)</h3>
+    <p class="academic-p">Beyond static images, we built a <strong>live interactive dashboard</strong> (<code>dashboard/app.py</code>) using Streamlit and Plotly. It generates a real-time 3D hull preview that updates as you drag sliders for Length, Beam, Depth, and Thickness.</p>
+
+    <div class="border border-gray-800 rounded-lg overflow-hidden my-6">
+        <div class="bg-gray-800 text-white px-4 py-2 text-sm font-bold sans flex justify-between">
+            <span>CODE LABORATORY: Plotly Interactive 3D Hull</span>
+            <span class="text-gray-400 font-mono">dashboard/app.py:194-226</span>
+        </div>
+        <div class="code-block"><span class="comment"># Interactive 3D hull preview (Plotly)</span>
+hull3d = go.<span class="function">Figure</span>()
+
+<span class="comment"># Right half of hull — Plotly Surface trace</span>
+hull3d.add_trace(go.<span class="function">Surface</span>(
+    x=X, y=Y, z=Z,
+    colorscale=<span class="string">"Blues"</span>,
+    opacity=<span class="number">0.7</span>,
+    showscale=<span class="keyword">False</span>
+))
+
+<span class="comment"># Left half — mirror Y coordinates</span>
+hull3d.add_trace(go.<span class="function">Surface</span>(
+    x=X, y=-Y, z=Z,
+    colorscale=<span class="string">"Blues"</span>,
+    opacity=<span class="number">0.7</span>,
+    showscale=<span class="keyword">False</span>
+))
+
+<span class="comment"># Set 3D scene with proper aspect ratio</span>
+hull3d.update_layout(scene=<span class="keyword">dict</span>(
+    xaxis_title=<span class="string">"Length (in)"</span>,
+    yaxis_title=<span class="string">"Beam (in)"</span>,
+    zaxis_title=<span class="string">"Depth (in)"</span>,
+    aspectratio=<span class="keyword">dict</span>(x=<span class="number">2</span>, y=<span class="number">0.5</span>, z=<span class="number">0.3</span>),
+))
+
+<span class="comment"># Display in Streamlit</span>
+st.plotly_chart(hull3d, use_container_width=<span class="keyword">True</span>)</div>
+    </div>
+
+    <div class="bg-gray-50 border rounded-lg p-6 my-6">
+        <h4 class="font-bold sans mb-2">Dashboard Features</h4>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+                <p class="font-bold text-gray-700">Real-Time Sliders:</p>
+                <ul class="list-disc pl-4 space-y-1">
+                    <li>Length: 168&ndash;240 inches</li>
+                    <li>Beam: 26&ndash;42 inches</li>
+                    <li>Depth: 12&ndash;22 inches</li>
+                    <li>Thickness: 0.30&ndash;0.75 inches</li>
+                    <li>Density: 50&ndash;70 PCF</li>
+                    <li>Paddlers: 2, 3, or 4</li>
+                </ul>
+            </div>
+            <div>
+                <p class="font-bold text-gray-700">Live Outputs:</p>
+                <ul class="list-disc pl-4 space-y-1">
+                    <li>3D hull preview (rotatable)</li>
+                    <li>5-axis performance radar chart</li>
+                    <li>KPI metrics (weight, freeboard, GM, SF)</li>
+                    <li>PASS/FAIL status vs. ASCE requirements</li>
+                    <li>Baseline design comparison table</li>
+                    <li>CSV export for records</li>
+                </ul>
+            </div>
+        </div>
+        <p class="text-xs text-gray-500 mt-3">Run locally: <code>cd dashboard &amp;&amp; pip install -r requirements.txt &amp;&amp; streamlit run app.py</code></p>
+    </div>
+
+    <div class="border rounded-lg overflow-hidden mb-6">
+        <img src="visual_calculator_dashboard.png" alt="12-panel visual calculator dashboard" class="w-full" loading="lazy"/>
+        <p class="text-xs text-gray-500 p-2 bg-gray-50">Figure: 12-panel engineering dashboard showing cross-section, hull profile, load distribution, shear/moment diagrams, GZ stability curve, weight breakdown, performance radar, and compliance checklist. Generated by <code>create_visual_calculator.py</code>.</p>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PART 11: HOW WE BUILT THIS                                    -->
+<!-- ============================================================ -->
+<div id="partHowBuilt" class="section-anchor p-10 md:p-20 border-t-4 border-indigo-600">
+    <h2 class="text-3xl font-bold text-gray-900 mb-6 border-l-8 border-indigo-600 pl-4 sans">How We Built This &mdash; Team Education Guide</h2>
+
+    <p class="academic-p">This section tells the story of how the computational system was developed, what problems we solved, and what your team needs to know to maintain and extend it.</p>
+
+    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4 sans">11.1 The Problem We Solved</h3>
+    <div class="bg-red-50 border-l-4 border-red-500 p-6 my-6">
+        <h4 class="font-bold text-red-900 sans mb-2">Before v2.0: 6 Critical Bugs</h4>
+        <table class="w-full text-sm">
+            <thead><tr class="bg-red-100"><th class="p-2 text-left">#</th><th class="p-2 text-left">Bug</th><th class="p-2 text-left">Impact</th><th class="p-2 text-left">Fix</th></tr></thead>
+            <tbody>
+                <tr class="calc-row"><td>1</td><td>Waterplane coefficient = 0.10</td><td>Draft calculated 7&times; too deep (33" instead of 4.8")</td><td>Changed to C<sub>wp</sub> = 0.70 [3]</td></tr>
+                <tr class="calc-row"><td>2</td><td>Solid-rectangle S = bh&sup2;/6</td><td>Section modulus 15&times; too high (1944 vs 129.6 in&sup3;)</td><td>Thin-shell U-section via parallel axis theorem [5]</td></tr>
+                <tr class="calc-row"><td>3</td><td>No hull weight estimation</td><td>Weight was hardcoded guesses</td><td>Added <code>estimate_hull_weight()</code> from geometry</td></tr>
+                <tr class="calc-row"><td>4</td><td>BM = B&sup2;/12T (simplified)</td><td>Ignored length; inaccurate for long hulls</td><td>Full BM = I<sub>wp</sub>/V formula [3]</td></tr>
+                <tr class="calc-row"><td>5</td><td>Thresholds: 2" FB, 2" GM</td><td>Would pass hulls that sink or capsize</td><td>ASCE 2026: 6" FB, 6" GM, 2.0 SF [2]</td></tr>
+                <tr class="calc-row"><td>6</td><td>Crew load = 0 (hull only)</td><td>Hydrostatics ignored 700 lbs of crew</td><td>Added crew_weight_lbs parameter</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4 sans">11.2 The Development Timeline</h3>
+    <div class="space-y-4 mb-8">
+        <div class="flex gap-4 items-start">
+            <div class="bg-blue-900 text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap mt-1">Phase 1</div>
+            <div>
+                <p class="font-bold text-sm">Calculator v2.0 &rarr; v2.1</p>
+                <p class="text-sm text-gray-600">Fixed 6 critical bugs. Added <code>calculate_cog_height()</code>, <code>validate_concrete_mix()</code>, <code>bending_moment_distributed_crew()</code>. Wrote 5 test modules.</p>
+            </div>
+        </div>
+        <div class="flex gap-4 items-start">
+            <div class="bg-blue-900 text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap mt-1">Phase 2</div>
+            <div>
+                <p class="font-bold text-sm">3D Visualizations</p>
+                <p class="text-sm text-gray-600">Built <code>generate_3d_visualizations.py</code> with parametric hull geometry. 4-view renderings for 3 designs plus comparison overlay. Also created the visual calculator dashboard (12 panels) and interactive Streamlit app with Plotly 3D.</p>
+            </div>
+        </div>
+        <div class="flex gap-4 items-start">
+            <div class="bg-blue-900 text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap mt-1">Phase 3</div>
+            <div>
+                <p class="font-bold text-sm">Appendix C (Competition Deliverable)</p>
+                <p class="text-sm text-gray-600">Created standalone version, then replaced with <strong>integrated version</strong> that imports from calculator. 4-page PDF with [1]-[8] references. Meets ASCE 2026 RFP Section 5.5.16 format.</p>
+            </div>
+        </div>
+        <div class="flex gap-4 items-start">
+            <div class="bg-blue-900 text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap mt-1">Phase 4</div>
+            <div>
+                <p class="font-bold text-sm">Teaching Materials</p>
+                <p class="text-sm text-gray-600">Generated teaching appendix (markdown + figures) with step-by-step explanations. Created comprehensive prompt for Gemini. Gemini produced initial HTML parts. Claude combined, fixed (MathJax config was broken), added missing Parts 4/7/8/9, and built this complete website.</p>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4 sans">11.3 For Your Team: How to Use This System</h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-5">
+            <h4 class="font-bold text-blue-900 sans mb-3">If Dimensions Change</h4>
+            <div class="code-block text-xs"><span class="comment"># Edit ONE file — top of generate_appendix_c_integrated.py:</span>
+L_in = <span class="number">216.0</span>   <span class="comment"># Change length here</span>
+B_in = <span class="number">36.0</span>    <span class="comment"># Change beam here</span>
+D_in = <span class="number">18.0</span>    <span class="comment"># Change depth here</span>
+t_in = <span class="number">0.75</span>    <span class="comment"># Change thickness here</span>
+
+<span class="comment"># Then regenerate everything:</span>
+/opt/sys-venv/bin/python3 scripts/generate_appendix_c_integrated.py
+/opt/sys-venv/bin/python3 scripts/generate_3d_visualizations.py
+/opt/sys-venv/bin/python3 scripts/generate_teaching_appendix_c.py</div>
+        </div>
+        <div class="bg-green-50 border border-green-200 rounded-lg p-5">
+            <h4 class="font-bold text-green-900 sans mb-3">If You Want to Verify</h4>
+            <div class="code-block text-xs"><span class="comment"># Run the test suite — should show ALL PASS:</span>
+cd concrete-canoe-project2026
+/opt/sys-venv/bin/python3 -m pytest tests/ -v
+
+<span class="comment"># Run the calculator directly:</span>
+/opt/sys-venv/bin/python3 calculations/concrete_canoe_calculator.py
+
+<span class="comment"># Launch the interactive dashboard:</span>
+cd dashboard
+pip install -r requirements.txt
+streamlit run app.py</div>
+        </div>
+    </div>
+
+    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4 sans">11.4 Number Verification: Script vs. This Document</h3>
+    <p class="academic-p text-sm mb-4">Every number in this website was verified against <code>concrete_canoe_calculator.py v2.1</code> output. Here is the exact trace:</p>
+
+    <table class="w-full text-xs border border-gray-300 mb-6">
+        <thead><tr class="bg-gray-800 text-white"><th class="p-2 text-left">Value</th><th class="p-2 text-left">Calculator Function</th><th class="p-2 text-right">Script Output</th><th class="p-2 text-right">This Doc</th><th class="p-2 text-center">Match?</th></tr></thead>
+        <tbody>
+            <tr class="calc-row"><td>Hull weight</td><td class="font-mono">estimate_hull_weight(216,36,18,0.75,60)</td><td class="text-right">245.025</td><td class="text-right">245.0</td><td class="text-center text-green-700 font-bold">YES</td></tr>
+            <tr class="calc-row"><td>Section modulus</td><td class="font-mono">section_modulus_thin_shell(36,18,0.75)</td><td class="text-right">129.58</td><td class="text-right">129.6</td><td class="text-center text-green-700 font-bold">YES</td></tr>
+            <tr class="calc-row"><td>Neutral axis</td><td class="font-mono">(composite centroid)</td><td class="text-right">4.7799</td><td class="text-right">4.779</td><td class="text-center text-green-700 font-bold">YES</td></tr>
+            <tr class="calc-row"><td>I<sub>x</sub></td><td class="font-mono">(parallel axis theorem)</td><td class="text-right">1713.2</td><td class="text-right">1,713</td><td class="text-center text-green-700 font-bold">YES</td></tr>
+            <tr class="calc-row"><td>4P Coed draft</td><td class="font-mono">run_complete_analysis(...,crew=700)</td><td class="text-right">4.808</td><td class="text-right">4.81</td><td class="text-center text-green-700 font-bold">YES</td></tr>
+            <tr class="calc-row"><td>4P Coed freeboard</td><td class="font-mono">(18 - draft)</td><td class="text-right">13.192</td><td class="text-right">13.19</td><td class="text-center text-green-700 font-bold">YES</td></tr>
+            <tr class="calc-row"><td>4P Coed GM</td><td class="font-mono">metacentric_height_approx(...)</td><td class="text-right">15.69</td><td class="text-right">15.69</td><td class="text-center text-green-700 font-bold">YES</td></tr>
+            <tr class="calc-row"><td>M<sub>max</sub></td><td class="font-mono">bending_moment_distributed_crew(245,700,18)</td><td class="text-right">3701.25</td><td class="text-right">3,701</td><td class="text-center text-green-700 font-bold">YES</td></tr>
+            <tr class="calc-row"><td>Bending stress</td><td class="font-mono">bending_stress_psi(3701,129.6)</td><td class="text-right">342.78</td><td class="text-right">342.8</td><td class="text-center text-green-700 font-bold">YES</td></tr>
+            <tr class="calc-row"><td>Safety factor</td><td class="font-mono">safety_factor(1500,342.8)</td><td class="text-right">4.375</td><td class="text-right">4.38</td><td class="text-center text-green-700 font-bold">YES</td></tr>
+            <tr class="calc-row"><td>M<sub>u</sub> (factored)</td><td class="font-mono">1.2(551)+1.6(3150)</td><td class="text-right">5701.5</td><td class="text-right">5,702</td><td class="text-center text-green-700 font-bold">YES</td></tr>
+            <tr class="calc-row"><td>DCR (flexural)</td><td class="font-mono">M_u / &phi;M_n</td><td class="text-right">0.1958</td><td class="text-right">0.196</td><td class="text-center text-green-700 font-bold">YES</td></tr>
+            <tr class="calc-row"><td>DCR (punching)</td><td class="font-mono">V_u / &phi;V_c</td><td class="text-right">0.1890</td><td class="text-right">0.189</td><td class="text-center text-green-700 font-bold">YES</td></tr>
+        </tbody>
+    </table>
+
+    <div class="bg-green-50 border-2 border-green-300 rounded-lg p-6 text-center mb-8">
+        <p class="text-xl font-bold text-green-900 sans">13/13 Values Verified &mdash; Document Matches Calculator Exactly</p>
+        <p class="text-sm text-green-700 mt-2">All differences are rounding to displayed precision. No discrepancies found.</p>
+    </div>
+
+    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4 sans">11.5 Reference Summary [1]-[8]</h3>
+    <table class="w-full text-sm border border-gray-300 mb-6">
+        <thead><tr class="bg-gray-800 text-white"><th class="p-2 text-center">Ref</th><th class="p-2 text-left">Source</th><th class="p-2 text-left">Used For</th><th class="p-2 text-left">Sections Cited</th></tr></thead>
+        <tbody>
+            <tr class="calc-row"><td class="text-center font-bold">[1]</td><td>ACI 318-25</td><td>Load factors, &phi; factors, punching shear</td><td>5.3.1b, 21.2.1, 22.6.5.2</td></tr>
+            <tr class="calc-row"><td class="text-center font-bold">[2]</td><td>ASCE 2026 RFP</td><td>Crew weights, freeboard, Appendix C format</td><td>5.5.4, 5.5.16, 6.2</td></tr>
+            <tr class="calc-row"><td class="text-center font-bold">[3]</td><td>SNAME <em>Prin. Naval Arch.</em></td><td>Waterplane area, draft, Bouguer's BM=I/V</td><td>Vol I, Ch 2-3</td></tr>
+            <tr class="calc-row"><td class="text-center font-bold">[4]</td><td>Ramanujan (1914)</td><td>Ellipse perimeter for hull surface area</td><td>Cross-check method</td></tr>
+            <tr class="calc-row"><td class="text-center font-bold">[5]</td><td>Beer et al. <em>Mech. of Materials</em></td><td>Parallel axis theorem, &sigma;=M/S</td><td>Eq 6.3, 6.6</td></tr>
+            <tr class="calc-row"><td class="text-center font-bold">[6]</td><td>ASTM C78</td><td>Modulus of rupture test method</td><td>f<sub>r</sub>=1500 psi</td></tr>
+            <tr class="calc-row"><td class="text-center font-bold">[7]</td><td>Tupper <em>Intro Naval Arch.</em></td><td>COG estimation for loaded canoe</td><td>Ch 4</td></tr>
+            <tr class="calc-row"><td class="text-center font-bold">[8]</td><td>ACI 318R-25 Commentary</td><td>Plain concrete &phi; factor justification</td><td>&phi;=0.65</td></tr>
+        </tbody>
+    </table>
 
     <div class="border-t-2 border-gray-300 pt-6 mt-8 text-sm text-gray-500">
         <p><strong>Prepared by:</strong> NAU Concrete Canoe Team &bull; February 2026</p>
-        <p><strong>Calculator:</strong> concrete_canoe_calculator.py v2.1 (6-error fix, 5 test modules)</p>
+        <p><strong>Calculator:</strong> concrete_canoe_calculator.py v2.1 (6-error fix, 5 test modules, 662 lines)</p>
+        <p><strong>AI Tools:</strong> Claude (Anthropic) &mdash; calculator, scripts, 3D viz, website | Gemini (Google) &mdash; initial HTML teaching content</p>
         <p><strong>Repository:</strong> <a href="https://github.com/Miles0sage/concrete-canoe-project2026" class="text-blue-600 underline">github.com/Miles0sage/concrete-canoe-project2026</a></p>
         <p><strong>Format:</strong> Digital calculations per ASCE 2026 RFP Section 5.5.16</p>
     </div>
