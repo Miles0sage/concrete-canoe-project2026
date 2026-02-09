@@ -1683,7 +1683,7 @@ function runScript(key) {
     output.classList.remove('hidden');
     output.textContent = 'Running ' + SCRIPTS[key] + '...\n(Requires local server on port 8080)';
 
-    fetch('http://localhost:8080/run', {
+    fetch('/run', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({script: SCRIPTS[key]})
@@ -1754,7 +1754,7 @@ async function sendAIMessage() {
     try {
         const messages = [{role: 'system', content: SYSTEM_PROMPT}, ...chatHistory];
 
-        const response = await fetch('http://localhost:11434/api/chat', {
+        const response = await fetch('/api/chat', {
             method: 'POST',
             body: JSON.stringify({ model: model, messages: messages, stream: true })
         });
@@ -1786,7 +1786,7 @@ async function sendAIMessage() {
         status.className = 'text-xs text-green-600 font-bold self-center';
 
     } catch(err) {
-        responseEl.textContent = 'Error connecting to Ollama. Make sure it is running on localhost:11434.\n\nStart with: ollama serve';
+        responseEl.textContent = 'Error connecting to AI server.\n\nStart the local server:\n  python3 scripts/web_server.py\n\nThen open http://localhost:8000';
         status.textContent = 'Offline';
         status.className = 'text-xs text-red-600 font-bold self-center';
     }
