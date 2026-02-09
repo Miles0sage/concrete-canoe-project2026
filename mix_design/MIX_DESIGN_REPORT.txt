@@ -1,0 +1,94 @@
+================================================================================
+NAU CONCRETE CANOE 2026 - MIX DESIGN ANALYSIS REPORT
+================================================================================
+
+RECOMMENDED MIX: Mix 3 (OPTIMIZED)
+  Weighted Score: 8.7/10 (GOOD)
+
+================================================================================
+MIX: Mix 1 (LIGHTWEIGHT)
+================================================================================
+
+CEMENTITIOUS MATERIALS (272.0 lbs):
+  Portland:   125.00 lbs ( 40.0%)
+  Slag:        70.00 lbs ( 22.4%)
+  Fly Ash:     67.00 lbs ( 21.5%)
+  Lime:        10.00 lbs (  3.2%)
+
+AGGREGATES (290.0 lbs):
+  Poraver:    115.00 lbs
+  Perlite:    150.00 lbs
+  K1:          25.00 lbs
+
+PROPERTIES:
+  Density:   48.0 pcf
+  w/cm:      0.45
+  7-day:     200 psi (WET)
+
+28-DAY PREDICTIONS:
+  Conservative: 1050 psi
+  Typical:      1300 psi
+  Optimistic:   1500 psi
+
+SCORES: 4.9/10 (RISKY)
+
+================================================================================
+MIX: Mix 2 (BALANCED)
+================================================================================
+
+CEMENTITIOUS MATERIALS (305.0 lbs):
+  Portland:   110.00 lbs ( 35.0%)
+  Slag:       120.00 lbs ( 38.0%)
+  Fly Ash:     65.00 lbs ( 20.7%)
+  Lime:        10.00 lbs (  3.2%)
+
+AGGREGATES (260.0 lbs):
+  Poraver:    125.00 lbs
+  Perlite:    100.00 lbs
+  K1:          35.00 lbs
+
+PROPERTIES:
+  Density:   55.0 pcf
+  w/cm:      0.42
+  7-day:     320 psi (WET)
+
+28-DAY PREDICTIONS:
+  Conservative: 1680 psi
+  Typical:      2080 psi
+  Optimistic:   2400 psi
+
+SCORES: 6.4/10 (RISKY)
+
+================================================================================
+MIX: Mix 3 (OPTIMIZED)
+================================================================================
+
+CEMENTITIOUS MATERIALS (315.9 lbs):
+  Portland:    97.21 lbs ( 30.8%)
+  Slag:       149.21 lbs ( 47.2%)
+  Fly Ash:     59.78 lbs ( 18.9%)
+  Lime:         9.72 lbs (  3.1%)
+
+AGGREGATES (258.3 lbs):
+  Poraver:    131.23 lbs
+  Perlite:     88.22 lbs
+  K1:          38.89 lbs
+
+PROPERTIES:
+  Density:   58.6 pcf
+  w/cm:      0.36
+  7-day:     273 psi (WET)
+
+28-DAY PREDICTIONS:
+  Conservative: 1433 psi
+  Typical:      1774 psi
+  Optimistic:   2048 psi
+
+SCORES: 8.7/10 (GOOD)
+
+================================================================================
+RANKING
+================================================================================
+  1. Mix 3 (OPTIMIZED)                8.7/10 (GOOD)
+  2. Mix 2 (BALANCED)                 6.4/10 (RISKY)
+  3. Mix 1 (LIGHTWEIGHT)              4.9/10 (RISKY)
