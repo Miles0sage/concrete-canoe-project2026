@@ -1,0 +1,35 @@
+Metric,Value,Unit
+Design Name,Design A,
+Design Tag,Optimal (Lightest),
+Length,192,in
+Beam,32,in
+Depth,17,in
+Thickness,0.5,in
+Concrete Density,60.0,PCF
+Shell Weight,163.11,lbs
+Reinforcement Weight,8.16,lbs
+Finish Weight,3.00,lbs
+Total Canoe Weight,174.26,lbs
+Crew Weight,700,lbs
+Loaded Weight,874.26,lbs
+Displacement Volume,14.0107,ft3
+Waterplane Area,27.7333,ft2
+Draft,6.06,in
+Freeboard,10.94,in
+KB,3.03,in
+BM,14.08,in
+KG,7.65,in
+GM,9.46,in
+Max Bending Moment,1748.53,lb-ft
+Section Modulus,1452.00,in3
+Bending Stress,14.45,psi
+Safety Factor,103.8015,
+Shell Volume,2.7185,ft3
+Batches Needed,6,
+Mesh Area,75.03,ft2
+Mold Size (L×W),17.0 × 3.7,ft
+Est. Total Cost,741.98,$
+Freeboard Pass,True,
+GM Pass,True,
+SF Pass,True,
+Overall Pass,True,

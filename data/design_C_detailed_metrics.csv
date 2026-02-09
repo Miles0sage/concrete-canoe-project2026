@@ -1,0 +1,35 @@
+Metric,Value,Unit
+Design Name,Design C,
+Design Tag,Traditional (Easy Build),
+Length,216,in
+Beam,36,in
+Depth,18,in
+Thickness,0.5,in
+Concrete Density,60.0,PCF
+Shell Weight,200.53,lbs
+Reinforcement Weight,10.03,lbs
+Finish Weight,3.00,lbs
+Total Canoe Weight,213.56,lbs
+Crew Weight,700,lbs
+Loaded Weight,913.56,lbs
+Displacement Volume,14.6403,ft3
+Waterplane Area,35.1000,ft2
+Draft,5.01,in
+Freeboard,12.99,in
+KB,2.50,in
+BM,21.58,in
+KG,8.10,in
+GM,15.98,in
+Max Bending Moment,2055.50,lb-ft
+Section Modulus,1837.50,in3
+Bending Stress,13.42,psi
+Safety Factor,111.7429,
+Shell Volume,3.3421,ft3
+Batches Needed,7,
+Mesh Area,92.24,ft2
+Mold Size (L×W),19.0 × 4.0,ft
+Est. Total Cost,800.07,$
+Freeboard Pass,True,
+GM Pass,True,
+SF Pass,True,
+Overall Pass,True,

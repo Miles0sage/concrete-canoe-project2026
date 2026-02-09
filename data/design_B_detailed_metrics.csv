@@ -1,0 +1,35 @@
+Metric,Value,Unit
+Design Name,Design B,
+Design Tag,Conservative (Safety Margin),
+Length,196,in
+Beam,34,in
+Depth,18,in
+Thickness,0.5,in
+Concrete Density,60.0,PCF
+Shell Weight,176.62,lbs
+Reinforcement Weight,8.83,lbs
+Finish Weight,3.00,lbs
+Total Canoe Weight,188.45,lbs
+Crew Weight,700,lbs
+Loaded Weight,888.45,lbs
+Displacement Volume,14.2379,ft3
+Waterplane Area,30.0806,ft2
+Draft,5.68,in
+Freeboard,12.32,in
+KB,2.84,in
+BM,16.96,in
+KG,8.10,in
+GM,11.70,in
+Max Bending Moment,1813.91,lb-ft
+Section Modulus,1735.42,in3
+Bending Stress,12.54,psi
+Safety Factor,119.5907,
+Shell Volume,2.9436,ft3
+Batches Needed,6,
+Mesh Area,81.24,ft2
+Mold Size (L×W),17.3 × 3.8,ft
+Est. Total Cost,762.95,$
+Freeboard Pass,True,
+GM Pass,True,
+SF Pass,True,
+Overall Pass,True,
