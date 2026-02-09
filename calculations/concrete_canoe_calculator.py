@@ -489,6 +489,45 @@ def run_complete_analysis(
     }
 
 
+def print_design_summary(results: Dict[str, Any], design_name: str = "Canoe") -> None:
+    """Generate formatted design summary for competition reports."""
+    W = 60
+    print(f"\n{'=' * W}")
+    print(f"  {design_name} Design Summary")
+    print(f"{'=' * W}")
+
+    hull = results['hull']
+    print(f"\n  Geometry:")
+    print(f"    Length:  {hull['length_in']/12:.1f} ft ({hull['length_in']:.0f} in)")
+    print(f"    Beam:    {hull['beam_in']:.1f} in")
+    print(f"    Depth:   {hull['depth_in']:.1f} in")
+    print(f"    Weight:  {hull['weight_lbs']:.0f} lbs")
+
+    fb = results['freeboard']
+    print(f"\n  Hydrostatics:")
+    print(f"    Draft:        {fb['draft_in']:.2f} in")
+    print(f"    Freeboard:    {fb['freeboard_in']:.2f} in  "
+          f"{'PASS' if fb['pass'] else 'FAIL'} (>= {fb['min_required_in']:.0f}\")")
+    print(f"    Displacement: {fb['displacement_ft3']:.2f} ft3")
+
+    stab = results['stability']
+    print(f"\n  Stability:")
+    print(f"    GM: {stab['gm_in']:.2f} in  "
+          f"{'PASS' if stab['pass'] else 'FAIL'} (>= {stab['min_required_in']:.0f}\")")
+
+    struct = results['structural']
+    print(f"\n  Structural:")
+    print(f"    Section modulus: {struct['section_modulus_in3']:.1f} in3")
+    print(f"    Max moment:      {struct['max_bending_moment_lb_ft']:.1f} lb-ft")
+    print(f"    Bending stress:  {struct['bending_stress_psi']:.0f} psi")
+    print(f"    Safety factor:   {struct['safety_factor']:.2f}  "
+          f"{'PASS' if struct['pass'] else 'FAIL'} (>= {struct['min_sf']:.1f})")
+
+    print(f"\n{'=' * W}")
+    print(f"  Overall: {'PASS' if results['overall_pass'] else 'FAIL'}")
+    print(f"{'=' * W}\n")
+
+
 def main() -> None:
     """CLI entry - run analysis for default Canoe 1."""
     print("=" * 60)
@@ -505,27 +544,11 @@ def main() -> None:
         flexural_strength_psi=1500,
         concrete_density_pcf=70.0,
     )
-
-    print("\n--- Canoe 1: 18' × 30\" × 18\", 276 lbs (+ 700 crew) ---")
-    print(f"Freeboard:      {results['freeboard']['freeboard_in']:.2f} in"
-          f"  (min {results['freeboard']['min_required_in']:.0f} in)"
-          f"  {'PASS' if results['freeboard']['pass'] else 'FAIL'}")
-    print(f"Draft:          {results['freeboard']['draft_in']:.2f} in")
-    print(f"Displacement:   {results['freeboard']['displacement_ft3']:.2f} ft³")
-    print(f"Metacentric GM: {results['stability']['gm_in']:.2f} in"
-          f"  (min {results['stability']['min_required_in']:.0f} in)"
-          f"  {'PASS' if results['stability']['pass'] else 'FAIL'}")
-    print(f"Section Mod Sx: {results['structural']['section_modulus_in3']:.1f} in³")
-    print(f"Max BM:         {results['structural']['max_bending_moment_lb_ft']:.1f} lb-ft")
-    print(f"Bending stress: {results['structural']['bending_stress_psi']:.1f} psi")
-    print(f"Safety factor:  {results['structural']['safety_factor']:.2f}"
-          f"  (min {results['structural']['min_sf']:.1f})"
-          f"  {'PASS' if results['structural']['pass'] else 'FAIL'}")
-    print(f"\nOverall: {'PASS' if results['overall_pass'] else 'FAIL'}")
+    print_design_summary(results, "NAU Canoe 1 (18' x 30\" x 18\")")
 
     # Weight verification
     est_w = estimate_hull_weight(216, 30, 18, 0.5, 70.0)
-    print(f"\nWeight check: provided=276 lbs, estimated={est_w:.0f} lbs")
+    print(f"  Weight check: provided=276 lbs, estimated={est_w:.0f} lbs")
     print("=" * 60)
 
 
