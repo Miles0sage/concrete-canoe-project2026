@@ -56,6 +56,7 @@
             <a href="#part9" class="nav-link px-2 py-1 rounded">9: Verdict</a>
             <a href="#part3d" class="nav-link px-2 py-1 rounded bg-indigo-800">3D Viz</a>
             <a href="#partHowBuilt" class="nav-link px-2 py-1 rounded bg-purple-800">How We Built</a>
+            <a href="#partStressTest" class="nav-link px-2 py-1 rounded bg-red-800">AI vs Code</a>
             <a href="hand-calcs.html" class="nav-link px-2 py-1 rounded bg-amber-700 font-bold">Hand Calcs &rarr;</a>
         </div>
     </div>
@@ -996,6 +997,162 @@ streamlit run app.py</div>
         <p><strong>AI Tools:</strong> Claude (Anthropic) &mdash; calculator, scripts, 3D viz, website | Gemini (Google) &mdash; initial HTML teaching content</p>
         <p><strong>Repository:</strong> <a href="https://github.com/Miles0sage/concrete-canoe-project2026" class="text-blue-600 underline">github.com/Miles0sage/concrete-canoe-project2026</a></p>
         <p><strong>Format:</strong> Digital calculations per ASCE 2026 RFP Section 5.5.16</p>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- AI vs CODE: STRESS TEST RESULTS                               -->
+<!-- ============================================================ -->
+<div id="partStressTest" class="section-anchor p-10 md:p-20 border-t-4 border-red-600">
+    <h2 class="text-3xl font-bold text-gray-900 mb-6 border-l-8 border-red-600 pl-4 sans">AI vs. Code &mdash; Why We Don't Let LLMs Do the Math</h2>
+
+    <p class="academic-p">We ran a controlled experiment: give three open-source LLMs (Qwen) the <strong>exact same 6 engineering problems</strong> our Python calculator solves, with all formulas provided, and grade their answers against the verified outputs of <code>concrete_canoe_calculator.py v2.1</code>.</p>
+
+    <div class="bg-red-50 border border-red-200 rounded-lg p-6 mb-8">
+        <h3 class="font-bold text-red-900 sans text-lg mb-3">Test Protocol</h3>
+        <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li><strong>Models tested:</strong> Qwen 3 (14B), Qwen 2.5 (32B), Qwen 2.5-Coder (32B) &mdash; all running locally via Ollama</li>
+            <li><strong>Temperature:</strong> 0.0 (deterministic &mdash; best-case for accuracy)</li>
+            <li><strong>Prompts:</strong> Each model received the formula, all input values, and step-by-step instructions</li>
+            <li><strong>Grading:</strong> Answer must be within stated tolerance of verified value to pass</li>
+            <li><strong>Baseline:</strong> <code>concrete_canoe_calculator.py v2.1</code> &mdash; 6/6 correct, every run, in &lt; 0.001 seconds</li>
+        </ul>
+    </div>
+
+    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4 sans">Results: Scorecard</h3>
+
+    <table class="w-full text-sm border border-gray-300 mb-6">
+        <thead><tr class="bg-gray-800 text-white">
+            <th class="p-2 text-left">Test</th>
+            <th class="p-2 text-center">Verified Answer</th>
+            <th class="p-2 text-center">Qwen 3<br><span class="font-normal text-gray-300">14B</span></th>
+            <th class="p-2 text-center">Qwen 2.5<br><span class="font-normal text-gray-300">32B</span></th>
+            <th class="p-2 text-center">Qwen 2.5-Coder<br><span class="font-normal text-gray-300">32B</span></th>
+            <th class="p-2 text-center">Python<br><span class="font-normal text-gray-300">Calculator</span></th>
+        </tr></thead>
+        <tbody>
+            <tr class="calc-row">
+                <td class="font-bold">Q1: Hull Weight</td>
+                <td class="text-center">245.0 lbs</td>
+                <td class="text-center text-red-700 font-bold">216.0 <span class="text-xs">&mdash; FAIL</span></td>
+                <td class="text-center text-green-700">244.95</td>
+                <td class="text-center text-green-700">244.03</td>
+                <td class="text-center text-green-700 font-bold">245.0</td>
+            </tr>
+            <tr class="calc-row">
+                <td class="font-bold">Q2: Neutral Axis</td>
+                <td class="text-center">4.779"</td>
+                <td class="text-center text-red-700 font-bold">4.000 <span class="text-xs">&mdash; FAIL</span></td>
+                <td class="text-center text-red-700 font-bold">6.094 <span class="text-xs">&mdash; FAIL</span></td>
+                <td class="text-center text-red-700 font-bold">8.063 <span class="text-xs">&mdash; FAIL</span></td>
+                <td class="text-center text-green-700 font-bold">4.779</td>
+            </tr>
+            <tr class="calc-row">
+                <td class="font-bold">Q3: Moment of Inertia</td>
+                <td class="text-center">1,713 in&sup4;</td>
+                <td class="text-center text-red-700 font-bold">524.9 <span class="text-xs">&mdash; FAIL</span></td>
+                <td class="text-center text-green-700">1,712.9</td>
+                <td class="text-center text-green-700">1,715.7</td>
+                <td class="text-center text-green-700 font-bold">1,713</td>
+            </tr>
+            <tr class="calc-row">
+                <td class="font-bold">Q4: Draft</td>
+                <td class="text-center">4.81"</td>
+                <td class="text-center text-red-700 font-bold">5.00 <span class="text-xs">&mdash; FAIL</span></td>
+                <td class="text-center text-green-700">4.802</td>
+                <td class="text-center text-green-700">4.80</td>
+                <td class="text-center text-green-700 font-bold">4.81</td>
+            </tr>
+            <tr class="calc-row">
+                <td class="font-bold">Q5: Metacentric Height</td>
+                <td class="text-center">15.69"</td>
+                <td class="text-center text-red-700 font-bold">15.14 <span class="text-xs">&mdash; FAIL</span></td>
+                <td class="text-center text-green-700">15.689</td>
+                <td class="text-center text-green-700">15.69</td>
+                <td class="text-center text-green-700 font-bold">15.69</td>
+            </tr>
+            <tr class="calc-row">
+                <td class="font-bold">Q6: ACI 318 DCR</td>
+                <td class="text-center">0.196</td>
+                <td class="text-center text-green-700">0.200</td>
+                <td class="text-center text-green-700">0.197</td>
+                <td class="text-center text-green-700">0.194</td>
+                <td class="text-center text-green-700 font-bold">0.196</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr class="bg-gray-100 font-bold text-lg">
+                <td class="p-3">TOTAL CORRECT</td>
+                <td class="text-center">&mdash;</td>
+                <td class="text-center text-red-700">1 / 6</td>
+                <td class="text-center text-yellow-700">5 / 6</td>
+                <td class="text-center text-yellow-700">5 / 6</td>
+                <td class="text-center text-green-700">6 / 6</td>
+            </tr>
+            <tr class="bg-gray-100 text-sm">
+                <td class="p-3">Time per question</td>
+                <td class="text-center">&mdash;</td>
+                <td class="text-center">~14 sec</td>
+                <td class="text-center">~60-90 sec</td>
+                <td class="text-center">~65-120 sec</td>
+                <td class="text-center font-bold text-green-700">&lt; 0.001 sec</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4 sans">Analysis: Where LLMs Fail</h3>
+
+    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 my-6">
+        <h4 class="font-bold text-yellow-900 sans mb-3">Q2 (Neutral Axis): ALL THREE MODELS FAILED</h4>
+        <p class="text-sm mb-2">The composite centroid formula $\bar{y} = \frac{\sum A_i y_i}{\sum A_i}$ requires tracking 3 areas, 3 centroids, and combining them correctly. Every model got a different wrong answer:</p>
+        <table class="w-full text-sm mt-3">
+            <tr class="calc-row"><td class="font-bold">Qwen 3 (14B)</td><td>4.000" (rounded/truncated mid-calculation)</td></tr>
+            <tr class="calc-row"><td class="font-bold">Qwen 2.5 (32B)</td><td>6.094" (used wrong centroid formula)</td></tr>
+            <tr class="calc-row"><td class="font-bold">Qwen 2.5-Coder (32B)</td><td>8.063" (swapped component weights)</td></tr>
+            <tr class="calc-row bg-green-50"><td class="font-bold">Python calculator</td><td>4.779" (correct, verified by hand calc)</td></tr>
+        </table>
+        <p class="text-sm mt-3"><strong>Why it matters:</strong> If the neutral axis is wrong, the moment of inertia is wrong, the section modulus is wrong, and every stress check is wrong. One bad intermediate value cascades through the entire analysis. This is exactly the kind of error a Python function catches by construction.</p>
+    </div>
+
+    <div class="bg-gray-50 border rounded-lg p-6 my-6">
+        <h4 class="font-bold sans mb-3">Qwen 3 (14B): Special Failure Mode</h4>
+        <p class="text-sm mb-2">Qwen 3 has a "thinking mode" that uses tokens for internal reasoning before generating output. With a 1,024-token limit, the model spent all its tokens <em>thinking</em> and ran out before it could finish the arithmetic. It scored <strong>1/6</strong> &mdash; worse than the older, non-thinking models.</p>
+        <p class="text-sm"><strong>Lesson:</strong> More sophisticated reasoning architecture does not automatically mean more accurate computation. A 662-line Python file outperforms a 14-billion-parameter neural network at arithmetic.</p>
+    </div>
+
+    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4 sans">The Verdict: Use the Right Tool for the Job</h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-green-50 border-2 border-green-300 rounded-lg p-6">
+            <h4 class="font-bold text-green-900 sans text-lg mb-3 text-center">LLMs Are Great For</h4>
+            <ul class="list-disc pl-6 space-y-2 text-sm">
+                <li><strong>Writing the calculator code</strong> (Claude built v2.1)</li>
+                <li><strong>Generating documentation</strong> (this website)</li>
+                <li><strong>Creating 3D visualizations</strong> (parametric hull scripts)</li>
+                <li><strong>Explaining engineering concepts</strong> (teaching report)</li>
+                <li><strong>Finding bugs in existing code</strong> (caught 6 critical errors)</li>
+                <li><strong>Building interactive dashboards</strong> (Streamlit app)</li>
+            </ul>
+        </div>
+        <div class="bg-red-50 border-2 border-red-300 rounded-lg p-6">
+            <h4 class="font-bold text-red-900 sans text-lg mb-3 text-center">LLMs Should NOT Do</h4>
+            <ul class="list-disc pl-6 space-y-2 text-sm">
+                <li><strong>Multi-step arithmetic</strong> (failed neutral axis 3/3 times)</li>
+                <li><strong>Chained engineering calculations</strong> (one error cascades)</li>
+                <li><strong>Final design verification</strong> (83% is not acceptable)</li>
+                <li><strong>Anything where wrong = dangerous</strong> (structural adequacy)</li>
+                <li><strong>Replacing validated, tested code</strong> (code is 100%, always)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="bg-blue-50 border-2 border-blue-300 rounded-lg p-6 text-center">
+        <p class="text-lg font-bold text-blue-900 sans mb-2">Our Approach: AI Writes the Code. Code Does the Math.</p>
+        <p class="text-sm text-blue-700">Claude and Gemini built the tools, documentation, and visualizations. <code>concrete_canoe_calculator.py v2.1</code> runs the numbers &mdash; 6/6 correct, every time, in under a millisecond. That's the paradigm shift.</p>
+    </div>
+
+    <div class="bg-gray-50 border rounded p-4 mt-6 text-xs text-gray-500">
+        <strong>Test conditions:</strong> Ollama v0.15.5 &bull; Models: qwen3:14b, qwen2.5:32b, qwen2.5-coder:32b &bull; Temperature: 0.0 &bull; All formulas and input values provided in prompt &bull; Tolerance: Q1 &plusmn;2 lbs, Q2 &plusmn;0.05", Q3 &plusmn;5 in&sup4;, Q4 &plusmn;0.1", Q5 &plusmn;0.5", Q6 &plusmn;0.01 &bull; Test date: February 2026
     </div>
 </div>
 
