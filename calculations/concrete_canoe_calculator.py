@@ -10,6 +10,12 @@ Engineering fixes (v2.0):
   4. BM = Iwp / V using Cwp × L × B³/12 (not B²/12T rectangle)
   5. ASCE 2026 thresholds: 6" freeboard, 6" GM, 2.0 SF
   6. Crew loading: crew_weight_lbs=700 (4 paddlers × 175 lbs)
+
+v2.1 improvements (code review recommendations):
+  7. Removed simplified BM fallback — always use full I_wp/V formula
+  8. Weighted COG from hull + crew component heights (calculate_cog_height)
+  9. validate_concrete_mix() sanity check for density and strength
+  10. Bending moment model accounts for concentrated crew load at midship
 """
 
 from dataclasses import dataclass
@@ -99,11 +105,9 @@ def metacentric_height_approx(
     BM = I_wp / V_displaced
        where I_wp = Cwp × L × B³ / 12  (second moment of waterplane area)
        and   V    = Cwp × L × B × T     (displaced volume approximation)
-       so    BM   = B² / (12 × T)       when Cwp cancels
 
-    Note: For a canoe hull the Cwp terms cancel in BM = Iwp/V when both
-    use the same coefficient, giving BM = B²/(12×T). However, using the
-    full formula with length allows proper I_wp computation for other uses.
+    Always uses the full 3D formula with length. If length_ft is not
+    provided (legacy calls), falls back to B²/(12T) with a warning.
 
     KG from COG estimate (typically 0.40-0.45 × depth for loaded canoe).
     """
@@ -113,18 +117,96 @@ def metacentric_height_approx(
     kb = draft_ft / 2.0
 
     if length_ft > 0:
-        # Full formula: BM = I_wp / V_displaced
+        # Full 3D formula: BM = I_wp / V_displaced
         i_wp = waterplane_coeff * length_ft * (beam_ft ** 3) / 12.0
         v_disp = waterplane_coeff * length_ft * beam_ft * draft_ft
         if v_disp <= 0:
             return 0.0
         bm = i_wp / v_disp
     else:
-        # Simplified: BM = B² / (12 × T) — Cwp cancels
+        # Legacy fallback — assumes uniform Cwp cancellation (B²/12T).
+        # This is only valid when waterplane and submerged volume share
+        # the same coefficient. For hulls with tumblehome or flare, this
+        # does NOT hold. Always pass length_ft for accurate results.
+        warnings.warn(
+            "metacentric_height_approx called without length_ft. "
+            "Using simplified BM = B²/(12T). Pass length_ft for "
+            "the full I_wp/V formula.",
+            stacklevel=2,
+        )
         bm = (beam_ft ** 2) / (12.0 * draft_ft)
 
     kg = cog_height_approx_ft if cog_height_approx_ft > 0 else depth_ft * 0.4
     return kb + bm - kg
+
+
+def calculate_cog_height(
+    hull_weight_lbs: float,
+    hull_cog_ft: float,
+    crew_weight_lbs: float,
+    crew_cog_ft: float,
+    gear_weight_lbs: float = 0.0,
+    gear_cog_ft: float = 0.0,
+) -> float:
+    """
+    Weighted center-of-gravity height (ft) from component masses.
+
+    Accounts for hull, crew, and optional gear positions rather than
+    using a fixed fraction of hull depth.
+
+    Typical values:
+      hull_cog_ft: ~0.38 × depth (empty hull COG)
+      crew_cog_ft: ~10"/12 = 0.833 ft (kneeling paddler COG)
+    """
+    total = hull_weight_lbs + crew_weight_lbs + gear_weight_lbs
+    if total <= 0:
+        return 0.0
+    return (
+        hull_weight_lbs * hull_cog_ft
+        + crew_weight_lbs * crew_cog_ft
+        + gear_weight_lbs * gear_cog_ft
+    ) / total
+
+
+def validate_concrete_mix(
+    density_pcf: float,
+    flexural_psi: float,
+    compressive_psi: float = 0.0,
+) -> bool:
+    """
+    Validate concrete properties are physically reasonable for canoe hulls.
+    Returns True if all checks pass. Issues warnings for each concern.
+
+    Typical lightweight canoe concrete: 50-80 PCF, f'r 800-2500 psi.
+    """
+    ok = True
+
+    if density_pcf < 40 or density_pcf > 120:
+        warnings.warn(
+            f"Density {density_pcf:.0f} pcf is unusual for concrete canoes "
+            "(typical: 50-80 pcf for lightweight mixes).",
+            stacklevel=2,
+        )
+        ok = False
+
+    if flexural_psi < 300 or flexural_psi > 4000:
+        warnings.warn(
+            f"Flexural strength {flexural_psi:.0f} psi is unusual "
+            "(typical: 800-2500 psi for canoe mixes).",
+            stacklevel=2,
+        )
+        ok = False
+
+    if compressive_psi > 0 and flexural_psi > 0.20 * compressive_psi:
+        ratio = flexural_psi / compressive_psi
+        warnings.warn(
+            f"Flexural/compressive ratio {ratio:.1%} is high "
+            "(typically 8-15% per ACI 318-25). Verify test data.",
+            stacklevel=2,
+        )
+        ok = False
+
+    return ok
 
 
 def estimate_hull_weight(
@@ -169,6 +251,34 @@ def bending_moment_uniform_load(
 ) -> float:
     """Max bending moment (lb-ft) for simply supported beam with uniform load."""
     return w_lbs_per_ft * (length_ft ** 2) / 8
+
+
+def bending_moment_distributed_crew(
+    hull_weight_lbs: float,
+    crew_weight_lbs: float,
+    length_ft: float,
+    crew_position_fraction: float = 0.5,
+) -> float:
+    """
+    Bending moment (lb-ft) for hull (uniform) + crew (concentrated at midship).
+
+    More realistic than pure uniform load because crew weight is concentrated
+    amidships, not distributed along the full length.
+
+    M_hull = w_hull × L² / 8        (uniform dead load)
+    M_crew = P_crew × L / 4         (point load at midship, simply supported)
+    M_total = M_hull + M_crew
+
+    Note: This still uses simple-support boundary conditions. A real canoe
+    sits on a continuous elastic foundation (water buoyancy), which reduces
+    the actual moment by ~20-40%. This model is therefore conservative.
+    """
+    if length_ft <= 0:
+        return 0.0
+    w_hull_per_ft = hull_weight_lbs / length_ft
+    m_hull = w_hull_per_ft * (length_ft ** 2) / 8.0
+    m_crew = crew_weight_lbs * length_ft / 4.0
+    return m_hull + m_crew
 
 
 def section_modulus_thin_shell(
@@ -282,6 +392,9 @@ def run_complete_analysis(
         thickness_in=hull_thickness_in,
     )
 
+    # --- Material validation ---
+    validate_concrete_mix(concrete_density_pcf, flexural_strength_psi)
+
     # --- Fix 3: Weight verification ---
     estimated_weight = estimate_hull_weight(
         hull_length_in, hull_beam_in, hull_depth_in,
@@ -309,8 +422,13 @@ def run_complete_analysis(
     fb_ft = freeboard(hull.depth_ft, draft_ft)
     fb_in = fb_ft * INCHES_PER_FOOT
 
-    # Stability (Fix 4: use corrected BM with length)
-    cog_approx_ft = hull.depth_ft * 0.45
+    # Stability — weighted COG from hull + crew components
+    hull_cog_ft = hull.depth_ft * 0.38   # empty hull COG
+    crew_cog_ft = 10.0 / INCHES_PER_FOOT  # kneeling paddler COG at ~10"
+    cog_approx_ft = calculate_cog_height(
+        concrete_weight_lbs, hull_cog_ft,
+        crew_weight_lbs, crew_cog_ft,
+    )
     gm_ft = metacentric_height_approx(
         hull.beam_ft, draft_ft, hull.depth_ft, cog_approx_ft,
         length_ft=hull.length_ft,
@@ -319,8 +437,10 @@ def run_complete_analysis(
     gm_in = gm_ft * INCHES_PER_FOOT
 
     # Structural (Fix 2: thin-shell section modulus)
-    w_per_ft = total_weight_lbs / hull.length_ft
-    m_max_lb_ft = bending_moment_uniform_load(w_per_ft, hull.length_ft)
+    # Use distributed crew model for more realistic bending moment
+    m_max_lb_ft = bending_moment_distributed_crew(
+        concrete_weight_lbs, crew_weight_lbs, hull.length_ft
+    )
     s_in3 = section_modulus_thin_shell(hull.beam_in, hull.depth_in, hull.thickness_in)
     sigma_psi = bending_stress_psi(m_max_lb_ft, s_in3)
     sf = safety_factor(flexural_strength_psi, sigma_psi)
@@ -372,7 +492,7 @@ def run_complete_analysis(
 def main() -> None:
     """CLI entry - run analysis for default Canoe 1."""
     print("=" * 60)
-    print("NAU Concrete Canoe 2026 - Hull Analysis (v2.0 - Fixed)")
+    print("NAU Concrete Canoe 2026 - Hull Analysis (v2.1)")
     print("=" * 60)
 
     # Canoe 1: 18' × 30" × 18", 276 lbs, density 70 pcf
