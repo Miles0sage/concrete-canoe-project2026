@@ -58,6 +58,7 @@
             <a href="#partHowBuilt" class="nav-link px-2 py-1 rounded bg-purple-800">How We Built</a>
             <a href="#partStressTest" class="nav-link px-2 py-1 rounded bg-red-800">AI vs Code</a>
             <a href="#partCost" class="nav-link px-2 py-1 rounded bg-emerald-800">Cost &amp; Credit</a>
+            <a href="#partVideo" class="nav-link px-2 py-1 rounded bg-rose-800">Video</a>
             <a href="hand-calcs.html" class="nav-link px-2 py-1 rounded bg-amber-700 font-bold">Hand Calcs &rarr;</a>
             <a href="construction.html" class="nav-link px-2 py-1 rounded bg-orange-700 font-bold">Build Guide &rarr;</a>
         </div>
@@ -1344,6 +1345,92 @@ streamlit run app.py</div>
         <p>python3 scripts/generate_3d_visualizations.py</p>
         <p class="mt-2 text-green-700"># Launch interactive dashboard</p>
         <p>cd dashboard && pip install -r requirements.txt && streamlit run app.py</p>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- ENGINEERING VIDEO WALKTHROUGH                                 -->
+<!-- ============================================================ -->
+<div id="partVideo" class="section-anchor border-t-4 border-rose-500 p-10 md:p-16">
+    <h2 class="text-3xl font-bold text-rose-800 sans mb-2">Engineering Analysis Video</h2>
+    <p class="text-gray-500 sans mb-6">2-Minute Animated Walkthrough &mdash; Every Calculation Step-by-Step</p>
+
+    <p class="academic-p">This programmatic video was generated using <strong>Remotion</strong> (React-based video engine) with custom SVG engineering diagrams, animated formula reveals, and spring-physics transitions. Every number in the video matches the Python calculator output exactly. Built with the <a href="https://github.com/digitalsamba/claude-code-video-toolkit" class="text-blue-600 underline">Claude Code Video Toolkit</a>.</p>
+
+    <div class="bg-gray-900 rounded-xl overflow-hidden shadow-2xl mb-6">
+        <video controls preload="metadata" class="w-full" poster="" style="max-height: 600px; margin: 0 auto; display: block;">
+            <source src="nau-canoe-engineering-1080p.mp4" type="video/mp4">
+            <source src="nau-canoe-engineering.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-rose-50 border border-rose-200 rounded-lg p-4 text-center">
+            <p class="text-2xl font-bold text-rose-800 sans">13 Scenes</p>
+            <p class="text-sm text-rose-600">Title &rarr; Challenge &rarr; 7 Calculation Steps &rarr; Results &rarr; AI Benchmark &rarr; CTA</p>
+        </div>
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
+            <p class="text-2xl font-bold text-blue-800 sans">7 ACI Checks</p>
+            <p class="text-sm text-blue-600">Hull Weight &bull; Section Props &bull; Hydrostatics &bull; Stability &bull; Loads &bull; LRFD &bull; Punching</p>
+        </div>
+        <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+            <p class="text-2xl font-bold text-green-800 sans">4 SVG Diagrams</p>
+            <p class="text-sm text-green-600">Cross-Section &bull; Hydrostatics &bull; Free Body Diagram &bull; Punching Shear</p>
+        </div>
+    </div>
+
+    <h3 class="text-xl font-bold text-gray-800 sans mt-8 mb-4">Scene-by-Scene Breakdown</h3>
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+            <thead>
+                <tr class="bg-gray-800 text-white text-xs uppercase">
+                    <th class="px-3 py-2 text-left">#</th>
+                    <th class="px-3 py-2 text-left">Scene</th>
+                    <th class="px-3 py-2 text-left">Duration</th>
+                    <th class="px-3 py-2 text-left">Engineering Content</th>
+                    <th class="px-3 py-2 text-left">Code Reference</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-b"><td class="px-3 py-2 font-bold">1</td><td class="px-3 py-2">Title</td><td class="px-3 py-2">7s</td><td class="px-3 py-2">NAU Concrete Canoe 2026 &mdash; ACI 318-25 LRFD</td><td class="px-3 py-2 font-mono text-xs">&mdash;</td></tr>
+                <tr class="border-b bg-gray-50"><td class="px-3 py-2 font-bold">2</td><td class="px-3 py-2">Challenge</td><td class="px-3 py-2">10s</td><td class="px-3 py-2">ACI, ASCE, Naval Arch requirements + Design C parameters</td><td class="px-3 py-2 font-mono text-xs">calculator.py L1-20</td></tr>
+                <tr class="border-b"><td class="px-3 py-2 font-bold">3</td><td class="px-3 py-2">Approach</td><td class="px-3 py-2">8s</td><td class="px-3 py-2">Python + AI = Verified Engineering (662 lines, 13 values)</td><td class="px-3 py-2 font-mono text-xs">&mdash;</td></tr>
+                <tr class="border-b bg-gray-50"><td class="px-3 py-2 font-bold text-amber-700">4</td><td class="px-3 py-2 font-bold">Hull Weight</td><td class="px-3 py-2">12s</td><td class="px-3 py-2">U-shell method: G &times; L &times; Cp &times; t &times; &rho; = <strong>245 lbs</strong></td><td class="px-3 py-2 font-mono text-xs">L212-245</td></tr>
+                <tr class="border-b"><td class="px-3 py-2 font-bold text-amber-700">5</td><td class="px-3 py-2 font-bold">Section Props</td><td class="px-3 py-2">14s</td><td class="px-3 py-2">Parallel axis theorem: I<sub>x</sub> = &Sigma;(I<sub>c</sub> + Ad&sup2;) = <strong>1,713 in&sup4;</strong></td><td class="px-3 py-2 font-mono text-xs">L284-338</td></tr>
+                <tr class="border-b bg-gray-50"><td class="px-3 py-2 font-bold text-blue-700">6</td><td class="px-3 py-2 font-bold">Hydrostatics</td><td class="px-3 py-2">12s</td><td class="px-3 py-2">Draft = 4.81", Freeboard = 13.19" (&ge;6" &check;)</td><td class="px-3 py-2 font-mono text-xs">L366-420</td></tr>
+                <tr class="border-b"><td class="px-3 py-2 font-bold text-blue-700">7</td><td class="px-3 py-2 font-bold">Stability</td><td class="px-3 py-2">12s</td><td class="px-3 py-2">Bouguer: GM = KB + BM &minus; KG = <strong>15.69"</strong> (&gt;0 &check;)</td><td class="px-3 py-2 font-mono text-xs">L92-140</td></tr>
+                <tr class="border-b bg-gray-50"><td class="px-3 py-2 font-bold text-red-700">8</td><td class="px-3 py-2 font-bold">Load Cases</td><td class="px-3 py-2">12s</td><td class="px-3 py-2">M<sub>u</sub> = 1.2D + 1.6L = <strong>5,702 lb-ft</strong> (ACI 5.3.1b)</td><td class="px-3 py-2 font-mono text-xs">L420-489</td></tr>
+                <tr class="border-b"><td class="px-3 py-2 font-bold text-green-700">9</td><td class="px-3 py-2 font-bold">LRFD Check</td><td class="px-3 py-2">12s</td><td class="px-3 py-2">DCR = M<sub>u</sub> / &phi;M<sub>n</sub> = <strong>0.196</strong> (ACI 14.5 + 21.2.1)</td><td class="px-3 py-2 font-mono text-xs">L440-470</td></tr>
+                <tr class="border-b bg-gray-50"><td class="px-3 py-2 font-bold text-green-700">10</td><td class="px-3 py-2 font-bold">Punching Shear</td><td class="px-3 py-2">12s</td><td class="px-3 py-2">DCR = V<sub>u</sub> / &phi;V<sub>c</sub> = <strong>0.189</strong> (ACI 22.6.5.2)</td><td class="px-3 py-2 font-mono text-xs">L470-489</td></tr>
+                <tr class="border-b"><td class="px-3 py-2 font-bold">11</td><td class="px-3 py-2">Results</td><td class="px-3 py-2">10s</td><td class="px-3 py-2">4 animated stat cards: 245 lbs, 1713 in&sup4;, 0.196 DCR, 0.189 DCR</td><td class="px-3 py-2 font-mono text-xs">&mdash;</td></tr>
+                <tr class="border-b bg-gray-50"><td class="px-3 py-2 font-bold">12</td><td class="px-3 py-2">AI Benchmark</td><td class="px-3 py-2">8s</td><td class="px-3 py-2">Python 6/6, Qwen2.5:32B 5/6, Qwen3:14B 1/6</td><td class="px-3 py-2 font-mono text-xs">stress_test.py</td></tr>
+                <tr><td class="px-3 py-2 font-bold">13</td><td class="px-3 py-2">CTA</td><td class="px-3 py-2">8s</td><td class="px-3 py-2">Open source &mdash; $0 vs $15K/year commercial</td><td class="px-3 py-2 font-mono text-xs">&mdash;</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="bg-rose-50 border-2 border-rose-300 rounded-lg p-6 mt-8">
+        <h4 class="font-bold text-rose-900 sans text-lg mb-2">How This Video Was Made</h4>
+        <p class="text-sm text-rose-800 mb-3">This video was generated <strong>programmatically</strong> using code &mdash; no screen recording, no After Effects, no manual editing. Each frame is a React component rendered by Remotion.</p>
+        <div class="grid md:grid-cols-4 gap-3 text-xs">
+            <div class="bg-white rounded p-3 text-center">
+                <p class="font-bold text-rose-700 sans">Remotion</p>
+                <p class="text-gray-600">React &rarr; MP4 video engine</p>
+            </div>
+            <div class="bg-white rounded p-3 text-center">
+                <p class="font-bold text-rose-700 sans">Custom SVGs</p>
+                <p class="text-gray-600">Animated engineering diagrams</p>
+            </div>
+            <div class="bg-white rounded p-3 text-center">
+                <p class="font-bold text-rose-700 sans">Spring Physics</p>
+                <p class="text-gray-600">Smooth formula animations</p>
+            </div>
+            <div class="bg-white rounded p-3 text-center">
+                <p class="font-bold text-rose-700 sans">FFmpeg</p>
+                <p class="text-gray-600">H.264 encoding @ 30fps</p>
+            </div>
+        </div>
     </div>
 </div>
 
