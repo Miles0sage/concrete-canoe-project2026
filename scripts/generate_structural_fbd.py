@@ -176,8 +176,8 @@ def generate_figure1():
     # TOP PANEL: FREE BODY DIAGRAM
     # ===================================================================
     ax1 = axes[0]
-    ax1.set_xlim(-0.5, L_ft + 0.5)
-    ax1.set_ylim(-3.5, 5.0)
+    ax1.set_xlim(-1.0, L_ft + 3.5)
+    ax1.set_ylim(-4.0, 5.5)
     ax1.set_aspect('auto')
     ax1.set_ylabel('', fontsize=10)
     ax1.set_title('Free Body Diagram', fontsize=13, fontweight='bold',
@@ -240,11 +240,10 @@ def generate_figure1():
                                          lw=1.2, mutation_scale=10),
                          zorder=4)
 
-    # Buoyancy label
-    mid_b, _ = buoyancy_distribution(np.array([L_ft / 2]), L_ft, W_total)
-    ax1.text(L_ft / 2, buoy_base_y - 0.35,
-             f'Buoyancy (sinusoidal dist.)\nb$_{{max}}$ = {b_max:.1f} lb/ft',
-             fontsize=9, ha='center', va='top', color=BLUE,
+    # Buoyancy label - placed to the left to avoid overlap with dimension line
+    ax1.text(L_ft * 0.15, buoy_base_y + 0.5,
+             f'Buoyancy (sinusoidal)\nb$_{{max}}$ = {b_max:.1f} lb/ft\n({W_total:.0f} lb total)',
+             fontsize=8, ha='center', va='center', color=BLUE,
              fontweight='bold',
              bbox=dict(boxstyle='round,pad=0.3', facecolor='white',
                        edgecolor=BLUE, alpha=0.9))
@@ -268,10 +267,10 @@ def generate_figure1():
     hw_line_y = hull_top + hull_w_arrow_len + 0.05
     ax1.plot(x_hull, hw_line_y, color=RED, linewidth=1.5, zorder=6)
 
-    # Hull weight label
-    ax1.text(L_ft * 0.82, hull_top[int(0.82 * len(hull_top))] + hull_w_arrow_len + 0.5,
-             f'w$_{{hull}}$ = {w_hull_per_ft:.1f} lb/ft\n({W_hull} lb total)',
-             fontsize=9, ha='center', va='bottom', color=RED,
+    # Hull weight label - positioned far right, clear of crew arrows
+    ax1.text(L_ft + 0.6, hull_y_center + 1.5,
+             f'w$_{{hull}}$ = {w_hull_per_ft:.1f} lb/ft\n({W_hull:.0f} lb total)',
+             fontsize=8, ha='left', va='center', color=RED,
              fontweight='bold',
              bbox=dict(boxstyle='round,pad=0.3', facecolor='white',
                        edgecolor=RED, alpha=0.9))
@@ -291,18 +290,15 @@ def generate_figure1():
                                      lw=3.0, mutation_scale=18),
                      zorder=8)
 
-        # Crew label
-        crew_label = f'{int(load)} lb'
-        ax1.text(pos, arrow_start_y + 0.15, crew_label,
-                 fontsize=10, fontweight='bold', ha='center', va='bottom',
+        # Crew label with load value
+        crew_label = f'Crew {i + 1}: {int(load)} lb'
+        # Stagger labels vertically to avoid overlap
+        label_offset = 0.25 if i % 2 == 0 else 0.7
+        ax1.text(pos, arrow_start_y + label_offset, crew_label,
+                 fontsize=9, fontweight='bold', ha='center', va='bottom',
                  color=PURPLE,
                  bbox=dict(boxstyle='round,pad=0.2', facecolor='white',
                            edgecolor=PURPLE, alpha=0.9))
-
-        # Position marker
-        ax1.text(pos, arrow_start_y + 0.65,
-                 f'Crew {i + 1}\n({pos:.1f} ft)',
-                 fontsize=7, ha='center', va='bottom', color=PURPLE)
 
     # Axis styling for FBD
     ax1.set_xlim(-1.0, L_ft + 1.0)
@@ -313,13 +309,15 @@ def generate_figure1():
     ax1.set_xticks([])
     ax1.set_yticks([])
 
-    # Length dimension line below buoyancy
-    dim_y = -3.3
+    # Length dimension line - below everything
+    dim_y = -3.5
     ax1.annotate('', xy=(L_ft, dim_y), xytext=(0, dim_y),
                  arrowprops=dict(arrowstyle='<->', color=DARK_GRAY, lw=1.2))
-    ax1.text(L_ft / 2, dim_y - 0.2, f'L = {L_ft:.0f} ft ({L_in:.0f}")',
+    ax1.text(L_ft / 2, dim_y - 0.15, f'L = {L_ft:.0f} ft ({L_in:.0f}")',
              fontsize=10, ha='center', va='top', color=DARK_GRAY,
-             fontweight='bold')
+             fontweight='bold',
+             bbox=dict(boxstyle='round,pad=0.15', facecolor='white',
+                       edgecolor='none', alpha=0.9))
 
     # ===================================================================
     # MIDDLE PANEL: SHEAR FORCE DIAGRAM
@@ -599,24 +597,27 @@ def generate_figure2():
     cy1 = t_vis / 2  # visual centroid of bottom plate
     ax.plot(cx1, cy1, 'o', color=BLUE, markersize=10, zorder=6,
             markeredgecolor='white', markeredgewidth=1.5)
-    ax.text(cx1 + 2, cy1, f'C$_1$ (\u0233$_1$={y1:.3f}")',
-            fontsize=9, color=BLUE, fontweight='bold', va='center')
+    ax.text(cx1 + 3, cy1 - 1.5, f'C$_1$ (\u0233$_1$={y1:.3f}")',
+            fontsize=9, color=BLUE, fontweight='bold', va='center',
+            bbox=dict(facecolor='white', edgecolor='none', alpha=0.8))
 
     # Rect 2 centroid (left wall)
     cx2 = t_vis / 2
     cy2 = t_vis + (D_sec - t_vis) / 2  # visual centroid
     ax.plot(cx2, cy2, 'o', color=RED, markersize=10, zorder=6,
             markeredgecolor='white', markeredgewidth=1.5)
-    ax.text(cx2 + 2.5, cy2 + 0.5, f'C$_2$ (\u0233$_2$={y2:.3f}")',
-            fontsize=9, color=RED, fontweight='bold', va='center')
+    ax.text(cx2 + 3, cy2 + 1.5, f'C$_2$ (\u0233$_2$={y2:.3f}")',
+            fontsize=9, color=RED, fontweight='bold', va='center',
+            bbox=dict(facecolor='white', edgecolor='none', alpha=0.8))
 
     # Rect 3 centroid (right wall)
     cx3 = B_sec - t_vis / 2
     cy3 = cy2
     ax.plot(cx3, cy3, 'o', color=RED, markersize=10, zorder=6,
             markeredgecolor='white', markeredgewidth=1.5)
-    ax.text(cx3 - 12, cy3 + 0.5, f'C$_3$ (\u0233$_3$={y2:.3f}")',
-            fontsize=9, color=RED, fontweight='bold', va='center')
+    ax.text(cx3 - 3, cy3 + 1.5, f'C$_3$ (\u0233$_3$={y2:.3f}")',
+            fontsize=9, color=RED, fontweight='bold', va='center', ha='right',
+            bbox=dict(facecolor='white', edgecolor='none', alpha=0.8))
 
     # --- Distance arrows from centroids to NA ---
     # d1: bottom plate centroid to NA
