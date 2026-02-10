@@ -62,6 +62,7 @@
             <a href="#partMixDesign" class="nav-link px-2 py-1 rounded bg-teal-800">Mix Design</a>
             <a href="#partPresTools" class="nav-link px-2 py-1 rounded bg-violet-800">Pres Tools</a>
             <a href="hand-calcs.html" class="nav-link px-2 py-1 rounded bg-amber-700 font-bold">Hand Calcs &rarr;</a>
+            <a href="#partDrawings" class="nav-link px-2 py-1 rounded bg-cyan-800">Drawings</a>
             <a href="construction.html" class="nav-link px-2 py-1 rounded bg-orange-700 font-bold">Build Guide &rarr;</a>
         </div>
     </div>
@@ -1509,6 +1510,70 @@ streamlit run app.py</div>
     </div>
 </div>
 
+<!-- ============================================================ -->
+<!-- ENGINEERING DRAWINGS                                          -->
+<!-- ============================================================ -->
+<div id="partDrawings" class="section-anchor border-t-4 border-cyan-500 p-10 md:p-16">
+    <h2 class="text-3xl font-bold text-cyan-800 sans mb-2">Engineering Drawings</h2>
+    <p class="text-gray-500 sans mb-8">Construction drawings and structural analysis figures &mdash; matching ASCE competition report format</p>
+
+    <!-- Figure 1: FBD with Buoyancy -->
+    <div class="mb-10">
+        <h3 class="text-xl font-bold text-gray-800 sans mb-4 border-l-4 border-cyan-500 pl-3">Figure 1: Free Body Diagram w/ Shear Force and Bending Moment</h3>
+        <p class="academic-p text-sm mb-4">This diagram shows the structural forces acting on the canoe hull modeled as a simply supported beam floating on water. The <strong>buoyancy distribution</strong> (upward, blue) follows the hull&rsquo;s waterplane width &mdash; wider at midship, tapering to zero at bow and stern. The hull dead load is distributed uniformly downward (red), while the four crew members are modeled as concentrated point loads (purple). Equilibrium requires &Sigma;F<sub>y</sub> = 0: total buoyancy equals total gravity loads.</p>
+        <div class="bg-white border rounded-xl shadow-lg p-4 mb-4">
+            <img src="figures/report_fig1_fbd_buoyancy.png" alt="Figure 1: FBD with Shear and Moment Diagrams" class="w-full rounded">
+        </div>
+        <div class="bg-gray-50 border rounded p-4 text-sm">
+            <p><strong>Key Results (Design A &mdash; 4-Person Coed, Governing Case):</strong></p>
+            <ul class="list-disc ml-6 mt-2 space-y-1">
+                <li><strong>V<sub>max</sub> = 114 lb</strong> at x = 4.0 ft (near first crew position)</li>
+                <li><strong>M<sub>max</sub> = 170 lb-ft</strong> at x = 9.6 ft (near midship)</li>
+                <li>Hull self-weight: w = 10.7 lb/ft (171 lb total)</li>
+                <li>Crew: 4 &times; 175 lb = 700 lb concentrated at L&times;0.25, 0.40, 0.60, 0.75</li>
+                <li>Buoyancy: sinusoidal distribution, 871 lb total (equilibrium satisfied)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Figure 2: MOI Rectangles -->
+    <div class="mb-10">
+        <h3 class="text-xl font-bold text-gray-800 sans mb-4 border-l-4 border-cyan-500 pl-3">Figure 2: Moment of Inertia &mdash; Parallel Axis Theorem</h3>
+        <p class="academic-p text-sm mb-4">The midship cross-section is decomposed into three rectangles for the parallel axis theorem calculation. The bottom plate (blue) and two side walls (red) each contribute both self-inertia (I<sub>c</sub>) and transfer inertia (Ad&sup2;) about the composite neutral axis. The 0.75 reduction factor per ACI 318 accounts for curvature effects and microcracking in thin concrete shells.</p>
+        <div class="bg-white border rounded-xl shadow-lg p-4 mb-4">
+            <img src="figures/report_fig2_moi_rectangles.png" alt="Figure 2: Moment of Inertia Parallel Axis Theorem" class="w-full rounded">
+        </div>
+        <div class="bg-gray-50 border rounded p-4 text-sm">
+            <p><strong>Section Properties Summary (Design A &mdash; B=32&quot;, D=17&quot;, t=0.5&quot;):</strong></p>
+            <ul class="list-disc ml-6 mt-2 space-y-1">
+                <li>Neutral axis: y&#772;<sub>NA</sub> = 4.57&quot; from bottom</li>
+                <li>Total moment of inertia: <strong>I<sub>total</sub> = 961.6 in&sup4;</strong></li>
+                <li>Section modulus (raw): S<sub>x</sub> = 77.3 in&sup3;</li>
+                <li>Section modulus (design): <strong>S<sub>design</sub> = 58.0 in&sup3;</strong> (&times;0.75 ACI thin-shell)</li>
+                <li>Safety Factor = f&prime;<sub>r</sub> / &sigma; = 1500 / 650 = <strong>2.31 &ge; 2.0</strong> <span class="pass-badge">PASS</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section Breakdown & Isometric -->
+    <div class="grid md:grid-cols-2 gap-6 mb-10">
+        <div>
+            <h3 class="text-lg font-bold text-gray-800 sans mb-3">Section Breakdown</h3>
+            <div class="bg-white border rounded-xl shadow-lg p-3">
+                <img src="figures/report_section_breakdown.png" alt="Section Breakdown Drawing" class="w-full rounded">
+            </div>
+            <p class="text-xs text-gray-500 mt-2">Plan view with three section cuts (A, B, C) at bow, midship, and stern. Each cross-section shows the U-shaped thin shell profile with dimensions.</p>
+        </div>
+        <div>
+            <h3 class="text-lg font-bold text-gray-800 sans mb-3">Top and Isometric View</h3>
+            <div class="bg-white border rounded-xl shadow-lg p-3">
+                <img src="figures/report_top_isometric.png" alt="Top and Isometric View" class="w-full rounded">
+            </div>
+            <p class="text-xs text-gray-500 mt-2">Dimensioned plan view (192&quot; &times; 32&quot;) with station lines and bulkhead positions, plus 3D isometric perspective showing hull form.</p>
+        </div>
+    </div>
+</div>
+
 <div id="partPresTools" class="section-anchor border-t-4 border-violet-500 p-10 md:p-16">
     <h2 class="text-3xl font-bold text-violet-800 sans mb-2">Presentation Tools</h2>
     <p class="text-gray-500 sans mb-6">Timer, Script Runner, and Local AI Assistant &mdash; Powered by Ollama + RTX 5070 Ti</p>
@@ -1771,9 +1836,14 @@ async function sendAIMessage() {
             for (const line of lines) {
                 try {
                     const data = JSON.parse(line);
-                    if (data.message && data.message.content) {
-                        fullResponse += data.message.content;
-                        responseEl.textContent = fullResponse;
+                    if (data.message) {
+                        // qwen3 uses "thinking" field first, then "content"
+                        if (data.message.content) {
+                            fullResponse += data.message.content;
+                            responseEl.textContent = fullResponse;
+                        } else if (data.message.thinking && !fullResponse) {
+                            responseEl.textContent = '(thinking...)';
+                        }
                         document.getElementById('ai-chat-history').scrollTop =
                             document.getElementById('ai-chat-history').scrollHeight;
                     }
