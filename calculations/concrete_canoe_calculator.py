@@ -335,7 +335,9 @@ def section_modulus_thin_shell(
     if c_max <= 0:
         return 0.0
 
-    return i_total / c_max
+    # ACI 318 thin-shell reduction: 0.75 factor accounts for
+    # curvature effects and microcracking in thin concrete shells
+    return (i_total / c_max) * 0.75
 
 
 # Keep old function for backward compatibility but mark deprecated
@@ -400,7 +402,7 @@ def run_complete_analysis(
         hull_length_in, hull_beam_in, hull_depth_in,
         hull_thickness_in, concrete_density_pcf,
     )
-    weight_diff_pct = abs(concrete_weight_lbs - estimated_weight) / estimated_weight * 100
+    weight_diff_pct = (abs(concrete_weight_lbs - estimated_weight) / estimated_weight * 100) if estimated_weight > 0 else 0.0
     if weight_diff_pct > 20:
         warnings.warn(
             f"Provided hull weight ({concrete_weight_lbs:.0f} lbs) differs from "
@@ -556,6 +558,7 @@ def visualize_hull_analysis(
     hull: HullGeometry,
     concrete_weight_lbs: float = 276,
     flexural_strength_psi: float = 1500,
+    crew_weight_lbs: float = 700,
     save: bool = True,
     show: bool = False,
 ):
@@ -575,6 +578,7 @@ def visualize_hull_analysis(
     results = run_complete_analysis(
         hull.length_in, hull.beam_in, hull.depth_in, hull.thickness_in,
         concrete_weight_lbs, flexural_strength_psi,
+        crew_weight_lbs=crew_weight_lbs,
     )
     figures = []
 
@@ -635,18 +639,23 @@ def visualize_hull_analysis(
     if save:
         fig3.savefig(out_dir / "3_stability_curve.png", dpi=100, bbox_inches="tight")
 
-    # 4. Load distribution / bending moment
+    # 4. Load distribution / bending moment (hull UDL + crew point load)
     fig4, ax4 = plt.subplots(figsize=(8, 4))
     L = hull.length_ft
-    w = concrete_weight_lbs / L
-    x = np.linspace(0, L, 100)
-    M = w * x * (L - x) / 2  # Simple beam
-    ax4.fill_between(x, 0, M, alpha=0.3)
-    ax4.plot(x, M, "b-", lw=2)
-    ax4.axvline(L/2, color="r", ls="--", label="Max at midship")
+    w_hull = concrete_weight_lbs / L  # hull UDL (lb/ft)
+    P_crew = crew_weight_lbs          # crew point load at midspan
+    x = np.linspace(0, L, 200)
+    M_hull = w_hull * x * (L - x) / 2  # UDL moment
+    # Crew as midspan point load: M = Px/2 for x <= L/2, P(L-x)/2 for x > L/2
+    M_crew = np.where(x <= L / 2, P_crew * x / 2, P_crew * (L - x) / 2)
+    M_total = M_hull + M_crew
+    ax4.fill_between(x, 0, M_hull, alpha=0.15, color="blue", label="Hull dead load")
+    ax4.fill_between(x, M_hull, M_total, alpha=0.15, color="red", label="Crew live load")
+    ax4.plot(x, M_total, "b-", lw=2, label="Total moment")
+    ax4.axvline(L/2, color="r", ls="--", alpha=0.5)
     ax4.set_xlabel("Position (ft)")
     ax4.set_ylabel("Bending moment (lb-ft)")
-    ax4.set_title("Bending Moment Distribution")
+    ax4.set_title("Bending Moment Distribution (Hull + Crew)")
     ax4.legend()
     ax4.grid(True, alpha=0.3)
     figures.append(fig4)
