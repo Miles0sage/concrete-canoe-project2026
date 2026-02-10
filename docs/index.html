@@ -32,7 +32,18 @@
         .nav-link.active { background-color: #1e3a8a; color: white; }
         .section-anchor { scroll-margin-top: 80px; }
         @media print { .no-print { display: none; } }
+        /* AI sections hidden by default — visible only via ?dev=1 */
+        .ai-hidden { display: none !important; }
     </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (new URLSearchParams(window.location.search).get('dev') === '1') {
+            document.querySelectorAll('.ai-hidden').forEach(function(el) {
+                el.classList.remove('ai-hidden');
+            });
+        }
+    });
+    </script>
 </head>
 <body class="bg-gray-100 text-gray-900">
 
@@ -57,13 +68,13 @@
             <a href="#part8" class="nav-link px-2 py-1 rounded">8: Punching</a>
             <a href="#part9" class="nav-link px-2 py-1 rounded">9: Verdict</a>
             <a href="#part3d" class="nav-link px-2 py-1 rounded bg-indigo-800">3D Viz</a>
-            <a href="#partHowBuilt" class="nav-link px-2 py-1 rounded bg-purple-800">How We Built</a>
-            <a href="#partStressTest" class="nav-link px-2 py-1 rounded bg-red-800">AI vs Code</a>
-            <a href="#partCost" class="nav-link px-2 py-1 rounded bg-emerald-800">Cost &amp; Credit</a>
-            <a href="#partVideo" class="nav-link px-2 py-1 rounded bg-rose-800">Video</a>
+            <a href="#partHowBuilt" class="nav-link px-2 py-1 rounded bg-purple-800 ai-hidden">How We Built</a>
+            <a href="#partStressTest" class="nav-link px-2 py-1 rounded bg-red-800 ai-hidden">AI vs Code</a>
+            <a href="#partCost" class="nav-link px-2 py-1 rounded bg-emerald-800 ai-hidden">Cost &amp; Credit</a>
+            <a href="#partVideo" class="nav-link px-2 py-1 rounded bg-rose-800 ai-hidden">Video</a>
             <a href="#partMixDesign" class="nav-link px-2 py-1 rounded bg-teal-800">Mix Design</a>
             <a href="#partDrawings" class="nav-link px-2 py-1 rounded bg-cyan-700 font-bold">Drawings</a>
-            <a href="#partPresTools" class="nav-link px-2 py-1 rounded bg-violet-800">Pres Tools</a>
+            <a href="#partPresTools" class="nav-link px-2 py-1 rounded bg-violet-800 ai-hidden">Pres Tools</a>
             <a href="hand-calcs.html" class="nav-link px-2 py-1 rounded bg-amber-700 font-bold">Hand Calcs &rarr;</a>
             <a href="construction.html" class="nav-link px-2 py-1 rounded bg-orange-700 font-bold">Build Guide &rarr;</a>
         </div>
@@ -94,7 +105,7 @@
     <div class="bg-purple-50 border border-purple-200 rounded-lg p-6 mb-8">
         <h3 class="font-bold text-purple-900 sans text-lg mb-3">Why This Approach?</h3>
         <p class="academic-p mb-2"><strong>Problem:</strong> Concrete canoe teams historically hand-calculate everything on paper. One wrong unit conversion cascades through 20 pages. Different team members get different answers. There's no way to verify the work except redoing it.</p>
-        <p class="academic-p mb-2"><strong>Solution:</strong> We built a <em>single-source-of-truth</em> calculator (<code>concrete_canoe_calculator.py v2.1</code>) that encodes every formula once with published references. Then we used AI (Claude + Gemini) to generate documentation, 3D visualizations, teaching materials, and this interactive website &mdash; all pulling numbers from that one validated engine.</p>
+        <p class="academic-p mb-2"><strong>Solution:</strong> We built a <em>single-source-of-truth</em> calculator (<code>concrete_canoe_calculator.py v2.1</code>) that encodes every formula once with published references. From that single validated engine we generated documentation, 3D visualizations, teaching materials, and this interactive website.</p>
         <p class="academic-p mb-2"><strong>The result:</strong></p>
         <ul class="list-disc pl-6 space-y-1 text-sm mb-4">
             <li><strong>Zero transcription errors</strong> &mdash; every number comes from code, not retyping</li>
@@ -145,7 +156,7 @@
 
     <!-- SVG FLOWCHART -->
     <div class="flex justify-center my-8 overflow-x-auto">
-        <svg viewBox="0 0 900 720" width="100%" class="border rounded-lg bg-white shadow-inner" style="max-width:900px;">
+        <svg viewBox="0 0 900 580" width="100%" class="border rounded-lg bg-white shadow-inner" style="max-width:900px;">
             <!-- Title -->
             <text x="450" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e3a8a" font-family="Helvetica,Arial,sans-serif">NAU Concrete Canoe 2026 &mdash; Development Pipeline</text>
 
@@ -224,52 +235,29 @@
             <text x="450" y="418" text-anchor="middle" font-size="14" font-weight="bold" fill="white" font-family="Helvetica">THIS INTERACTIVE WEBSITE</text>
             <text x="450" y="436" text-anchor="middle" font-size="10" fill="#d1fae5" font-family="monospace">docs/index.html | GitHub Pages | All 9 parts + 3D</text>
 
-            <!-- Row 5: AI Tools Used -->
+            <!-- GitHub box at bottom (connects to website) -->
             <line x1="450" y1="450" x2="450" y2="480" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-            <text x="450" y="500" text-anchor="middle" font-size="11" font-weight="bold" fill="#6b7280" font-family="Helvetica">AI TOOLS USED IN DEVELOPMENT</text>
-
-            <!-- Claude box -->
-            <rect x="100" y="515" width="300" height="90" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
-            <text x="250" y="535" text-anchor="middle" font-size="11" font-weight="bold" fill="#c2410c" font-family="Helvetica">Claude (Anthropic)</text>
-            <text x="250" y="552" text-anchor="middle" font-size="9" fill="#9a3412" font-family="Helvetica">Built the calculator (v2.0 &rarr; v2.1)</text>
-            <text x="250" y="566" text-anchor="middle" font-size="9" fill="#9a3412" font-family="Helvetica">Created Appendix C generator scripts</text>
-            <text x="250" y="580" text-anchor="middle" font-size="9" fill="#9a3412" font-family="Helvetica">Generated 3D visualizations &amp; dashboard</text>
-            <text x="250" y="594" text-anchor="middle" font-size="9" fill="#9a3412" font-family="Helvetica">Built this website with all 9+ parts</text>
-
-            <!-- Gemini box -->
-            <rect x="500" y="515" width="300" height="90" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
-            <text x="650" y="535" text-anchor="middle" font-size="11" font-weight="bold" fill="#15803d" font-family="Helvetica">Gemini (Google)</text>
-            <text x="650" y="552" text-anchor="middle" font-size="9" fill="#166534" font-family="Helvetica">Generated HTML teaching content (Parts 1-6)</text>
-            <text x="650" y="566" text-anchor="middle" font-size="9" fill="#166534" font-family="Helvetica">MathJax equation formatting</text>
-            <text x="650" y="580" text-anchor="middle" font-size="9" fill="#166534" font-family="Helvetica">Visual styling with Tailwind CSS</text>
-            <text x="650" y="594" text-anchor="middle" font-size="9" fill="#166534" font-family="Helvetica">Initial draft reviewed &amp; enhanced by Claude</text>
-
-            <!-- GitHub box at bottom -->
-            <rect x="250" y="630" width="400" height="50" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
-            <text x="450" y="652" text-anchor="middle" font-size="11" font-weight="bold" fill="#334155" font-family="Helvetica">GitHub Repository (Version Controlled)</text>
-            <text x="450" y="668" text-anchor="middle" font-size="9" fill="#64748b" font-family="monospace">github.com/Miles0sage/concrete-canoe-project2026</text>
-            <line x1="250" y1="615" x2="350" y2="630" stroke="#6b7280" stroke-width="1" stroke-dasharray="4,3"/>
-            <line x1="650" y1="615" x2="550" y2="630" stroke="#6b7280" stroke-width="1" stroke-dasharray="4,3"/>
-            <line x1="450" y1="450" x2="450" y2="455" stroke="none"/>
+            <rect x="250" y="480" width="400" height="50" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+            <text x="450" y="502" text-anchor="middle" font-size="11" font-weight="bold" fill="#334155" font-family="Helvetica">GitHub Repository (Version Controlled)</text>
+            <text x="450" y="518" text-anchor="middle" font-size="9" fill="#64748b" font-family="monospace">github.com/Miles0sage/concrete-canoe-project2026</text>
 
             <!-- Legend -->
-            <text x="30" y="700" font-size="9" fill="#9ca3af" font-family="Helvetica">Legend: Dark blue = core engine | Green = testing | Yellow = competition deliverable | Pink = visualization | Purple = interactive | Orange/Green = AI tools</text>
+            <text x="30" y="560" font-size="9" fill="#9ca3af" font-family="Helvetica">Legend: Dark blue = core engine | Green = testing | Yellow = competition deliverable | Pink = visualization | Purple = interactive</text>
         </svg>
     </div>
 
     <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4 sans">File-by-File Breakdown</h3>
     <table class="w-full text-sm border border-gray-300 mb-6">
-        <thead><tr class="bg-purple-900 text-white"><th class="p-2 text-left">File</th><th class="p-2 text-left">Lines</th><th class="p-2 text-left">Purpose</th><th class="p-2 text-left">Built With</th></tr></thead>
+        <thead><tr class="bg-purple-900 text-white"><th class="p-2 text-left">File</th><th class="p-2 text-left">Lines</th><th class="p-2 text-left">Purpose</th></tr></thead>
         <tbody>
-            <tr class="calc-row"><td class="font-mono text-xs">calculations/concrete_canoe_calculator.py</td><td>662</td><td>ALL physics &mdash; single source of truth (v2.1)</td><td>Claude</td></tr>
-            <tr class="calc-row"><td class="font-mono text-xs">scripts/generate_appendix_c_integrated.py</td><td>~500</td><td>Competition Appendix C PDF (imports from calculator)</td><td>Claude</td></tr>
-            <tr class="calc-row"><td class="font-mono text-xs">scripts/generate_teaching_appendix_c.py</td><td>~400</td><td>Teaching markdown with step-by-step explanations</td><td>Claude</td></tr>
-            <tr class="calc-row"><td class="font-mono text-xs">scripts/generate_3d_visualizations.py</td><td>241</td><td>Parametric 3D hull renderings (matplotlib)</td><td>Claude</td></tr>
-            <tr class="calc-row"><td class="font-mono text-xs">dashboard/app.py</td><td>275</td><td>Interactive Streamlit dashboard with Plotly 3D</td><td>Claude</td></tr>
-            <tr class="calc-row"><td class="font-mono text-xs">scripts/create_visual_calculator.py</td><td>~350</td><td>12-panel engineering dashboard (static PNG/PDF)</td><td>Claude</td></tr>
-            <tr class="calc-row"><td class="font-mono text-xs">docs/index.html</td><td>800+</td><td>This interactive teaching website</td><td>Claude + Gemini</td></tr>
-            <tr class="calc-row"><td class="font-mono text-xs">tests/ (5 modules)</td><td>~500</td><td>Geometry, hydrostatics, stability, structural, integration</td><td>Claude</td></tr>
+            <tr class="calc-row"><td class="font-mono text-xs">calculations/concrete_canoe_calculator.py</td><td>662</td><td>ALL physics &mdash; single source of truth (v2.1)</td></tr>
+            <tr class="calc-row"><td class="font-mono text-xs">scripts/generate_appendix_c_integrated.py</td><td>~500</td><td>Competition Appendix C PDF (imports from calculator)</td></tr>
+            <tr class="calc-row"><td class="font-mono text-xs">scripts/generate_teaching_appendix_c.py</td><td>~400</td><td>Teaching markdown with step-by-step explanations</td></tr>
+            <tr class="calc-row"><td class="font-mono text-xs">scripts/generate_3d_visualizations.py</td><td>241</td><td>Parametric 3D hull renderings (matplotlib)</td></tr>
+            <tr class="calc-row"><td class="font-mono text-xs">dashboard/app.py</td><td>275</td><td>Interactive Streamlit dashboard with Plotly 3D</td></tr>
+            <tr class="calc-row"><td class="font-mono text-xs">scripts/create_visual_calculator.py</td><td>~350</td><td>12-panel engineering dashboard (static PNG/PDF)</td></tr>
+            <tr class="calc-row"><td class="font-mono text-xs">docs/index.html</td><td>800+</td><td>This interactive teaching website</td></tr>
+            <tr class="calc-row"><td class="font-mono text-xs">tests/ (5 modules)</td><td>~500</td><td>Geometry, hydrostatics, stability, structural, integration</td></tr>
         </tbody>
     </table>
 
@@ -872,7 +860,7 @@ st.plotly_chart(hull3d, use_container_width=<span class="keyword">True</span>)</
 <!-- ============================================================ -->
 <!-- PART 11: HOW WE BUILT THIS                                    -->
 <!-- ============================================================ -->
-<div id="partHowBuilt" class="section-anchor p-10 md:p-20 border-t-4 border-indigo-600">
+<div id="partHowBuilt" class="section-anchor p-10 md:p-20 border-t-4 border-indigo-600 ai-hidden">
     <h2 class="text-3xl font-bold text-gray-900 mb-6 border-l-8 border-indigo-600 pl-4 sans">How We Built This &mdash; Team Education Guide</h2>
 
     <p class="academic-p">This section tells the story of how the computational system was developed, what problems we solved, and what your team needs to know to maintain and extend it.</p>
@@ -1011,7 +999,7 @@ streamlit run app.py</div>
 <!-- ============================================================ -->
 <!-- AI vs CODE: STRESS TEST RESULTS                               -->
 <!-- ============================================================ -->
-<div id="partStressTest" class="section-anchor p-10 md:p-20 border-t-4 border-red-600">
+<div id="partStressTest" class="section-anchor p-10 md:p-20 border-t-4 border-red-600 ai-hidden">
     <h2 class="text-3xl font-bold text-gray-900 mb-6 border-l-8 border-red-600 pl-4 sans">AI vs. Code &mdash; Why We Don't Let LLMs Do the Math</h2>
 
     <p class="academic-p">We ran a controlled experiment: give three open-source LLMs (Qwen) the <strong>exact same 6 engineering problems</strong> our Python calculator solves, with all formulas provided, and grade their answers against the verified outputs of <code>concrete_canoe_calculator.py v2.1</code>.</p>
@@ -1167,7 +1155,7 @@ streamlit run app.py</div>
 <!-- ============================================================ -->
 <!-- COST & CREDIBILITY: THE PARADIGM SHIFT IN NUMBERS             -->
 <!-- ============================================================ -->
-<div id="partCost" class="section-anchor p-10 md:p-20 border-t-4 border-emerald-600">
+<div id="partCost" class="section-anchor p-10 md:p-20 border-t-4 border-emerald-600 ai-hidden">
     <h2 class="text-3xl font-bold text-gray-900 mb-6 border-l-8 border-emerald-600 pl-4 sans">The Paradigm Shift &mdash; In Real Numbers</h2>
 
     <p class="academic-p">Engineering students are told they need expensive commercial software to do "real" structural analysis. We proved that wrong. A small team, using open-source tools and AI, built a complete design-analysis-documentation pipeline that is <strong>open, validated, reproducible, and free</strong>.</p>
@@ -1356,7 +1344,7 @@ streamlit run app.py</div>
 <!-- ============================================================ -->
 <!-- ENGINEERING VIDEO WALKTHROUGH                                 -->
 <!-- ============================================================ -->
-<div id="partVideo" class="section-anchor border-t-4 border-rose-500 p-10 md:p-16">
+<div id="partVideo" class="section-anchor border-t-4 border-rose-500 p-10 md:p-16 ai-hidden">
     <h2 class="text-3xl font-bold text-rose-800 sans mb-2">Engineering Analysis Video</h2>
     <p class="text-gray-500 sans mb-6">2-Minute Animated Walkthrough &mdash; Every Calculation Step-by-Step</p>
 
@@ -1597,7 +1585,7 @@ streamlit run app.py</div>
     </div>
 </div>
 
-<div id="partPresTools" class="section-anchor border-t-4 border-violet-500 p-10 md:p-16">
+<div id="partPresTools" class="section-anchor border-t-4 border-violet-500 p-10 md:p-16 ai-hidden">
     <h2 class="text-3xl font-bold text-violet-800 sans mb-2">Presentation Tools</h2>
     <p class="text-gray-500 sans mb-6">Timer, Script Runner, and Local AI Assistant &mdash; Powered by Ollama + RTX 5070 Ti</p>
 
