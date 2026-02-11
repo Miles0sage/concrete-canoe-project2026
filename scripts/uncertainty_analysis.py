@@ -19,6 +19,8 @@ from calculations.concrete_canoe_calculator import (
     displacement_volume,
     metacentric_height_approx,
     bending_moment_uniform_load,
+    bending_moment_distributed_crew,
+    calculate_cog_height,
     section_modulus_rectangular,
     section_modulus_thin_shell,
     bending_stress_psi,
@@ -42,7 +44,7 @@ BASE = {
     "flexural": 1500.0,
     "paddler_wt": 175.0,
     "n_paddlers": 4,
-    "cwp": 0.65,
+    "cwp": 0.70,
 }
 
 # ── Uncertainty ranges ──
@@ -85,13 +87,20 @@ def run_single(density, thickness, flexural, paddler_wt):
     fb_in = max(0, (Df - draft_ft) * 12)
 
     KB = draft_ft / 2
-    BM = (Bf**2) / (12 * draft_ft) if draft_ft > 0 else 0
-    KG = Df * 0.45
+    # 3D Bouguer's formula: BM = I_wp / V_disp
+    cwp = BASE["cwp"]
+    I_wp = cwp * Lf * Bf**3 / 12
+    V_disp = cwp * Lf * Bf * draft_ft if draft_ft > 0 else 1
+    BM = I_wp / V_disp if draft_ft > 0 else 0
+    # Weighted COG from hull + crew components
+    hull_cog = Df * 0.38
+    crew_cog = 10.0 / 12.0  # kneeling paddler ~10"
+    KG = calculate_cog_height(canoe_wt, hull_cog, crew, crew_cog)
     gm_ft = KB + BM - KG
     gm_in = gm_ft * 12
 
-    w_per_ft = loaded / Lf
-    M_max = w_per_ft * Lf**2 / 8
+    # Hull UDL + crew point load at midship
+    M_max = bending_moment_distributed_crew(canoe_wt, crew, Lf)
     S = section_modulus_thin_shell(B, D, thickness)
     sigma = (M_max * 12) / S if S > 0 else 0
     sf = flexural / sigma if sigma > 0 else 0

@@ -21,24 +21,24 @@
 | Metric | Mean | Std Dev | 5th %ile | 95th %ile | Min | Max |
 |--------|------|---------|----------|-----------|-----|-----|
 | Canoe Weight (lbs) | 175.6 | 18.8 | 145.3 | 207.6 | 119.8 | 243.0 |
-| Freeboard (in) | 10.9 | 0.4 | 10.2 | 11.6 | 9.5 | 12.3 |
-| GM (in) | 9.5 | 0.8 | 8.3 | 11.0 | 7.5 | 12.7 |
-| Safety Factor | 104.3 | 12.8 | 85.2 | 126.8 | 70.9 | 158.8 |
+| Freeboard (in) | 11.4 | 0.4 | 10.7 | 12.0 | 10.1 | 12.6 |
+| GM (in) | 8.8 | 1.0 | 7.4 | 10.5 | 6.4 | 12.4 |
+| Safety Factor | 2.3 | 0.4 | 1.8 | 2.9 | 1.4 | 3.9 |
 
 ### Pass/Fail Analysis
 
-- **Overall pass rate: 100.0%**
-- Failures: 0 / 1000 iterations
-- Failure rate: 0.0%
+- **Overall pass rate: 83.7%**
+- Failures: 163 / 1000 iterations
+- Failure rate: 16.3%
 
 ### 95% Confidence Intervals
 
 | Metric | 95% CI | Requirement | Worst Case | Status |
 |--------|--------|-------------|------------|--------|
 | Weight | 145.3 – 207.6 lbs | ≤ 237 lbs | 243.0 lbs | FAIL ✗ |
-| Freeboard | 10.2 – 11.6" | ≥ 6" | 9.5" | PASS ✓ |
-| GM | 8.3 – 11.0" | ≥ 6" | 7.5" | PASS ✓ |
-| Safety Factor | 85.2 – 126.8 | ≥ 2.0 | 70.9 | PASS ✓ |
+| Freeboard | 10.7 – 12.0" | ≥ 6" | 10.1" | PASS ✓ |
+| GM | 7.4 – 10.5" | ≥ 6" | 6.4" | PASS ✓ |
+| Safety Factor | 1.8 – 2.9 | ≥ 2.0 | 1.4 | FAIL ✗ |
 
 ## 3. Sensitivity Analysis
 
@@ -54,22 +54,22 @@ on each output metric. Parameters are ranked by total impact (swing).
 - Paddler Weight (lbs) (±8.6%): 174.3 to 174.3 (swing: 0.0)
 
 **Freeboard (in):**
-- Paddler Weight (lbs) (±8.6%): 11.4 to 10.5 (swing: 0.8)
-- Wall Thickness (in) (±10%): 11.1 to 10.8 (swing: 0.2)
-- Concrete Density (PCF) (±5%): 11.0 to 10.9 (swing: 0.1)
-- Flexural Strength (psi) (±10%): 10.9 to 10.9 (swing: 0.0)
+- Paddler Weight (lbs) (±8.6%): 11.8 to 11.0 (swing: 0.8)
+- Wall Thickness (in) (±10%): 11.5 to 11.3 (swing: 0.2)
+- Concrete Density (PCF) (±5%): 11.4 to 11.3 (swing: 0.1)
+- Flexural Strength (psi) (±10%): 11.4 to 11.4 (swing: 0.0)
 
 **GM (in):**
-- Paddler Weight (lbs) (±8.6%): 10.3 to 8.8 (swing: 1.5)
-- Wall Thickness (in) (±10%): 9.7 to 9.2 (swing: 0.4)
-- Concrete Density (PCF) (±5%): 9.6 to 9.4 (swing: 0.2)
-- Flexural Strength (psi) (±10%): 9.5 to 9.5 (swing: 0.0)
+- Paddler Weight (lbs) (±8.6%): 9.7 to 7.9 (swing: 1.8)
+- Wall Thickness (in) (±10%): 8.9 to 8.5 (swing: 0.4)
+- Concrete Density (PCF) (±5%): 8.8 to 8.6 (swing: 0.2)
+- Flexural Strength (psi) (±10%): 8.7 to 8.7 (swing: 0.0)
 
 **Safety Factor:**
-- Flexural Strength (psi) (±10%): 93.4 to 114.2 (swing: 20.8)
-- Paddler Weight (lbs) (±8.6%): 111.5 to 97.1 (swing: 14.3)
-- Wall Thickness (in) (±10%): 106.5 to 101.2 (swing: 5.3)
-- Concrete Density (PCF) (±5%): 104.8 to 102.8 (swing: 2.0)
+- Flexural Strength (psi) (±10%): 2.1 to 2.5 (swing: 0.5)
+- Wall Thickness (in) (±10%): 2.1 to 2.5 (swing: 0.4)
+- Paddler Weight (lbs) (±8.6%): 2.5 to 2.1 (swing: 0.4)
+- Concrete Density (PCF) (±5%): 2.3 to 2.3 (swing: 0.0)
 
 ## 4. Risk Mitigation Strategies
 
@@ -86,8 +86,8 @@ on each output metric. Parameters are ranked by total impact (swing).
 
 ## 5. Recommendations
 
-- **Design A remains viable** with 100.0% pass rate under uncertainty.
-- Worst-case freeboard (9.5") exceeds the 6" requirement.
+- **Design A remains viable** with 83.7% pass rate under uncertainty.
+- Worst-case freeboard (10.1") exceeds the 6" requirement.
 - Consider Design B if risk tolerance is lower (wider safety margins).
 
 ## 6. Figures

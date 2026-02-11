@@ -13,17 +13,17 @@ Total Canoe Weight,188.45,lbs
 Crew Weight,700,lbs
 Loaded Weight,888.45,lbs
 Displacement Volume,14.2379,ft3
-Waterplane Area,30.0806,ft2
-Draft,5.68,in
-Freeboard,12.32,in
-KB,2.84,in
-BM,16.96,in
-KG,8.10,in
-GM,11.70,in
-Max Bending Moment,1813.91,lb-ft
-Section Modulus,1735.42,in3
-Bending Stress,12.54,psi
-Safety Factor,119.5907,
+Waterplane Area,32.3944,ft2
+Draft,5.27,in
+Freeboard,12.73,in
+KB,2.64,in
+BM,18.26,in
+KG,9.33,in
+GM,11.57,in
+Max Bending Moment,3243.08,lb-ft
+Section Modulus,65.16,in3
+Bending Stress,597.28,psi
+Safety Factor,2.5114,
 Shell Volume,2.9436,ft3
 Batches Needed,6,
 Mesh Area,81.24,ft2

@@ -28,56 +28,56 @@ Target: ≤ 237.0 lbs → **PASS ✓** (20% under target)
 | Parameter | Value |
 |-----------|-------|
 | Displacement Volume | 14.238 ft³ |
-| Waterplane Area (Cwp=0.65) | 30.08 ft² |
-| Draft (loaded) | 5.7" (0.473 ft) |
-| Freeboard | 12.3" (1.027 ft) |
+| Waterplane Area (Cwp=0.7) | 32.39 ft² |
+| Draft (loaded) | 5.3" (0.440 ft) |
+| Freeboard | 12.7" (1.060 ft) |
 | Freeboard Requirement | ≥ 6.0" → **PASS ✓** |
 
 ## 4. Stability Analysis
 
 | Parameter | Value (ft) | Value (in) |
 |-----------|-----------|-----------|
-| KB (center of buoyancy) | 0.2367 | 2.84 |
-| BM (metacentric radius) | 1.4134 | 16.96 |
-| KG (center of gravity) | 0.6750 | 8.10 |
-| **GM (metacentric height)** | **0.9750** | **11.70** |
+| KB (center of buoyancy) | 0.2198 | 2.64 |
+| BM (metacentric radius) | 1.5221 | 18.26 |
+| KG (center of gravity) | 0.7775 | 9.33 |
+| **GM (metacentric height)** | **0.9644** | **11.57** |
 
-GM = KB + BM - KG = 0.2367 + 1.4134 - 0.6750 = 0.9750 ft = 11.70"
+GM = KB + BM - KG = 0.2198 + 1.5221 - 0.7775 = 0.9644 ft = 11.57"
 
-GM Requirement: ≥ 6.0" → **PASS ✓** (margin: 5.7")
+GM Requirement: ≥ 6.0" → **PASS ✓** (margin: 5.6")
 
 ### GZ Stability Curve
-Maximum righting arm: GZ_max = 11.7" at 90°
+Maximum righting arm: GZ_max = 11.6" at 90°
 Vanishing angle: ~90° (simplified model)
 
 ## 5. Structural Analysis
 
 | Parameter | Value |
 |-----------|-------|
-| Load Distribution | 54.4 lb/ft (uniform) |
-| Max Bending Moment | 1813.9 lb-ft (at midship) |
+| Load Distribution | Hull: 11.5 lb/ft UDL + 700 lb crew at midship |
+| Max Bending Moment | 3243.1 lb-ft (at midship) |
 | Effective Section Depth | 17.5" |
-| Section Modulus (S) | 1735.4 in³ |
-| Max Bending Stress | 12.5 psi |
+| Section Modulus (S) | 65.2 in³ |
+| Max Bending Stress | 597.3 psi |
 | Flexural Strength | 1500 psi |
-| **Safety Factor** | **119.59** |
+| **Safety Factor** | **2.51** |
 
-Safety Factor Requirement: ≥ 2.0 → **PASS ✓** (60× over minimum)
+Safety Factor Requirement: ≥ 2.0 → **PASS ✓** (1× over minimum)
 
 ### Station-by-Station Analysis
 
 | Station | Position (ft) | Shear (lbs) | Moment (lb-ft) |
 |---------|--------------|-------------|----------------|
 | 0 | 0.0 | 444.2 | 0.0 |
-| 1 | 1.6 | 355.4 | 653.0 |
-| 2 | 3.3 | 266.5 | 1160.9 |
-| 3 | 4.9 | 177.7 | 1523.7 |
-| 4 | 6.5 | 88.8 | 1741.4 |
-| 5 | 8.2 | 0.0 | 1813.9 |
-| 6 | 9.8 | -88.8 | 1741.4 |
-| 7 | 11.4 | -177.7 | 1523.7 |
-| 8 | 13.1 | -266.5 | 1160.9 |
-| 9 | 14.7 | -355.4 | 653.0 |
+| 1 | 1.6 | 425.4 | 710.2 |
+| 2 | 3.3 | 406.5 | 1389.6 |
+| 3 | 4.9 | 387.7 | 2038.2 |
+| 4 | 6.5 | 368.8 | 2656.0 |
+| 5 | 8.2 | 350.0 | 3243.1 |
+| 6 | 9.8 | -368.8 | 2656.0 |
+| 7 | 11.4 | -387.7 | 2038.2 |
+| 8 | 13.1 | -406.5 | 1389.6 |
+| 9 | 14.7 | -425.4 | 710.2 |
 | 10 | 16.3 | -444.2 | 0.0 |
 
 ## 6. Material Quantities
@@ -114,9 +114,9 @@ Safety Factor Requirement: ≥ 2.0 → **PASS ✓** (60× over minimum)
 
 | Requirement | Value | Minimum | Status |
 |-------------|-------|---------|--------|
-| Freeboard | 12.3" | ≥ 6.0" | **PASS ✓** |
-| Metacentric Height (GM) | 11.7" | ≥ 6.0" | **PASS ✓** |
-| Safety Factor | 119.59 | ≥ 2.0 | **PASS ✓** |
+| Freeboard | 12.7" | ≥ 6.0" | **PASS ✓** |
+| Metacentric Height (GM) | 11.6" | ≥ 6.0" | **PASS ✓** |
+| Safety Factor | 2.51 | ≥ 2.0 | **PASS ✓** |
 | Canoe Weight | 188.4 lbs | ≤ 237.0 lbs | **PASS ✓** |
 | **Overall** | | | **PASS ✓** |
 

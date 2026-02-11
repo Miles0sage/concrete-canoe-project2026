@@ -27,6 +27,8 @@ from calculations.concrete_canoe_calculator import (
     freeboard as calc_freeboard,
     metacentric_height_approx,
     bending_moment_uniform_load,
+    bending_moment_distributed_crew,
+    calculate_cog_height,
     section_modulus_rectangular,
     section_modulus_thin_shell,
     bending_stress_psi,
@@ -47,7 +49,7 @@ for d in [FIG_DIR, DATA_DIR, REPORT_DIR]:
 # ── Constants ──
 CONCRETE_DENSITY_PCF = 60.0
 FLEXURAL_STRENGTH_PSI = 1500.0
-WATERPLANE_CWP = 0.65
+WATERPLANE_CWP = 0.70
 PADDLER_WEIGHT = 175.0
 NUM_PADDLERS = 4
 CREW_WEIGHT = PADDLER_WEIGHT * NUM_PADDLERS
@@ -114,10 +116,14 @@ def full_analysis(d: Design) -> Dict[str, Any]:
     fb_ft = max(0, D_ft - draft_ft)
     fb_in = fb_ft * 12
 
-    # Stability
+    # Stability — 3D Bouguer's formula + weighted COG
     KB = draft_ft / 2
-    BM = (B_ft**2) / (12 * draft_ft) if draft_ft > 0 else 0
-    KG = D_ft * 0.45
+    I_wp = WATERPLANE_CWP * L_ft * B_ft**3 / 12
+    V_disp_stab = WATERPLANE_CWP * L_ft * B_ft * draft_ft if draft_ft > 0 else 1
+    BM = I_wp / V_disp_stab if draft_ft > 0 else 0
+    hull_cog = D_ft * 0.38
+    crew_cog = 10.0 / 12.0  # kneeling paddler ~10"
+    KG = calculate_cog_height(canoe_wt, hull_cog, CREW_WEIGHT, crew_cog)
     GM_ft = KB + BM - KG
     GM_in = GM_ft * 12
 
@@ -125,16 +131,20 @@ def full_analysis(d: Design) -> Dict[str, Any]:
     angles = np.arange(0, 91, 1)
     GZ = GM_in * np.sin(np.deg2rad(angles))
 
-    # Structural — 10 stations
+    # Structural — 10 stations (hull UDL + crew point load at midship)
     stations = np.linspace(0, L_ft, 11)
-    w_per_ft = loaded_wt / L_ft
+    w_hull_per_ft = canoe_wt / L_ft
+    P_crew = CREW_WEIGHT
+    R_total = loaded_wt / 2  # symmetric reaction
     BM_stations = []  # bending moment
     SF_stations = []  # shear force
     for x in stations:
-        R = loaded_wt / 2  # reaction
-        V = R - w_per_ft * x  # shear
-        M = R * x - w_per_ft * x**2 / 2  # moment
-        BM_stations.append(M)
+        # Shear: hull UDL + crew point load step at midspan
+        V = R_total - w_hull_per_ft * x - (P_crew if x > L_ft / 2 else 0)
+        # Moment: hull UDL parabola + crew triangle
+        M_hull = w_hull_per_ft * x * (L_ft - x) / 2
+        M_crew = (P_crew * x / 2) if x <= L_ft / 2 else (P_crew * (L_ft - x) / 2)
+        BM_stations.append(M_hull + M_crew)
         SF_stations.append(V)
     M_max = max(BM_stations)
 
@@ -438,7 +448,7 @@ Vanishing angle: ~90° (simplified model)
 
 | Parameter | Value |
 |-----------|-------|
-| Load Distribution | {a['loaded_wt']/(L/12):.1f} lb/ft (uniform) |
+| Load Distribution | Hull: {a['canoe_wt']/(L/12):.1f} lb/ft UDL + {CREW_WEIGHT:.0f} lb crew at midship |
 | Max Bending Moment | {a['M_max']:.1f} lb-ft (at midship) |
 | Effective Section Depth | {D - t:.1f}" |
 | Section Modulus (S) | {a['S_in3']:.1f} in³ |
